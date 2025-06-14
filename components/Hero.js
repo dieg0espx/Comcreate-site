@@ -83,10 +83,10 @@ function Hero() {
   };
 
   return (
-    <div className="flex flex-row items-center justify-center w-full -mb-[100px]">
+    <div className="flex flex-col xl:flex-row items-center justify-center w-full bg-[#0A0A0A] space-y-[150px] md:space-y-0 -mb-[500px] md:-mb-[100px]">
       {/* Left Side: Content */}
       <motion.div 
-        className="flex flex-col justify-center basis-1/2 px-8"
+        className="flex flex-col justify-center w-full md:basis-1/2 md:px-4 lg:px-8 z-10"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -100,7 +100,7 @@ function Hero() {
         </motion.button> */}
 
         <motion.h1 
-          className="text-4xl md:text-7xl font-bold text-white mb-4 leading-tight"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight"
           variants={itemVariants}
         >
           Ignite your brand with next-gen{" "}
@@ -117,25 +117,25 @@ function Hero() {
         </motion.h1>
 
         <motion.p 
-          className="text-lg text-gray-400 mb-2"
+          className="text-base sm:text-lg md:text-xl text-gray-400 mb-2 sm:mb-3"
           variants={itemVariants}
         >
           Your business deserves more than clicks — it needs conversion, impact, and a digital edge.
         </motion.p>
 
         <motion.p 
-          className="text-lg text-gray-400 mb-8"
+          className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 md:mb-10"
           variants={itemVariants}
         >
           Work with the team rewriting what success looks like online.
         </motion.p>
 
         <motion.div 
-          className="flex gap-4"
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6"
           variants={itemVariants}
         >
           <motion.button 
-            className="bg-blue-500 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-600 transition-colors"
+            className="bg-blue-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold hover:bg-blue-600 transition-colors w-full sm:w-auto"
             variants={buttonVariants}
             whileHover="hover"
           >
@@ -143,7 +143,7 @@ function Hero() {
           </motion.button>
           <motion.a 
             href="#" 
-            className="flex items-center text-blue-400 text-lg font-semibold hover:text-blue-300 transition-colors"
+            className="flex items-center justify-center sm:justify-start text-blue-400 text-base sm:text-lg font-semibold hover:text-blue-300 transition-colors"
             variants={buttonVariants}
             whileHover="hover"
           >
@@ -153,7 +153,7 @@ function Hero() {
       </motion.div>
 
       {/* Right Side: Globe */}
-      <div className="basis-1/2 flex items-center justify-center relative">
+      <div className="w-full md:basis-1/2 flex items-center justify-center  mb-8 md:mb-0 h-[300px] sm:h-[100px] md:h-[500px] lg:h-[600px]">
         <GlobeDemoClient />
       </div>
     </div>

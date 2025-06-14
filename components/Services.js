@@ -25,7 +25,7 @@ function Services() {
   }
 
   return (
-    <div className="w-full flex flex-col items-center justify-center mt-12 py-16">
+    <div className="w-full flex flex-col items-center justify-center mt-12 py-16 relative z-99 bg-black md:bg-transparent">
       <motion.div 
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[20px] w-full"
         variants={containerVariants}

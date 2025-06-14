@@ -52,7 +52,7 @@ function ReviewsSection() {
   return (
     <div className="w-full mt-24 px-4 py-16">
       <motion.div 
-        className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center justify-center"
+        className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row gap-16 items-center justify-center"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}

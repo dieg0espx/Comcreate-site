@@ -31,7 +31,7 @@ function Footer() {
         </div>
       </div>
       {/* Right: Links */}
-      <div className="flex flex-1 flex-col md:flex-row gap-12 w-full justify-end">
+      <div className="flex flex-1 flex-col md:flex-row gap-12 w-full justify-end px-4 md:px-0">
         {/* Quick Links */}
         <div>
           <h4 className="text-gray-400 text-sm font-semibold mb-6 tracking-widest">QUICK LINKS</h4>

@@ -12,6 +12,7 @@ function index() {
   return (
     <div className=''>
       <Hero />
+      <div className='block md:hidden w-full h-[200px] relative -bottom-[100px] z-99' style={{ background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 1) 50%)' }}></div>
       <Services />
       <GrowthSection />
       <FeaturedSection />

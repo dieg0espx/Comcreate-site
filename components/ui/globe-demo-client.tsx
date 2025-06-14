@@ -395,7 +395,7 @@ export default function GlobeDemoClient() {
   ];
 
   return (
-    <div className="w-full h-[700px] relative">
+    <div className="w-full h-[700px]">
       <div className="w-full h-full">
         <World data={sampleArcs} globeConfig={globeConfig} />
       </div>

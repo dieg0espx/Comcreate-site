@@ -52,7 +52,7 @@ function AgencySection() {
   return (
     <div className="w-full mt-24 px-0 py-16 bg-[#14121c] rounded-2xl">
       <motion.div 
-        className="flex flex-col md:flex-row items-center gap-12 w-full px-4 md:px-16"
+        className="flex flex-col-reverse md:flex-row items-center gap-12 w-full px-4 md:px-16"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
