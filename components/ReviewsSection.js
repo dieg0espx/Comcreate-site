@@ -83,7 +83,7 @@ function ReviewsSection() {
                 </motion.svg>
               ))}
             </div>
-            <p className="text-gray-200 mb-4">Comcreate didn't just build our site — they built our brand. Our traffic tripled in 2 months!</p>
+            <p className="text-gray-200 mb-4">Comcreate didn&apos;t just build our site — they built our brand. Our traffic tripled in 2 months!</p>
             <div className="text-white font-bold">Elena R.<br /><span className="font-normal text-gray-400">Founder</span></div>
           </motion.div>
           {/* Review 2 */}
@@ -129,7 +129,7 @@ function ReviewsSection() {
                 </motion.svg>
               ))}
             </div>
-            <p className="text-gray-200 mb-4">Their SEO team is next level. We're ranking top 3 for every keyword that matters.</p>
+            <p className="text-gray-200 mb-4">Their SEO team is next level. We&apos;re ranking top 3 for every keyword that matters.</p>
             <div className="text-white font-bold">Marcus T.<br /><span className="font-normal text-gray-400">Marketing Lead</span></div>
           </motion.div>
           {/* Review 4 */}

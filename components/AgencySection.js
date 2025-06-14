@@ -92,7 +92,7 @@ function AgencySection() {
             className="text-lg text-gray-400 mb-8"
             variants={contentVariants}
           >
-            Thinking of starting your own web, SEO, or ad agency?<br />Comcreate offers tailored consulting to help you build, scale, and succeed. Learn from those who've launched hundreds.
+            Thinking of starting your own web, SEO, or ad agency?<br />Comcreate offers tailored consulting to help you build, scale, and succeed. Learn from those who&apos;ve launched hundreds.
           </motion.p>
           <motion.div 
             className="flex flex-col sm:flex-row gap-6 w-full"

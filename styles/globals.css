@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,6 +12,7 @@
 @layer base {
   body {
     @apply bg-background text-white m-0 p-0 min-h-screen;
+    font-family: 'Space Grotesk', sans-serif;
   }
   :root {
     --background: 0 0% 100%;
@@ -88,8 +90,6 @@
     --globe-bg: #181626;
   }
 }
-
-
 
 @layer base {
   * {
