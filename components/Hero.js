@@ -86,7 +86,7 @@ function Hero() {
     <div className="flex flex-col xl:flex-row items-center justify-center pt-10 md:pt-0 mx-auto w-full bg-[#0A0A0A] space-y-[150px] md:space-y-0 -mb-[500px] md:-mb-[100px]">
       {/* Left Side: Content */}
       <motion.div 
-        className="flex flex-col justify-center w-full md:basis-1/2 md:px-4 lg:px-8 z-10 w-[90%] md:w-full"
+        className="flex flex-col justify-center md:basis-1/2 md:px-4 lg:px-8 z-10 w-[90%] md:w-full"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
