@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { GlobeDemo } from './ui/globe';
+import ContactPopup from './ContactPopup';
 
 // Dynamically import the GlobeDemoClient component with no SSR
 const GlobeDemoClient = dynamic(
@@ -10,6 +11,8 @@ const GlobeDemoClient = dynamic(
 );
 
 function Hero() {
+  const [isContactPopupOpen, setIsContactPopupOpen] = useState(false);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -83,7 +86,7 @@ function Hero() {
   };
 
   return (
-    <div className="flex flex-col xl:flex-row items-center justify-center pt-10 md:pt-0 mx-auto w-full bg-[#0A0A0A] space-y-[150px] md:space-y-0 -mb-[500px] md:-mb-[100px]">
+    <div className="flex flex-col xl:flex-row items-center justify-center pt-10 md:pt-0 mx-auto w-full  space-y-[150px] md:space-y-0 -mb-[500px] md:-mb-[100px]">
       {/* Left Side: Content */}
       <motion.div 
         className="flex flex-col justify-center md:basis-1/2 md:px-4 lg:px-8 z-10 w-[90%] md:w-full"
@@ -138,17 +141,18 @@ function Hero() {
             className="bg-blue-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold hover:bg-blue-600 transition-colors w-full sm:w-auto"
             variants={buttonVariants}
             whileHover="hover"
+            onClick={() => setIsContactPopupOpen(true)}
           >
             Get Started
           </motion.button>
-          <motion.a 
-            href="#" 
+          <motion.button 
             className="flex items-center justify-center sm:justify-start text-blue-400 text-base sm:text-lg font-semibold hover:text-blue-300 transition-colors"
             variants={buttonVariants}
             whileHover="hover"
+            onClick={() => setIsContactPopupOpen(true)}
           >
-            <span className="mr-2">🎧</span> Support Center
-          </motion.a>
+            <span className="mr-2">🎧</span> Talk to an expert
+          </motion.button>
         </motion.div>
       </motion.div>
 
@@ -156,6 +160,11 @@ function Hero() {
       <div className="w-full md:basis-1/2 flex items-center justify-center  mb-8 md:mb-0 h-[300px] sm:h-[100px] md:h-[500px] lg:h-[600px]">
         <GlobeDemoClient />
       </div>
+
+      <ContactPopup 
+        isOpen={isContactPopupOpen} 
+        onClose={() => setIsContactPopupOpen(false)} 
+      />
     </div>
   )
 }

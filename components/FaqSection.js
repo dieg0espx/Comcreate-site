@@ -100,7 +100,7 @@ function FaqSection() {
   }
 
   return (
-    <div className="w-full mt-24 px-0 py-16">
+    <div className="w-full px-0 py-16">
       <motion.div 
         className="flex flex-col items-center w-full"
         initial="hidden"

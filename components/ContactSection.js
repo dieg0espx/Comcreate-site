@@ -110,8 +110,9 @@ function ContactSection() {
             <div className="text-gray-200 text-base mb-1">Live Chat</div>
           </motion.div>
           {/* Call Card */}
-          <motion.div 
-            className="bg-yellow-900/80 rounded-2xl p-8 flex flex-col items-start"
+          <motion.a 
+            href="tel:+16199550105"
+            className="bg-yellow-900/80 rounded-2xl p-8 flex flex-col items-start hover:bg-yellow-900/90 transition-colors duration-200"
             variants={cardVariants}
             whileHover={{ 
               scale: 1.05,
@@ -125,8 +126,10 @@ function ContactSection() {
               <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 16.92V21a2 2 0 0 1-2.18 2A19.72 19.72 0 0 1 3 5.18 2 2 0 0 1 5 3h4.09a2 2 0 0 1 2 1.72l.3 2.18a2 2 0 0 1-1.1 2.18l-2.2 1.1a16 16 0 0 0 6.29 6.29l1.1-2.2a2 2 0 0 1 2.18-1.1l2.18.3A2 2 0 0 1 21 14.91V19a2 2 0 0 1-2 2z"/></svg>
             </motion.div>
             <div className="text-yellow-300 text-xl font-bold mb-1">Call us</div>
-            <div className="text-gray-200 text-base mb-1">+1 (888) 123-4567</div>
-          </motion.div>
+            <div className="text-gray-200 text-base mb-1 hover:text-yellow-300 transition-colors duration-200">
+              +1 619-955-0105
+            </div>
+          </motion.a>
         </motion.div>
       </motion.div>
     </div>

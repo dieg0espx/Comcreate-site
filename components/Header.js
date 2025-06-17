@@ -5,13 +5,20 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
+import ContactPopup from './ContactPopup';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isContactPopupOpen, setIsContactPopupOpen] = useState(false);
   const pathname = usePathname();
 
   const isActive = (path) => {
     return pathname === path;
+  };
+
+  const handleContactClick = () => {
+    setIsContactPopupOpen(true);
+    setIsMenuOpen(false);
   };
 
   return (
@@ -32,8 +39,10 @@ export default function Header() {
               <span>Live Chat</span>
             </div> */}
             <div className="flex items-center gap-2">
-              <FaPhone className="text-white" />
-              <span>+1 619-955-0105</span>
+              <FaPhone className="text-white rotate-90" />
+              <a href="tel:+16199550105" className="text-white hover:text-blue-300 transition-colors duration-200">
+                <span>619-955-0105</span>
+              </a>
             </div>
           </div>
         </div>
@@ -127,7 +136,10 @@ export default function Header() {
               <span className="relative z-10">Login</span>
               <div className="absolute inset-0 bg-gradient-to-r from-[#003cc7] to-[#700f59] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button> */}
-            <button className="group px-4 lg:px-6 py-2 rounded-full bg-white text-[#0a071a] text-sm lg:text-base font-md transition-all duration-300 whitespace-nowrap relative overflow-hidden">
+            <button 
+              onClick={handleContactClick}
+              className="group px-4 lg:px-6 py-2 rounded-full bg-white text-[#0a071a] text-sm lg:text-base font-md transition-all duration-300 whitespace-nowrap relative overflow-hidden"
+            >
               <span className="relative z-10 group-hover:text-white transition-colors duration-300">Contact Us</span>
               <div className="absolute inset-0 bg-gradient-to-r from-[#003cc7] to-[#700f59] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
@@ -217,13 +229,17 @@ export default function Header() {
               <span className="relative z-10">Login</span>
               <div className="absolute inset-0 bg-gradient-to-r from-[#003cc7] to-[#700f59] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
-            <button className="group w-full px-6 py-3 rounded-full bg-white text-[#0a071a] text-lg font-md transition-all duration-300 relative overflow-hidden">
+            <button 
+              onClick={handleContactClick}
+              className="group w-full px-6 py-3 rounded-full bg-white text-[#0a071a] text-lg font-md transition-all duration-300 relative overflow-hidden"
+            >
               <span className="relative z-10 group-hover:text-white transition-colors duration-300">Contact Us</span>
               <div className="absolute inset-0 bg-gradient-to-r from-[#003cc7] to-[#700f59] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
           </div>
         </div>
       </div>
+      <ContactPopup isOpen={isContactPopupOpen} onClose={() => setIsContactPopupOpen(false)} />
     </header>
   );
 } 

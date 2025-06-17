@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 function Footer() {
   return (
-    <footer className="bg-black py-16 px-4 md:px-16">
+    <footer className="bg-black border-t border-gray-800 py-16 px-4 md:px-10 mt-20">
     <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
       {/* Left: Logo and Contact Icons */}
       <div className="flex flex-col items-start gap-10 min-w-[320px]">
