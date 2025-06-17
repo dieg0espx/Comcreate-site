@@ -204,6 +204,10 @@ function ContactPopup({ isOpen, onClose }) {
                   <FaPaperPlane className="text-white/80 group-hover:text-[#700f59] group-hover:translate-x-1 transition-all duration-200" />
                 </motion.button>
               </motion.form>
+
+              <p className="text-gray-400 text-sm mb-4">
+                Can&apos;t find a time that works for you?
+              </p>
             </motion.div>
           </motion.div>
         </motion.div>
