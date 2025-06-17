@@ -17,29 +17,31 @@ export default function Header() {
   return (
     <header className="w-full fixed top-0 z-50">
       {/* Top blue bar */}
-      <div className="hidden lg:flex bg-[linear-gradient(90deg,rgba(0,60,199,1)_0%,rgba(112,15,89,1)_100%)] text-white font-md justify-between items-center px-6 py-1 text-sm">
-        <div className="truncate">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor .
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <FaGlobe className="text-white" />
-            <span>English</span>
+      <div className="hidden lg:flex bg-[linear-gradient(90deg,rgba(0,60,199,1)_0%,rgba(112,15,89,1)_100%)] text-white font-md justify-between items-center py-1 text-sm">
+        <div className="max-w-[1440px] mx-auto w-full px-10 flex justify-between items-center">
+          <div className="truncate">
+            Get a FREE site audit scheduling a call with our team.
           </div>
-          <div className="flex items-center gap-2">
-            <FaComments className="text-white" />
-            <span>Live Chat</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <FaPhone className="text-white" />
-            <span>+1 234 567 890</span>
+          <div className="flex items-center gap-4">
+            {/* <div className="flex items-center gap-2">
+              <FaGlobe className="text-white" />
+              <span>English</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <FaComments className="text-white" />
+              <span>Live Chat</span>
+            </div> */}
+            <div className="flex items-center gap-2">
+              <FaPhone className="text-white" />
+              <span>+1 619-955-0105</span>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Main header */}
-      <div className="bg-[#070410] flex justify-between items-center py-4">
-        <div className="flex items-center justify-between w-full px-10">
+      <div className="bg-[#070410] flex justify-between items-center py-4 ">
+        <div className="flex items-center justify-between w-full max-w-[1440px] mx-auto px-10">
           {/* Logo */}
           <div className="flex items-center">
             <Image
@@ -52,17 +54,17 @@ export default function Header() {
           </div>
 
           {/* Mobile menu button */}
-          <button 
+          {/* <button 
             className="md:hidden text-white p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-          </button>
+          </button> */}
 
           {/* Navigation - Desktop */}
           <nav className="hidden md:flex gap-6 lg:gap-10 text-sm lg:text-md font-medium text-white/90 absolute left-1/2 transform -translate-x-1/2">
-            <Link 
+            {/* <Link 
               href="/home" 
               className={`relative py-2 whitespace-nowrap hover:text-white transition-colors duration-300 ${
                 isActive('/home') ? 'text-white' : ''
@@ -116,15 +118,15 @@ export default function Header() {
               <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#003cc7] to-[#700f59] transform scale-x-0 transition-transform duration-300 ${
                 isActive('#') ? 'scale-x-100' : 'group-hover:scale-x-100'
               }`}></span>
-            </Link>
+            </Link> */}
           </nav>
 
           {/* Buttons - Desktop */}
           <div className="hidden md:flex items-center gap-2 lg:gap-4">
-            <button className="group px-4 lg:px-6 py-2 rounded-full border-2 border-blue-400 text-white text-sm lg:text-base font-md bg-transparent hover:border-transparent transition-all duration-300 whitespace-nowrap relative overflow-hidden">
+            {/* <button className="group px-4 lg:px-6 py-2 rounded-full border-2 border-blue-400 text-white text-sm lg:text-base font-md bg-transparent hover:border-transparent transition-all duration-300 whitespace-nowrap relative overflow-hidden">
               <span className="relative z-10">Login</span>
               <div className="absolute inset-0 bg-gradient-to-r from-[#003cc7] to-[#700f59] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </button>
+            </button> */}
             <button className="group px-4 lg:px-6 py-2 rounded-full bg-white text-[#0a071a] text-sm lg:text-base font-md transition-all duration-300 whitespace-nowrap relative overflow-hidden">
               <span className="relative z-10 group-hover:text-white transition-colors duration-300">Contact Us</span>
               <div className="absolute inset-0 bg-gradient-to-r from-[#003cc7] to-[#700f59] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

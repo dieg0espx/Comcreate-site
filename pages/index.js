@@ -7,6 +7,7 @@ import ReviewsSection from '../components/ReviewsSection'
 import AgencySection from '../components/AgencySection'
 import ContactSection from '../components/ContactSection'
 import FaqSection from '../components/FaqSection'
+import Calendly from '../components/Calendly'
 
 function index() {
   return (
@@ -20,6 +21,7 @@ function index() {
       <AgencySection />
       <ContactSection />
       <FaqSection />
+      <Calendly url="https://calendly.com/analytics-comcreate/30min" />
       <div className='fixed bottom-0 left-0 w-full h-[150px]' style={{ background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 1) 95%)' }}></div>
     </div>
   )
