@@ -82,7 +82,7 @@ export default function Calendly({ url = "https://calendly.com/comcreate/30min" 
                 variants={itemVariants}
               >
                 Book a free consultation with our team of digital marketing professionals. 
-                We'll help you understand how we can transform your online presence and 
+                We&#39;ll help you understand how we can transform your online presence and 
                 drive real business growth.
               </motion.p>
               <motion.div 
