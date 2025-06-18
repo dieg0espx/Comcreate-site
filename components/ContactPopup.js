@@ -192,7 +192,7 @@ function ContactPopup({ isOpen, onClose }) {
                     animate={{ opacity: 1, y: 0 }}
                     className="p-3 rounded-xl bg-green-500/10 border border-green-500/20 text-green-500 text-sm"
                   >
-                    Message sent successfully! We'll get back to you soon.
+                    Message sent successfully! We&apos;ll get back to you soon.
                   </motion.div>
                 )}
 
