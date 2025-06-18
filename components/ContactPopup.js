@@ -121,7 +121,7 @@ function ContactPopup({ isOpen, onClose }) {
                 variants={itemVariants}
                 className="text-gray-400 mb-6"
               >
-                We&#39;d love to hear from you. Choose your preferred way to reach us.
+                We&apos;d love to hear from you. Choose your preferred way to reach us.
               </motion.p>
 
               {/* Quick Contact Buttons */}
