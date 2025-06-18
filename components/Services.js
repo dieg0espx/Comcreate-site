@@ -43,7 +43,7 @@ function Services() {
           </div>
           <h3 className="text-white text-2xl font-bold">Web Design</h3>
           <p className="text-gray-400">Modern, responsive websites designed to engage and convert your audience.</p>
-          <a href="#" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></a>
+          {/* <a href="#" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></a> */}
         </motion.div>
         {/* SEO Strategy Card */}
         <motion.div 
@@ -56,7 +56,7 @@ function Services() {
           </div>
           <h3 className="text-white text-2xl font-bold">SEO Strategy</h3>
           <p className="text-gray-400">Boost your visibility with strategies that drive organic traffic and long-term growth.</p>
-          <a href="#" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></a>
+          {/* <a href="#" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></a> */}
         </motion.div>
         {/* Digital Ads Card */}
         <motion.div 
@@ -68,7 +68,7 @@ function Services() {
           </div>
           <h3 className="text-white text-2xl font-bold">Digital Ads</h3>
           <p className="text-gray-400">Targeted campaigns across Google and social platforms that deliver real results.</p>
-          <a href="#" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></a>
+          {/* <a href="#" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></a> */}
         </motion.div>
         {/* Branding Card */}
         <motion.div 
@@ -81,7 +81,7 @@ function Services() {
           </div>
           <h3 className="text-white text-2xl font-bold">Branding</h3>
           <p className="text-gray-400">From logos to voice — build a brand identity that stands out and connects.</p>
-          <a href="#" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></a>
+          {/* <a href="#" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></a> */}
         </motion.div>
       </motion.div>
     </div>

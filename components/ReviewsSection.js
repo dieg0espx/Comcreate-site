@@ -178,14 +178,14 @@ function ReviewsSection() {
           >
             From idea to execution, our partners trust Comcreate to deliver beyond expectations every time. Their success stories are our proudest proof.
           </motion.p>
-          <motion.button 
+          {/* <motion.button 
             className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition"
             variants={contentVariants}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             More Reviews
-          </motion.button>
+          </motion.button> */}
         </motion.div>
       </motion.div>
     </div>

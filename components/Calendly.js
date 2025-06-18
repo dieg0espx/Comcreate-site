@@ -151,9 +151,9 @@ export default function Calendly({ url = "https://calendly.com/comcreate/30min" 
                 </motion.a>
               </motion.div>
 
-              <p className="text-gray-400 text-sm mb-4">
+              {/* <p className="text-gray-400 text-sm mb-4">
                 Can&apos;t find a time that works for you?
-              </p>
+              </p> */}
             </motion.div>
 
             {/* Right Column - Calendly Widget */}

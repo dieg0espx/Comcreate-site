@@ -92,8 +92,9 @@ function ContactSection() {
             <div className="text-gray-200 text-base mb-1">sales@comcreate.com</div>
           </motion.div>
           {/* Chat Card */}
-          <motion.div 
-            className="bg-blue-900/80 rounded-2xl p-8 flex flex-col items-start"
+          <motion.a 
+            href="sms:+16199550105"
+            className="bg-blue-900/80 rounded-2xl p-8 flex flex-col items-start cursor-pointer"
             variants={cardVariants}
             whileHover={{ 
               scale: 1.05,
@@ -107,8 +108,8 @@ function ContactSection() {
               <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="4"/><path d="M8 12h8M8 16h4"/></svg>
             </motion.div>
             <div className="text-blue-300 text-xl font-bold mb-1">Chat us</div>
-            <div className="text-gray-200 text-base mb-1">Live Chat</div>
-          </motion.div>
+            <div className="text-gray-200 text-base mb-1">Send us a message</div>
+          </motion.a>
           {/* Call Card */}
           <motion.a 
             href="tel:+16199550105"

@@ -8,12 +8,41 @@ function ContactPopup({ isOpen, onClose }) {
     email: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    onClose();
+    setIsSubmitting(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Something went wrong');
+      }
+
+      setSuccess(true);
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => {
+        onClose();
+      }, 2000);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -147,6 +176,26 @@ function ContactPopup({ isOpen, onClose }) {
                 onSubmit={handleSubmit} 
                 className="space-y-4 pb-4"
               >
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm"
+                  >
+                    {error}
+                  </motion.div>
+                )}
+                
+                {success && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-3 rounded-xl bg-green-500/10 border border-green-500/20 text-green-500 text-sm"
+                  >
+                    Message sent successfully! We'll get back to you soon.
+                  </motion.div>
+                )}
+
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
                     Name
@@ -158,7 +207,8 @@ function ContactPopup({ isOpen, onClose }) {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-[#1a1725] border border-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 rounded-xl bg-[#1a1725] border border-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 disabled:opacity-50"
                     placeholder="Your name"
                   />
                 </div>
@@ -174,7 +224,8 @@ function ContactPopup({ isOpen, onClose }) {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-[#1a1725] border border-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 rounded-xl bg-[#1a1725] border border-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 disabled:opacity-50"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -189,25 +240,27 @@ function ContactPopup({ isOpen, onClose }) {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    disabled={isSubmitting}
                     rows="4"
-                    className="w-full px-4 py-3 rounded-xl bg-[#1a1725] border border-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-[#1a1725] border border-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 resize-none disabled:opacity-50"
                     placeholder="How can we help you?"
                   />
                 </div>
 
                 <motion.button
                   type="submit"
-                  className="w-full px-6 py-3 rounded-xl bg-[#700f59] text-white font-medium transition-all duration-200 flex items-center justify-center gap-2 group border border-transparent hover:bg-white hover:border-white hover:text-[#700f59]"
+                  disabled={isSubmitting}
+                  className="w-full px-6 py-3 rounded-xl bg-[#700f59] text-white font-medium transition-all duration-200 flex items-center justify-center gap-2 group border border-transparent hover:bg-white hover:border-white hover:text-[#700f59] disabled:opacity-50 disabled:cursor-not-allowed"
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span>Send Message</span>
-                  <FaPaperPlane className="text-white/80 group-hover:text-[#700f59] group-hover:translate-x-1 transition-all duration-200" />
+                  <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                  {!isSubmitting && (
+                    <FaPaperPlane className="text-white/80 group-hover:text-[#700f59] group-hover:translate-x-1 transition-all duration-200" />
+                  )}
                 </motion.button>
               </motion.form>
 
-              <p className="text-gray-400 text-sm mb-4">
-                Can&apos;t find a time that works for you?
-              </p>
+             
             </motion.div>
           </motion.div>
         </motion.div>
