@@ -89,14 +89,14 @@ function ContactPopup({ isOpen, onClose }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 pt-[150px] md:pt-4 bg-black/50 backdrop-blur-sm overflow-y-auto"
+          className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-4  md:pt-4 bg-black/50 backdrop-blur-sm overflow-y-auto"
           onClick={onClose}
         >
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-[#14121c] rounded-2xl p-6 md:p-8 w-full max-w-[700px] relative overflow-hidden my-8"
+            initial={{ scale: 0.9, opacity: 0, y: 100 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 100 }}
+            className="bg-[#14121c] rounded-t-2xl md:rounded-2xl p-6 md:p-8 w-full h-full md:h-auto md:max-w-[700px] relative overflow-hidden my-0 md:my-8"
             onClick={e => e.stopPropagation()}
           >
             {/* Background gradient effect */}
@@ -116,7 +116,7 @@ function ContactPopup({ isOpen, onClose }) {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="relative max-h-[calc(100vh-4rem)] overflow-y-auto pr-2"
+              className="relative h-full md:max-h-[calc(100vh-4rem)] overflow-y-auto pr-2"
             >
               <motion.h2 
                 variants={itemVariants}
