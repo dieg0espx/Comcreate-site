@@ -33,6 +33,13 @@ function ContactPopup({ isOpen, onClose }) {
         throw new Error(data.message || 'Something went wrong');
       }
 
+      // Trigger Google Ads conversion tracking
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'conversion', {
+          'send_to': 'AW-17227198630/ssEoCLzDwd4aEKbhyJZA'
+        });
+      }
+
       setSuccess(true);
       setFormData({ name: '', email: '', message: '' });
       setTimeout(() => {
