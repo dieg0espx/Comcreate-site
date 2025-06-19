@@ -89,7 +89,7 @@ function ContactPopup({ isOpen, onClose }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-y-auto"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 pt-[150px] md:pt-4 bg-black/50 backdrop-blur-sm overflow-y-auto"
           onClick={onClose}
         >
           <motion.div
@@ -120,7 +120,7 @@ function ContactPopup({ isOpen, onClose }) {
             >
               <motion.h2 
                 variants={itemVariants}
-                className="text-2xl md:text-3xl font-bold text-white mb-2 sticky top-0  py-2 z-10"
+                className="text-2xl md:text-3xl font-bold text-white mb-2 md:sticky top-0  py-2 z-10"
               >
                 Get in Touch
               </motion.h2>
