@@ -171,7 +171,7 @@ function Projects() {
             Our Portfolio
           </h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Discover how we've helped businesses transform their digital presence and achieve measurable results that drive growth.
+            Discover how we&apos;ve helped businesses transform their digital presence and achieve measurable results that drive growth.
           </p>
         </motion.div>
 
