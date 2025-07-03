@@ -210,7 +210,7 @@ function Projects() {
                                      <div className="text-gray-400 text-lg mb-6 leading-relaxed">
                      {projects[0].description.split('\n\n').map((paragraph, index) => (
                        <p key={index} className={index > 0 ? "mt-4" : ""}>
-                         {paragraph}
+                         {paragraph.replace(/'/g, '&apos;')}
                        </p>
                      ))}
                    </div>
@@ -223,7 +223,7 @@ function Projects() {
                          {projects[0].bullets.map((bullet, index) => (
                            <div key={index} className="flex items-start gap-3">
                              <span className="text-blue-400 mt-1 text-sm">•</span>
-                             <span className="text-gray-300 text-base">{bullet}</span>
+                             <span className="text-gray-300 text-base">{bullet.replace(/'/g, '&apos;')}</span>
                            </div>
                          ))}
                        </div>
@@ -236,7 +236,7 @@ function Projects() {
                       <div key={index} className="bg-white/5 rounded-lg p-4 text-center">
                         <div className="text-2xl mb-2">{metric.icon}</div>
                         <div className="text-2xl font-bold text-white mb-1">{metric.value}</div>
-                        <div className="text-sm text-gray-400">{metric.label}</div>
+                        <div className="text-sm text-gray-400">{metric.label.replace(/'/g, '&apos;')}</div>
                       </div>
                     ))}
                   </div>
@@ -283,7 +283,7 @@ function Projects() {
                       {project.title}
                     </h3>
                     <p className="text-gray-400 text-sm lg:text-base mb-4 leading-relaxed">
-                      {project.description}
+                      {project.description.replace(/'/g, '&apos;')}
                     </p>
 
                     {/* Key Features */}
@@ -294,7 +294,7 @@ function Projects() {
                           {project.bullets.slice(0, 4).map((bullet, index) => (
                             <div key={index} className="flex items-start gap-2">
                               <span className="text-blue-400 mt-1 text-xs">•</span>
-                              <span className="text-gray-300 text-xs">{bullet}</span>
+                              <span className="text-gray-300 text-xs">{bullet.replace(/'/g, '&apos;')}</span>
                             </div>
                           ))}
                         </div>
@@ -307,7 +307,7 @@ function Projects() {
                         <div key={index} className="flex items-center justify-between bg-white/5 rounded-lg p-3">
                           <span className="text-sm text-gray-400 flex items-center gap-2">
                             <span>{metric.icon}</span>
-                            {metric.label}
+                            {metric.label.replace(/'/g, '&apos;')}
                           </span>
                           <span className="font-bold text-white">{metric.value}</span>
                         </div>
@@ -356,7 +356,7 @@ function Projects() {
                         {project.title}
                       </h3>
                       <p className="text-gray-400 text-sm lg:text-base mb-4 leading-relaxed">
-                        {project.description}
+                        {project.description.replace(/'/g, '&apos;')}
                       </p>
 
                       {/* Key Features */}
@@ -367,7 +367,7 @@ function Projects() {
                             {project.bullets.slice(0, 4).map((bullet, index) => (
                               <div key={index} className="flex items-start gap-2">
                                 <span className="text-blue-400 mt-1 text-xs">•</span>
-                                <span className="text-gray-300 text-xs">{bullet}</span>
+                                <span className="text-gray-300 text-xs">{bullet.replace(/'/g, '&apos;')}</span>
                               </div>
                             ))}
                           </div>
@@ -380,7 +380,7 @@ function Projects() {
                           <div key={index} className="flex items-center justify-between bg-white/5 rounded-lg p-3">
                             <span className="text-sm text-gray-400 flex items-center gap-2">
                               <span>{metric.icon}</span>
-                              {metric.label}
+                              {metric.label.replace(/'/g, '&apos;')}
                             </span>
                             <span className="font-bold text-white">{metric.value}</span>
                           </div>
