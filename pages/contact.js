@@ -382,7 +382,7 @@ function Contact() {
             </p>
           </div>
           
-          <Calendly url="https://calendly.com/comcreate/30min" />
+          <Calendly url="https://calendly.com/analytics-comcreate/30min" />
         </motion.div>
 
         {/* Services CTA */}
