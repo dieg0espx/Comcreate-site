@@ -69,7 +69,7 @@ function Services() {
           </div>
           <h3 className="text-white text-2xl font-bold">Digital Ads</h3>
           <p className="text-gray-400">Targeted campaigns across Google and social platforms that deliver real results.</p>
-          {/* <a href="#" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></a> */}
+          <Link href="/ads" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></Link>
         </motion.div>
         {/* Branding Card */}
         <motion.div 
