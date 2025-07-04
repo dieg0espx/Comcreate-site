@@ -194,9 +194,10 @@ export default function Header() {
 
         {/* Close button with advanced styling */}
         <button 
-          className="absolute top-6 right-6 z-10 p-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300 hover:scale-110 hover:rotate-90 group"
+          className="fixed top-6 right-6 z-[100] p-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300 hover:scale-110 hover:rotate-90 group"
           onClick={() => setIsMenuOpen(false)}
           aria-label="Close menu"
+          style={{ position: 'fixed' }}
         >
           <FaTimes size={20} className="text-white group-hover:text-blue-300 transition-colors duration-300" />
           <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-red-400/20 to-pink-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
