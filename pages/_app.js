@@ -25,7 +25,7 @@ export default function App({ Component, pageProps }) {
         <meta name="google" content="notranslate" />
       </Head>
       <Header />
-        <div className="pt-[80px] md:pt-[110px] max-w-[1440px] mx-auto px-3 md:px-6 lg:px-10">
+        <div className="pt-[80px] md:pt-[150px] max-w-[1440px] mx-auto px-3 md:px-6 lg:px-10">
           <Component {...pageProps} />
         </div>
         <Footer />
