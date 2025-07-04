@@ -160,13 +160,13 @@ function Ads() {
           viewport={{ once: true }}
         >
           <motion.div className="mb-6">
-            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent text-lg font-semibold">
+            <span className="bg-gradient-to-r from-red-400 via-orange-500 to-yellow-400 bg-clip-text text-transparent text-lg font-semibold">
               DIGITAL ADVERTISING & PPC
             </span>
           </motion.div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
             Drive Results with{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-red-400 via-orange-500 to-yellow-400 bg-clip-text text-transparent">
               Targeted Advertising
             </span>
           </h1>
@@ -174,7 +174,7 @@ function Ads() {
             From Google search campaigns to social media advertising, we create data-driven ad campaigns that reach your ideal customers and deliver measurable results across all major platforms.
           </p>
           <motion.button 
-            className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
+            className="bg-gradient-to-r from-red-500 to-orange-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-2xl hover:shadow-red-500/25 transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsContactPopupOpen(true)}
@@ -394,8 +394,8 @@ function Ads() {
                 className="text-center"
                 variants={cardVariants}
               >
-                <div className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 border border-blue-500/30">
-                  <span className="text-blue-400 font-bold text-lg">{step.step}</span>
+                <div className="bg-gradient-to-br from-red-500/20 to-orange-600/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 border border-red-500/30">
+                  <span className="text-red-400 font-bold text-lg">{step.step}</span>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">{step.description}</p>
@@ -438,7 +438,7 @@ function Ads() {
             ].map((platform, index) => (
               <motion.div 
                 key={index}
-                className="bg-[#181626] rounded-2xl p-6 text-center border border-gray-800/50 hover:border-blue-500/30 transition-all duration-300 group"
+                className="bg-[#181626] rounded-2xl p-6 text-center border border-gray-800/50 hover:border-red-500/30 transition-all duration-300 group"
                 variants={cardVariants}
               >
                 <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
@@ -508,7 +508,7 @@ function Ads() {
             ].map((feature, index) => (
               <motion.div 
                 key={index}
-                className="bg-[#181626] rounded-2xl p-8 border border-gray-800/50 hover:border-blue-500/30 transition-all duration-300 group"
+                className="bg-[#181626] rounded-2xl p-8 border border-gray-800/50 hover:border-red-500/30 transition-all duration-300 group"
                 variants={cardVariants}
               >
                 <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -553,7 +553,7 @@ function Ads() {
             ].map((industry, index) => (
               <motion.div 
                 key={index}
-                className="bg-[#181626] rounded-2xl p-6 text-center border border-gray-800/50 hover:border-blue-500/30 transition-all duration-300 group"
+                className="bg-[#181626] rounded-2xl p-6 text-center border border-gray-800/50 hover:border-red-500/30 transition-all duration-300 group"
                 variants={cardVariants}
               >
                 <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
@@ -603,7 +603,7 @@ function Ads() {
                 ].map((faq, index) => (
                   <motion.div 
                     key={`left-faq-${index}`}
-                    className="bg-[#181626] rounded-2xl border border-gray-800/50 hover:border-blue-500/30 transition-all duration-300"
+                    className="bg-[#181626] rounded-2xl border border-gray-800/50 hover:border-red-500/30 transition-all duration-300"
                     variants={cardVariants}
                   >
                     <button
@@ -613,7 +613,7 @@ function Ads() {
                       <h3 className="text-white font-bold text-lg pr-4">{faq.question}</h3>
                       <div className="flex-shrink-0">
                         <svg 
-                          className={`w-5 h-5 text-blue-400 transform transition-transform duration-300 ${openFAQ === index ? 'rotate-180' : 'rotate-0'}`}
+                          className={`w-5 h-5 text-red-400 transform transition-transform duration-300 ${openFAQ === index ? 'rotate-180' : 'rotate-0'}`}
                           fill="none" 
                           stroke="currentColor" 
                           viewBox="0 0 24 24"
@@ -662,7 +662,7 @@ function Ads() {
                   return (
                     <motion.div 
                       key={`right-faq-${index}`}
-                      className="bg-[#181626] rounded-2xl border border-gray-800/50 hover:border-blue-500/30 transition-all duration-300"
+                      className="bg-[#181626] rounded-2xl border border-gray-800/50 hover:border-red-500/30 transition-all duration-300"
                       variants={cardVariants}
                     >
                       <button
@@ -672,7 +672,7 @@ function Ads() {
                         <h3 className="text-white font-bold text-lg pr-4">{faq.question}</h3>
                         <div className="flex-shrink-0">
                           <svg 
-                            className={`w-5 h-5 text-blue-400 transform transition-transform duration-300 ${openFAQ === rightColumnIndex ? 'rotate-180' : 'rotate-0'}`}
+                            className={`w-5 h-5 text-red-400 transform transition-transform duration-300 ${openFAQ === rightColumnIndex ? 'rotate-180' : 'rotate-0'}`}
                             fill="none" 
                             stroke="currentColor" 
                             viewBox="0 0 24 24"
@@ -721,7 +721,7 @@ function Ads() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.button 
-              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
+              className="bg-gradient-to-r from-red-500 to-orange-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-2xl hover:shadow-red-500/25 transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsContactPopupOpen(true)}
@@ -729,7 +729,7 @@ function Ads() {
               Get Free Ad Audit
             </motion.button>
             <motion.button 
-              className="border-2 border-blue-400 text-blue-400 px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-400 hover:text-white transition-all duration-300"
+              className="border-2 border-red-400 text-red-400 px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-400 hover:text-white transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsContactPopupOpen(true)}
