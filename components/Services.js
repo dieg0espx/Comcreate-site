@@ -82,7 +82,7 @@ function Services() {
           </div>
           <h3 className="text-white text-2xl font-bold">Branding</h3>
           <p className="text-gray-400">From logos to voice — build a brand identity that stands out and connects.</p>
-          {/* <a href="#" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></a> */}
+          <Link href="/branding" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></Link>
         </motion.div>
       </motion.div>
     </div>
