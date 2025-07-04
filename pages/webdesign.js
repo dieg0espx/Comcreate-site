@@ -82,7 +82,7 @@ function WebDesign() {
       id: 3,
       category: "NO-CODE PLATFORM",
       title: "Webflow Development",
-      description: "Stunning, responsive websites built on Webflow's powerful platform. Perfect for businesses that want beautiful design with easy content management and fast deployment.",
+      description: "Stunning, responsive websites built on Webflow&apos;s powerful platform. Perfect for businesses that want beautiful design with easy content management and fast deployment.",
       features: [
         "Responsive design systems",
         "Custom animations and interactions",
@@ -128,7 +128,7 @@ function WebDesign() {
     {
       step: "03",
       title: "Development & Testing",
-      description: "We build your website using best practices, ensuring it's fast, secure, and works perfectly across all devices and browsers."
+      description: "We build your website using best practices, ensuring it&apos;s fast, secure, and works perfectly across all devices and browsers."
     },
     {
       step: "04",
@@ -170,7 +170,7 @@ function WebDesign() {
           </span>
         </h1>
         <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-8">
-          From custom code to popular platforms like Shopify and Webflow, we create websites that don't just look amazing — they drive results, engage users, and grow your business.
+                     From custom code to popular platforms like Shopify and Webflow, we create websites that don&apos;t just look amazing — they drive results, engage users, and grow your business.
         </p>
         <motion.button 
           className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
@@ -462,7 +462,7 @@ function WebDesign() {
             Why Choose Comcreate?
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            We don't just build websites — we create digital experiences that drive real business results.
+                         We don&apos;t just build websites — we create digital experiences that drive real business results.
           </p>
         </div>
 
@@ -533,7 +533,7 @@ function WebDesign() {
             Industries We Serve
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            From startups to enterprise companies, we've helped businesses across diverse industries establish their digital presence.
+            From startups to enterprise companies, we&apos;ve helped businesses across diverse industries establish their digital presence.
           </p>
         </div>
 
@@ -578,7 +578,7 @@ function WebDesign() {
             Frequently Asked Questions
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Got questions? We've got answers. Here are the most common questions about our web design services.
+            Got questions? We&apos;ve got answers. Here are the most common questions about our web design services.
           </p>
         </div>
 
@@ -589,7 +589,7 @@ function WebDesign() {
               {[
                 {
                   question: "How long does it take to build a website?",
-                  answer: "Timeline depends on complexity. Simple websites take 2-4 weeks, while custom e-commerce or complex applications can take 6-12 weeks. We'll provide a detailed timeline during our consultation."
+                  answer: "Timeline depends on complexity. Simple websites take 2-4 weeks, while custom e-commerce or complex applications can take 6-12 weeks. We&apos;ll provide a detailed timeline during our consultation."
                 },
                 {
                   question: "Will my website be mobile-friendly?",
@@ -597,7 +597,7 @@ function WebDesign() {
                 },
                 {
                   question: "What if I need changes after launch?",
-                  answer: "We include a revision period post-launch, and offer flexible maintenance plans for ongoing updates. We're here to support your website's evolution as your business grows."
+                                      answer: "We include a revision period post-launch, and offer flexible maintenance plans for ongoing updates. We&apos;re here to support your website&apos;s evolution as your business grows."
                 }
               ].map((faq, index) => (
                 <motion.div 
@@ -716,7 +716,7 @@ function WebDesign() {
           Ready to Build Something Amazing?
         </h2>
         <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
-          Let's discuss your project and find the perfect solution for your business needs. Get a free consultation and quote today.
+          Let&apos;s discuss your project and find the perfect solution for your business needs. Get a free consultation and quote today.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <motion.button 

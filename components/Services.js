@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 function Services() {
   const containerVariants = {
@@ -43,7 +44,7 @@ function Services() {
           </div>
           <h3 className="text-white text-2xl font-bold">Web Design</h3>
           <p className="text-gray-400">Modern, responsive websites designed to engage and convert your audience.</p>
-          <a href="/webdesign" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></a>
+          <Link href="/webdesign" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></Link>
         </motion.div>
         {/* SEO Strategy Card */}
         <motion.div 
