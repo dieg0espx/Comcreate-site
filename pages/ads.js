@@ -150,13 +150,14 @@ function Ads() {
         <meta name="twitter:title" content="Digital Advertising Services | Google, Facebook & Instagram Ads | Comcreate" />
         <meta name="twitter:description" content="Professional digital advertising services across Google Ads, Facebook, Instagram, LinkedIn, YouTube, and TikTok. Drive qualified traffic and maximize ROI." />
       </Head>
-      <div className="min-h-screen bg-black text-white py-16">
+      <div className="text-white">
         {/* Hero Section */}
         <motion.div 
           className="text-center mb-20"
           variants={headerVariants}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true }}
         >
           <motion.div className="mb-6">
             <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent text-lg font-semibold">
@@ -706,7 +707,7 @@ function Ads() {
 
         {/* CTA Section */}
         <motion.div 
-          className="text-center bg-[#181626] rounded-2xl p-12 mx-4"
+          className="text-center bg-[#181626] rounded-2xl p-12"
           variants={headerVariants}
           initial="hidden"
           whileInView="visible"
