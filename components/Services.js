@@ -57,7 +57,7 @@ function Services() {
           </div>
           <h3 className="text-white text-2xl font-bold">SEO Strategy</h3>
           <p className="text-gray-400">Boost your visibility with strategies that drive organic traffic and long-term growth.</p>
-          {/* <a href="#" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></a> */}
+          <Link href="/seo" className="text-blue-400 font-semibold flex items-center gap-1 mt-auto">Learn more <span>→</span></Link>
         </motion.div>
         {/* Digital Ads Card */}
         <motion.div 
