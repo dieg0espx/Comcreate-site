@@ -30,6 +30,7 @@ CREATE TABLE project_stages (
     description TEXT,
     status stage_status DEFAULT 'pending',
     order_index INTEGER DEFAULT 0,
+    estimated_duration INTEGER DEFAULT 0,
     started_at TIMESTAMP WITH TIME ZONE,
     completed_at TIMESTAMP WITH TIME ZONE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -210,12 +211,12 @@ INSERT INTO projects (client_name, project_name, description, status, progress, 
 ('Fitness Pro', 'SEO Optimization Campaign', 'Comprehensive SEO campaign to improve search rankings and organic traffic.', 'planning', 15, '2024-02-01', '2024-05-01', 12000.00, 3000.00);
 
 -- Insert project stages
-INSERT INTO project_stages (project_id, name, description, status, order_index, started_at, completed_at) VALUES
-((SELECT id FROM projects WHERE project_name = 'E-commerce Website Redesign'), 'Discovery & Planning', 'Project requirements gathered and planning completed', 'completed', 1, '2024-01-15', '2024-01-20'),
-((SELECT id FROM projects WHERE project_name = 'E-commerce Website Redesign'), 'Design & Wireframes', 'UI/UX design approved and wireframes completed', 'completed', 2, '2024-01-20', '2024-01-30'),
-((SELECT id FROM projects WHERE project_name = 'E-commerce Website Redesign'), 'Development', 'Frontend development in progress', 'in_progress', 3, '2024-02-01', NULL),
-((SELECT id FROM projects WHERE project_name = 'E-commerce Website Redesign'), 'Testing & QA', 'Comprehensive testing and quality assurance', 'pending', 4, NULL, NULL),
-((SELECT id FROM projects WHERE project_name = 'E-commerce Website Redesign'), 'Launch', 'Final deployment and go-live', 'pending', 5, NULL, NULL);
+INSERT INTO project_stages (project_id, name, description, status, order_index, estimated_duration, started_at, completed_at) VALUES
+((SELECT id FROM projects WHERE project_name = 'E-commerce Website Redesign'), 'Discovery & Planning', 'Project requirements gathered and planning completed', 'completed', 1, 5, '2024-01-15', '2024-01-20'),
+((SELECT id FROM projects WHERE project_name = 'E-commerce Website Redesign'), 'Design & Wireframes', 'UI/UX design approved and wireframes completed', 'completed', 2, 10, '2024-01-20', '2024-01-30'),
+((SELECT id FROM projects WHERE project_name = 'E-commerce Website Redesign'), 'Development', 'Frontend development in progress', 'in_progress', 3, 20, '2024-02-01', NULL),
+((SELECT id FROM projects WHERE project_name = 'E-commerce Website Redesign'), 'Testing & QA', 'Comprehensive testing and quality assurance', 'pending', 4, 7, NULL, NULL),
+((SELECT id FROM projects WHERE project_name = 'E-commerce Website Redesign'), 'Launch', 'Final deployment and go-live', 'pending', 5, 3, NULL, NULL);
 
 -- Insert project updates
 INSERT INTO project_updates (project_id, message, author) VALUES
