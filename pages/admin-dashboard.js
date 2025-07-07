@@ -534,7 +534,7 @@ export default function AdminDashboard() {
                   className="group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                 >
                   <span className="relative z-10">+ New Project</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
                 <button 
                   onClick={() => window.open('/test-connection', '_blank')}
@@ -759,7 +759,7 @@ export default function AdminDashboard() {
                                 className="group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                               >
                                 <span className="relative z-10">Save Changes</span>
-                                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div className="absolute inset-0 bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               </button>
                               <button
                                 onClick={() => setEditingProject(false)}
@@ -812,7 +812,7 @@ export default function AdminDashboard() {
                             className="group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                           >
                             <span className="relative z-10">+ Add Stage</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div className="absolute inset-0 bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                           </button>
                         </div>
 
@@ -868,7 +868,7 @@ export default function AdminDashboard() {
                                 className="group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                               >
                                 <span className="relative z-10">Create Stage</span>
-                                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div className="absolute inset-0 bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               </button>
                               <button
                                 onClick={() => setShowCreateStage(false)}
@@ -957,7 +957,7 @@ export default function AdminDashboard() {
                                         className="group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                                       >
                                         <span className="relative z-10">Save Changes</span>
-                                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                        <div className="absolute inset-0 bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                       </button>
                                       <button
                                         onClick={() => setEditingStage(null)}
@@ -1059,7 +1059,7 @@ export default function AdminDashboard() {
                             className="mt-3 group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                           >
                             <span className="relative z-10">Add Update</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div className="absolute inset-0 bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                           </button>
                         </div>
 
@@ -1098,7 +1098,7 @@ export default function AdminDashboard() {
                             className="mt-3 group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                           >
                             <span className="relative z-10">Add Note</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div className="absolute inset-0 bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                           </button>
                         </div>
 
@@ -1126,7 +1126,7 @@ export default function AdminDashboard() {
                             className="group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                           >
                             <span className="relative z-10">+ Create Invoice</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div className="absolute inset-0 bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                           </button>
                         </div>
 
@@ -1458,7 +1458,7 @@ export default function AdminDashboard() {
                 className="flex-1 group px-4 py-3 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
               >
                 <span className="relative z-10">Create Project</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </button>
               <button
                 onClick={() => setShowCreateProject(false)}
