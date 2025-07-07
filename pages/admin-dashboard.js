@@ -35,6 +35,7 @@ export default function AdminDashboard() {
     order_index: 0
   });
   const [editingStage, setEditingStage] = useState(null);
+  const [updatingStage, setUpdatingStage] = useState(null);
 
   // Load projects on component mount
   useEffect(() => {
@@ -108,13 +109,15 @@ export default function AdminDashboard() {
 
   const updateStageStatus = async (projectId, stageId, newStatus) => {
     try {
+      setUpdatingStage(stageId);
       const now = new Date().toISOString();
       const startedAt = newStatus === 'in_progress' ? now : null;
       const completedAt = newStatus === 'completed' ? now : null;
 
       await stageService.updateStageStatus(stageId, newStatus, startedAt, completedAt);
       
-      setProjects(projects.map(project => 
+      // Update projects state
+      const updatedProjects = projects.map(project => 
         project.id === projectId 
           ? {
               ...project,
@@ -130,10 +133,23 @@ export default function AdminDashboard() {
               )
             }
           : project
-      ));
+      );
+      
+      setProjects(updatedProjects);
+      
+      // Update selected project state immediately
+      if (selectedProject && selectedProject.id === projectId) {
+        const updatedSelectedProject = updatedProjects.find(p => p.id === projectId);
+        setSelectedProject(updatedSelectedProject);
+      }
+      
+      setSuccess(`Stage status updated to ${newStatus.replace('_', ' ')}!`);
+      setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
       setError(err.message);
       console.error('Error updating stage:', err);
+    } finally {
+      setUpdatingStage(null);
     }
   };
 
@@ -246,14 +262,23 @@ export default function AdminDashboard() {
 
       const createdStage = await stageService.createStage(stageData);
       
-      setProjects(projects.map(project => 
+      // Update projects state
+      const updatedProjects = projects.map(project => 
         project.id === projectId 
           ? { 
               ...project, 
               project_stages: [...(project.project_stages || []), createdStage].sort((a, b) => a.order_index - b.order_index)
             }
           : project
-      ));
+      );
+      
+      setProjects(updatedProjects);
+      
+      // Update selected project state immediately
+      if (selectedProject && selectedProject.id === projectId) {
+        const updatedSelectedProject = updatedProjects.find(p => p.id === projectId);
+        setSelectedProject(updatedSelectedProject);
+      }
       
       setShowCreateStage(false);
       setNewStage({
@@ -274,7 +299,8 @@ export default function AdminDashboard() {
     try {
       const updatedStage = await stageService.updateStage(stageId, updates);
       
-      setProjects(projects.map(project => 
+      // Update projects state
+      const updatedProjects = projects.map(project => 
         project.id === projectId 
           ? {
               ...project,
@@ -283,7 +309,15 @@ export default function AdminDashboard() {
               )
             }
           : project
-      ));
+      );
+      
+      setProjects(updatedProjects);
+      
+      // Update selected project state immediately
+      if (selectedProject && selectedProject.id === projectId) {
+        const updatedSelectedProject = updatedProjects.find(p => p.id === projectId);
+        setSelectedProject(updatedSelectedProject);
+      }
       
       setEditingStage(null);
       setSuccess('Stage updated successfully!');
@@ -300,14 +334,23 @@ export default function AdminDashboard() {
     try {
       await stageService.deleteStage(stageId);
       
-      setProjects(projects.map(project => 
+      // Update projects state
+      const updatedProjects = projects.map(project => 
         project.id === projectId 
           ? {
               ...project,
               project_stages: project.project_stages.filter(stage => stage.id !== stageId)
             }
           : project
-      ));
+      );
+      
+      setProjects(updatedProjects);
+      
+      // Update selected project state immediately
+      if (selectedProject && selectedProject.id === projectId) {
+        const updatedSelectedProject = updatedProjects.find(p => p.id === projectId);
+        setSelectedProject(updatedSelectedProject);
+      }
       
       setSuccess('Stage deleted successfully!');
       setTimeout(() => setSuccess(null), 3000);
@@ -838,12 +881,20 @@ export default function AdminDashboard() {
                                         <select
                                           value={stage.status}
                                           onChange={(e) => updateStageStatus(selectedProject.id, stage.id, e.target.value)}
-                                          className="bg-gray-700 text-white text-sm rounded px-2 py-1 border border-gray-600"
+                                          disabled={updatingStage === stage.id}
+                                          className={`bg-gray-700 text-white text-sm rounded px-2 py-1 border border-gray-600 ${
+                                            updatingStage === stage.id ? 'opacity-50 cursor-not-allowed' : ''
+                                          }`}
                                         >
                                           <option value="pending">Pending</option>
                                           <option value="in_progress">In Progress</option>
                                           <option value="completed">Completed</option>
                                         </select>
+                                        {updatingStage === stage.id && (
+                                          <div className="ml-2">
+                                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-purple-500"></div>
+                                          </div>
+                                        )}
                                       </div>
                                     </div>
                                     
