@@ -1,0 +1,7 @@
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=https://qwojdjrtgrlfdgkfjoej.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key_here
+
+# Note: You provided the service role key, but for the frontend we need the anon/public key
+# Please replace 'your_anon_key_here' with your actual anon key from Supabase dashboard
+# Go to Settings > API in your Supabase dashboard to find the anon/public key 

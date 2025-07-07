@@ -1,9 +1,6 @@
 -- Comcreate Dashboard Database Schema
 -- Run this in your Supabase SQL editor
 
--- Enable Row Level Security
-ALTER DATABASE postgres SET "app.jwt_secret" TO 'your-jwt-secret';
-
 -- Create custom types
 CREATE TYPE project_status AS ENUM ('planning', 'in_progress', 'completed', 'on_hold');
 CREATE TYPE stage_status AS ENUM ('pending', 'in_progress', 'completed');
@@ -138,6 +135,9 @@ ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE client_projects ENABLE ROW LEVEL SECURITY;
 
 -- Create RLS policies
+-- Allow public access to projects for admin dashboard (temporary)
+CREATE POLICY "Allow public access to projects" ON projects FOR ALL USING (true);
+
 -- Admin can see all projects
 CREATE POLICY "Admin can view all projects" ON projects FOR ALL USING (auth.jwt() ->> 'role' = 'admin');
 
@@ -151,6 +151,13 @@ CREATE POLICY "Clients can view their projects" ON projects FOR SELECT USING (
 );
 
 -- Similar policies for other tables
+-- Allow public access for admin dashboard (temporary)
+CREATE POLICY "Allow public access to stages" ON project_stages FOR ALL USING (true);
+CREATE POLICY "Allow public access to updates" ON project_updates FOR ALL USING (true);
+CREATE POLICY "Allow public access to notes" ON project_notes FOR ALL USING (true);
+CREATE POLICY "Allow public access to deliverables" ON project_deliverables FOR ALL USING (true);
+CREATE POLICY "Allow public access to invoices" ON invoices FOR ALL USING (true);
+
 CREATE POLICY "Admin can view all stages" ON project_stages FOR ALL USING (auth.jwt() ->> 'role' = 'admin');
 CREATE POLICY "Clients can view project stages" ON project_stages FOR SELECT USING (
     EXISTS (

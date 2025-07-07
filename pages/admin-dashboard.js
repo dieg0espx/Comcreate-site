@@ -6,10 +6,27 @@ export default function AdminDashboard() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
   const [newUpdate, setNewUpdate] = useState('');
   const [newNote, setNewNote] = useState('');
+  const [showCreateProject, setShowCreateProject] = useState(false);
+  const [newProject, setNewProject] = useState({
+    client_name: '',
+    project_name: '',
+    description: '',
+    budget: '',
+    start_date: '',
+    end_date: ''
+  });
+  const [editingProject, setEditingProject] = useState(false);
+  const [newInvoice, setNewInvoice] = useState({
+    invoice_number: '',
+    amount: '',
+    description: '',
+    due_date: ''
+  });
 
   // Load projects on component mount
   useEffect(() => {
@@ -47,6 +64,8 @@ export default function AdminDashboard() {
           : project
       ));
       setNewUpdate('');
+      setSuccess('Update added successfully!');
+      setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
       setError(err.message);
       console.error('Error adding update:', err);
@@ -71,6 +90,8 @@ export default function AdminDashboard() {
           : project
       ));
       setNewNote('');
+      setSuccess('Note added successfully!');
+      setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
       setError(err.message);
       console.error('Error adding note:', err);
@@ -105,6 +126,102 @@ export default function AdminDashboard() {
     } catch (err) {
       setError(err.message);
       console.error('Error updating stage:', err);
+    }
+  };
+
+  const createProject = async () => {
+    try {
+      const projectData = {
+        ...newProject,
+        budget: parseFloat(newProject.budget) || 0,
+        status: 'planning',
+        progress: 0
+      };
+
+      const createdProject = await projectService.createProject(projectData);
+      setProjects([createdProject, ...projects]);
+      setShowCreateProject(false);
+      setNewProject({
+        client_name: '',
+        project_name: '',
+        description: '',
+        budget: '',
+        start_date: '',
+        end_date: ''
+      });
+      setSuccess('Project created successfully!');
+      setTimeout(() => setSuccess(null), 3000);
+    } catch (err) {
+      setError(err.message);
+      console.error('Error creating project:', err);
+    }
+  };
+
+  const updateProject = async (projectId, updates) => {
+    try {
+      const updatedProject = await projectService.updateProject(projectId, updates);
+      setProjects(projects.map(project => 
+        project.id === projectId ? updatedProject : project
+      ));
+      setSelectedProject(updatedProject);
+      setEditingProject(false);
+    } catch (err) {
+      setError(err.message);
+      console.error('Error updating project:', err);
+    }
+  };
+
+  const createInvoice = async (projectId) => {
+    try {
+      const invoiceData = {
+        project_id: projectId,
+        invoice_number: newInvoice.invoice_number,
+        amount: parseFloat(newInvoice.amount) || 0,
+        description: newInvoice.description,
+        due_date: newInvoice.due_date,
+        status: 'draft'
+      };
+
+      const createdInvoice = await invoiceService.createInvoice(invoiceData);
+      
+      setProjects(projects.map(project => 
+        project.id === projectId 
+          ? { ...project, invoices: [createdInvoice, ...(project.invoices || [])] }
+          : project
+      ));
+      
+      setNewInvoice({
+        invoice_number: '',
+        amount: '',
+        description: '',
+        due_date: ''
+      });
+    } catch (err) {
+      setError(err.message);
+      console.error('Error creating invoice:', err);
+    }
+  };
+
+  const updateInvoiceStatus = async (projectId, invoiceId, status) => {
+    try {
+      const paidDate = status === 'paid' ? new Date().toISOString() : null;
+      await invoiceService.updateInvoiceStatus(invoiceId, status, paidDate);
+      
+      setProjects(projects.map(project => 
+        project.id === projectId 
+          ? {
+              ...project,
+              invoices: project.invoices.map(invoice => 
+                invoice.id === invoiceId 
+                  ? { ...invoice, status, paid_date: paidDate }
+                  : invoice
+              )
+            }
+          : project
+      ));
+    } catch (err) {
+      setError(err.message);
+      console.error('Error updating invoice:', err);
     }
   };
 
@@ -174,19 +291,51 @@ export default function AdminDashboard() {
                 </h1>
                 <p className="text-gray-300 mt-1">Manage projects, updates, and client communications</p>
               </div>
-                              <div className="flex items-center space-x-4">
-                  <div className="bg-purple-500/20 px-4 py-2 rounded-lg">
-                    <span className="text-purple-300 text-sm">Total Projects: {projects.length}</span>
-                  </div>
-                  <div className="bg-magenta-500/20 px-4 py-2 rounded-lg">
-                    <span className="text-magenta-300 text-sm">Active: {projects.filter(p => p.status === 'in_progress').length}</span>
-                  </div>
+              <div className="flex items-center space-x-4">
+                <div className="bg-purple-500/20 px-4 py-2 rounded-lg">
+                  <span className="text-purple-300 text-sm">Total Projects: {projects.length}</span>
                 </div>
+                <div className="bg-magenta-500/20 px-4 py-2 rounded-lg">
+                  <span className="text-magenta-300 text-sm">Active: {projects.filter(p => p.status === 'in_progress').length}</span>
+                </div>
+                <button 
+                  onClick={() => setShowCreateProject(true)}
+                  className="group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
+                >
+                  <span className="relative z-10">+ New Project</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <button 
+                  onClick={() => window.open('/test-connection', '_blank')}
+                  className="group px-4 py-2 rounded-full border-2 border-blue-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
+                >
+                  <span className="relative z-10">Test DB</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Success/Error Messages */}
+          {success && (
+            <div className="mb-6 bg-green-500/20 border border-green-500/40 rounded-lg p-4">
+              <p className="text-green-300">{success}</p>
+            </div>
+          )}
+          {error && (
+            <div className="mb-6 bg-red-500/20 border border-red-500/40 rounded-lg p-4">
+              <p className="text-red-300">{error}</p>
+              <button 
+                onClick={() => setError(null)}
+                className="text-red-400 hover:text-red-300 text-sm mt-2"
+              >
+                Dismiss
+              </button>
+            </div>
+          )}
+          
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Projects List */}
             <div className="lg:col-span-1">
@@ -234,18 +383,27 @@ export default function AdminDashboard() {
             {selectedProject && (
               <div className="lg:col-span-2">
                 <div className="bg-black/40 backdrop-blur-lg rounded-2xl border border-purple-500/20 p-6">
-                  {/* Project Header */}
-                  <div className="mb-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <div>
-                        <h2 className="text-2xl font-bold text-white">{selectedProject.project_name}</h2>
-                        <p className="text-purple-300">{selectedProject.client_name}</p>
+                                      {/* Project Header */}
+                    <div className="mb-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <div>
+                          <h2 className="text-2xl font-bold text-white">{selectedProject.project_name}</h2>
+                          <p className="text-purple-300">{selectedProject.client_name}</p>
+                          <p className="text-gray-400 text-sm mt-1">{selectedProject.description}</p>
+                        </div>
+                        <div className="text-right">
+                          <div className="flex items-center gap-2 mb-2">
+                            <button
+                              onClick={() => setEditingProject(!editingProject)}
+                              className="text-purple-400 hover:text-purple-300 transition-colors"
+                            >
+                              {editingProject ? 'Cancel' : 'Edit'}
+                            </button>
+                          </div>
+                          <p className="text-gray-400 text-sm">Budget</p>
+                          <p className="text-white font-semibold">${selectedProject.budget?.toLocaleString() || 0}</p>
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <p className="text-gray-400 text-sm">Budget</p>
-                        <p className="text-white font-semibold">${selectedProject.budget?.toLocaleString() || 0}</p>
-                      </div>
-                    </div>
                     
                     {/* Tabs */}
                     <div className="flex space-x-1 bg-gray-800/50 rounded-lg p-1">
@@ -269,32 +427,146 @@ export default function AdminDashboard() {
                   <div className="min-h-[500px]">
                     {activeTab === 'overview' && (
                       <div className="space-y-6">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {editingProject ? (
                           <div className="bg-gray-800/50 rounded-lg p-4">
-                            <p className="text-gray-400 text-sm">Progress</p>
-                            <p className="text-2xl font-bold text-white">{selectedProject.progress}%</p>
-                          </div>
-                          <div className="bg-gray-800/50 rounded-lg p-4">
-                            <p className="text-gray-400 text-sm">Start Date</p>
-                            <p className="text-white">{selectedProject.start_date ? new Date(selectedProject.start_date).toLocaleDateString() : 'Not set'}</p>
-                          </div>
-                          <div className="bg-gray-800/50 rounded-lg p-4">
-                            <p className="text-gray-400 text-sm">End Date</p>
-                            <p className="text-white">{selectedProject.end_date ? new Date(selectedProject.end_date).toLocaleDateString() : 'Not set'}</p>
-                          </div>
-                        </div>
-                        
-                        <div className="bg-gray-800/50 rounded-lg p-4">
-                          <h3 className="text-lg font-semibold text-white mb-3">Recent Updates</h3>
-                          <div className="space-y-3">
-                            {selectedProject.project_updates?.slice(0, 3).map((update) => (
-                              <div key={update.id} className="border-l-2 border-purple-500 pl-4">
-                                <p className="text-white text-sm">{update.message}</p>
-                                <p className="text-gray-400 text-xs mt-1">{new Date(update.created_at).toLocaleDateString()} by {update.author}</p>
+                            <h3 className="text-lg font-semibold text-white mb-4">Edit Project</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div>
+                                <label className="block text-gray-300 text-sm mb-2">Project Name</label>
+                                <input
+                                  type="text"
+                                  defaultValue={selectedProject.project_name}
+                                  className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                  id="edit-project-name"
+                                />
                               </div>
-                            ))}
+                              <div>
+                                <label className="block text-gray-300 text-sm mb-2">Client Name</label>
+                                <input
+                                  type="text"
+                                  defaultValue={selectedProject.client_name}
+                                  className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                  id="edit-client-name"
+                                />
+                              </div>
+                              <div className="md:col-span-2">
+                                <label className="block text-gray-300 text-sm mb-2">Description</label>
+                                <textarea
+                                  defaultValue={selectedProject.description}
+                                  className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none resize-none"
+                                  rows="3"
+                                  id="edit-description"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-gray-300 text-sm mb-2">Budget</label>
+                                <input
+                                  type="number"
+                                  defaultValue={selectedProject.budget}
+                                  className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                  id="edit-budget"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-gray-300 text-sm mb-2">Progress (%)</label>
+                                <input
+                                  type="number"
+                                  min="0"
+                                  max="100"
+                                  defaultValue={selectedProject.progress}
+                                  className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                  id="edit-progress"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-gray-300 text-sm mb-2">Start Date</label>
+                                <input
+                                  type="date"
+                                  defaultValue={selectedProject.start_date}
+                                  className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                  id="edit-start-date"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-gray-300 text-sm mb-2">End Date</label>
+                                <input
+                                  type="date"
+                                  defaultValue={selectedProject.end_date}
+                                  className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                  id="edit-end-date"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-gray-300 text-sm mb-2">Status</label>
+                                <select
+                                  defaultValue={selectedProject.status}
+                                  className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                  id="edit-status"
+                                >
+                                  <option value="planning">Planning</option>
+                                  <option value="in_progress">In Progress</option>
+                                  <option value="completed">Completed</option>
+                                  <option value="on_hold">On Hold</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div className="flex gap-3 mt-4">
+                              <button
+                                onClick={() => {
+                                  const updates = {
+                                    project_name: document.getElementById('edit-project-name').value,
+                                    client_name: document.getElementById('edit-client-name').value,
+                                    description: document.getElementById('edit-description').value,
+                                    budget: parseFloat(document.getElementById('edit-budget').value) || 0,
+                                    progress: parseInt(document.getElementById('edit-progress').value) || 0,
+                                    start_date: document.getElementById('edit-start-date').value,
+                                    end_date: document.getElementById('edit-end-date').value,
+                                    status: document.getElementById('edit-status').value
+                                  };
+                                  updateProject(selectedProject.id, updates);
+                                }}
+                                className="bg-gradient-to-r from-purple-500 to-magenta-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-magenta-600 transition-all duration-300"
+                              >
+                                Save Changes
+                              </button>
+                              <button
+                                onClick={() => setEditingProject(false)}
+                                className="border-2 border-gray-600 text-white px-4 py-2 rounded-lg hover:border-gray-500 transition-all duration-300"
+                              >
+                                Cancel
+                              </button>
+                            </div>
                           </div>
-                        </div>
+                        ) : (
+                          <>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                              <div className="bg-gray-800/50 rounded-lg p-4">
+                                <p className="text-gray-400 text-sm">Progress</p>
+                                <p className="text-2xl font-bold text-white">{selectedProject.progress}%</p>
+                              </div>
+                              <div className="bg-gray-800/50 rounded-lg p-4">
+                                <p className="text-gray-400 text-sm">Start Date</p>
+                                <p className="text-white">{selectedProject.start_date ? new Date(selectedProject.start_date).toLocaleDateString() : 'Not set'}</p>
+                              </div>
+                              <div className="bg-gray-800/50 rounded-lg p-4">
+                                <p className="text-gray-400 text-sm">End Date</p>
+                                <p className="text-white">{selectedProject.end_date ? new Date(selectedProject.end_date).toLocaleDateString() : 'Not set'}</p>
+                              </div>
+                            </div>
+                            
+                            <div className="bg-gray-800/50 rounded-lg p-4">
+                              <h3 className="text-lg font-semibold text-white mb-3">Recent Updates</h3>
+                              <div className="space-y-3">
+                                {selectedProject.project_updates?.slice(0, 3).map((update) => (
+                                  <div key={update.id} className="border-l-2 border-purple-500 pl-4">
+                                    <p className="text-white text-sm">{update.message}</p>
+                                    <p className="text-gray-400 text-xs mt-1">{new Date(update.created_at).toLocaleDateString()} by {update.author}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </>
+                        )}
                       </div>
                     )}
 
@@ -412,10 +684,75 @@ export default function AdminDashboard() {
                       <div className="space-y-4">
                         <div className="flex items-center justify-between">
                           <h3 className="text-lg font-semibold text-white">Invoices</h3>
-                          <button className="bg-gradient-to-r from-purple-500 to-magenta-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-magenta-600 transition-all duration-300">
-                            Create Invoice
+                          <button 
+                            onClick={() => setActiveTab('create-invoice')}
+                            className="group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
+                          >
+                            <span className="relative z-10">+ Create Invoice</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                           </button>
                         </div>
+                        
+                        {/* Create Invoice Form */}
+                        {activeTab === 'create-invoice' && (
+                          <div className="bg-gray-800/50 rounded-lg p-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div>
+                                <label className="block text-gray-300 text-sm mb-2">Invoice Number</label>
+                                <input
+                                  type="text"
+                                  value={newInvoice.invoice_number}
+                                  onChange={(e) => setNewInvoice({...newInvoice, invoice_number: e.target.value})}
+                                  className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                  placeholder="INV-001"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-gray-300 text-sm mb-2">Amount</label>
+                                <input
+                                  type="number"
+                                  value={newInvoice.amount}
+                                  onChange={(e) => setNewInvoice({...newInvoice, amount: e.target.value})}
+                                  className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                  placeholder="0.00"
+                                />
+                              </div>
+                            </div>
+                            <div className="mt-4">
+                              <label className="block text-gray-300 text-sm mb-2">Description</label>
+                              <textarea
+                                value={newInvoice.description}
+                                onChange={(e) => setNewInvoice({...newInvoice, description: e.target.value})}
+                                className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none resize-none"
+                                rows="2"
+                                placeholder="Invoice description"
+                              />
+                            </div>
+                            <div className="mt-4">
+                              <label className="block text-gray-300 text-sm mb-2">Due Date</label>
+                              <input
+                                type="date"
+                                value={newInvoice.due_date}
+                                onChange={(e) => setNewInvoice({...newInvoice, due_date: e.target.value})}
+                                className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                              />
+                            </div>
+                            <div className="flex gap-3 mt-4">
+                              <button
+                                onClick={() => createInvoice(selectedProject.id)}
+                                className="bg-gradient-to-r from-purple-500 to-magenta-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-magenta-600 transition-all duration-300"
+                              >
+                                Create Invoice
+                              </button>
+                              <button
+                                onClick={() => setActiveTab('invoices')}
+                                className="border-2 border-gray-600 text-white px-4 py-2 rounded-lg hover:border-gray-500 transition-all duration-300"
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          </div>
+                        )}
                         
                         <div className="space-y-3">
                           {selectedProject.invoices?.map((invoice) => (
@@ -424,6 +761,9 @@ export default function AdminDashboard() {
                                 <div>
                                   <h4 className="font-medium text-white">{invoice.invoice_number}</h4>
                                   <p className="text-gray-400 text-sm">Due: {new Date(invoice.due_date).toLocaleDateString()}</p>
+                                  {invoice.description && (
+                                    <p className="text-gray-400 text-sm mt-1">{invoice.description}</p>
+                                  )}
                                 </div>
                                 <div className="text-right">
                                   <p className="text-white font-semibold">${invoice.amount?.toLocaleString() || 0}</p>
@@ -434,6 +774,17 @@ export default function AdminDashboard() {
                                   }`}>
                                     {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
                                   </span>
+                                  <div className="mt-2">
+                                    <select
+                                      value={invoice.status}
+                                      onChange={(e) => updateInvoiceStatus(selectedProject.id, invoice.id, e.target.value)}
+                                      className="bg-gray-700 text-white text-xs rounded px-2 py-1 border border-gray-600"
+                                    >
+                                      <option value="draft">Draft</option>
+                                      <option value="pending">Pending</option>
+                                      <option value="paid">Paid</option>
+                                    </select>
+                                  </div>
                                 </div>
                               </div>
                               {invoice.paid_date && (
@@ -451,6 +802,106 @@ export default function AdminDashboard() {
           </div>
         </div>
       </div>
+
+      {/* Create Project Modal */}
+      {showCreateProject && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-black/90 backdrop-blur-lg rounded-2xl border border-purple-500/20 p-6 w-full max-w-md">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-semibold text-white">Create New Project</h3>
+              <button
+                onClick={() => setShowCreateProject(false)}
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-gray-300 text-sm mb-2">Client Name</label>
+                <input
+                  type="text"
+                  value={newProject.client_name}
+                  onChange={(e) => setNewProject({...newProject, client_name: e.target.value})}
+                  className="w-full bg-gray-800 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                  placeholder="Enter client name"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-gray-300 text-sm mb-2">Project Name</label>
+                <input
+                  type="text"
+                  value={newProject.project_name}
+                  onChange={(e) => setNewProject({...newProject, project_name: e.target.value})}
+                  className="w-full bg-gray-800 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                  placeholder="Enter project name"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-gray-300 text-sm mb-2">Description</label>
+                <textarea
+                  value={newProject.description}
+                  onChange={(e) => setNewProject({...newProject, description: e.target.value})}
+                  className="w-full bg-gray-800 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none resize-none"
+                  rows="3"
+                  placeholder="Enter project description"
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-gray-300 text-sm mb-2">Budget</label>
+                  <input
+                    type="number"
+                    value={newProject.budget}
+                    onChange={(e) => setNewProject({...newProject, budget: e.target.value})}
+                    className="w-full bg-gray-800 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                    placeholder="0.00"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-gray-300 text-sm mb-2">Start Date</label>
+                  <input
+                    type="date"
+                    value={newProject.start_date}
+                    onChange={(e) => setNewProject({...newProject, start_date: e.target.value})}
+                    className="w-full bg-gray-800 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                  />
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-gray-300 text-sm mb-2">End Date</label>
+                <input
+                  type="date"
+                  value={newProject.end_date}
+                  onChange={(e) => setNewProject({...newProject, end_date: e.target.value})}
+                  className="w-full bg-gray-800 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                />
+              </div>
+            </div>
+            
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={createProject}
+                className="flex-1 bg-gradient-to-r from-purple-500 to-magenta-500 text-white py-3 rounded-lg hover:from-purple-600 hover:to-magenta-600 transition-all duration-300"
+              >
+                Create Project
+              </button>
+              <button
+                onClick={() => setShowCreateProject(false)}
+                className="flex-1 border-2 border-gray-600 text-white py-3 rounded-lg hover:border-gray-500 transition-all duration-300"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 } 
