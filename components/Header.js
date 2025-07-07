@@ -157,20 +157,6 @@ export default function Header() {
 
           {/* Buttons - Desktop */}
           <div className="hidden md:flex items-center gap-2 lg:gap-4">
-            <Link 
-              href="/admin-dashboard" 
-              className="group px-4 lg:px-6 py-2 rounded-full border-2 border-purple-400 text-white text-sm lg:text-base font-md bg-transparent hover:border-transparent transition-all duration-300 whitespace-nowrap relative overflow-hidden"
-            >
-              <span className="relative z-10">Admin</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </Link>
-            <Link 
-              href="/client-dashboard" 
-              className="group px-4 lg:px-6 py-2 rounded-full border-2 border-blue-400 text-white text-sm lg:text-base font-md bg-transparent hover:border-transparent transition-all duration-300 whitespace-nowrap relative overflow-hidden"
-            >
-              <span className="relative z-10">Client</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </Link>
             <button 
               onClick={handleContactClick}
               className="group px-4 lg:px-6 py-2 rounded-full bg-white text-[#0a071a] text-sm lg:text-base font-md transition-all duration-300 whitespace-nowrap relative overflow-hidden"
@@ -289,31 +275,14 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Dashboards */}
-          <div className="space-y-3 mb-8">
-            <div className={`text-xs font-semibold text-white/60 uppercase tracking-wider mb-3 transition-all duration-700 delay-1100 ${isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
-              Dashboards
-            </div>
-            <div className={`grid grid-cols-2 gap-3 transition-all duration-700 delay-1200 ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              <Link href="/admin-dashboard" className="group p-3 rounded-xl border border-white/10 hover:border-purple-400/30 hover:bg-purple-500/10 transition-all duration-300 text-center" onClick={() => setIsMenuOpen(false)}>
-                <div className="text-lg mb-1">⚙️</div>
-                <div className="text-white text-xs font-medium">Admin</div>
-                <div className="text-white/60 text-xs">Project management</div>
-              </Link>
-              <Link href="/client-dashboard" className="group p-3 rounded-xl border border-white/10 hover:border-blue-400/30 hover:bg-blue-500/10 transition-all duration-300 text-center" onClick={() => setIsMenuOpen(false)}>
-                <div className="text-lg mb-1">👤</div>
-                <div className="text-white text-xs font-medium">Client</div>
-                <div className="text-white/60 text-xs">Track projects</div>
-              </Link>
-            </div>
-          </div>
+
 
           {/* Contact Information */}
           <div className="space-y-3 mb-8">
-            <div className={`text-xs font-semibold text-white/60 uppercase tracking-wider mb-3 transition-all duration-700 delay-1300 ${isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
+            <div className={`text-xs font-semibold text-white/60 uppercase tracking-wider mb-3 transition-all duration-700 delay-1100 ${isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
               Contact Info
             </div>
-            <div className={`space-y-2 transition-all duration-700 delay-1400 ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <div className={`space-y-2 transition-all duration-700 delay-1200 ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
               <a href="tel:+16199550105" className="flex items-center p-2 rounded-lg hover:bg-white/5 transition-colors group">
                 <FaPhone className="text-blue-400 mr-3" size={14} />
                 <div>
@@ -335,10 +304,10 @@ export default function Header() {
 
           {/* Social Media */}
           <div className="space-y-3 mb-8">
-            <div className={`text-xs font-semibold text-white/60 uppercase tracking-wider mb-3 transition-all duration-700 delay-1500 ${isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
+            <div className={`text-xs font-semibold text-white/60 uppercase tracking-wider mb-3 transition-all duration-700 delay-1300 ${isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
               Follow Us
             </div>
-            <div className={`flex justify-center space-x-4 transition-all duration-700 delay-1600 ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <div className={`flex justify-center space-x-4 transition-all duration-700 delay-1400 ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
               {[
                 { href: "https://facebook.com", icon: <FaFacebook />, color: "hover:text-blue-500", bg: "hover:bg-blue-500/20" },
                 { href: "https://twitter.com", icon: <FaTwitter />, color: "hover:text-sky-400", bg: "hover:bg-sky-500/20" },
@@ -359,7 +328,7 @@ export default function Header() {
           </div>
 
           {/* CTA Button */}
-          <div className={`transition-all duration-700 delay-1700 ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <div className={`transition-all duration-700 delay-1500 ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <button 
               onClick={handleContactClick}
               className="group w-full p-4 rounded-xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/30 relative overflow-hidden"
