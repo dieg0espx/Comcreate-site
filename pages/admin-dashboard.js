@@ -721,15 +721,17 @@ export default function AdminDashboard() {
                                   };
                                   updateProject(selectedProject.id, updates);
                                 }}
-                                className="bg-gradient-to-r from-purple-500 to-magenta-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-magenta-600 transition-all duration-300"
+                                className="group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                               >
-                                Save Changes
+                                <span className="relative z-10">Save Changes</span>
+                                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               </button>
                               <button
                                 onClick={() => setEditingProject(false)}
-                                className="border-2 border-gray-600 text-white px-4 py-2 rounded-lg hover:border-gray-500 transition-all duration-300"
+                                className="group px-4 py-2 rounded-full border-2 border-gray-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                               >
-                                Cancel
+                                <span className="relative z-10">Cancel</span>
+                                <div className="absolute inset-0 bg-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               </button>
                             </div>
                           </div>
@@ -828,15 +830,17 @@ export default function AdminDashboard() {
                             <div className="flex gap-3 mt-4">
                               <button
                                 onClick={() => createStage(selectedProject.id)}
-                                className="bg-gradient-to-r from-purple-500 to-magenta-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-magenta-600 transition-all duration-300"
+                                className="group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                               >
-                                Create Stage
+                                <span className="relative z-10">Create Stage</span>
+                                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               </button>
                               <button
                                 onClick={() => setShowCreateStage(false)}
-                                className="border-2 border-gray-600 text-white px-4 py-2 rounded-lg hover:border-gray-500 transition-all duration-300"
+                                className="group px-4 py-2 rounded-full border-2 border-gray-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                               >
-                                Cancel
+                                <span className="relative z-10">Cancel</span>
+                                <div className="absolute inset-0 bg-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               </button>
                             </div>
                           </div>
@@ -915,15 +919,17 @@ export default function AdminDashboard() {
                                           };
                                           updateStage(selectedProject.id, stage.id, updates);
                                         }}
-                                        className="bg-gradient-to-r from-purple-500 to-magenta-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-magenta-600 transition-all duration-300"
+                                        className="group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                                       >
-                                        Save Changes
+                                        <span className="relative z-10">Save Changes</span>
+                                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                       </button>
                                       <button
                                         onClick={() => setEditingStage(null)}
-                                        className="border-2 border-gray-600 text-white px-4 py-2 rounded-lg hover:border-gray-500 transition-all duration-300"
+                                        className="group px-4 py-2 rounded-full border-2 border-gray-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                                       >
-                                        Cancel
+                                        <span className="relative z-10">Cancel</span>
+                                        <div className="absolute inset-0 bg-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                       </button>
                                     </div>
                                   </div>
@@ -1015,9 +1021,10 @@ export default function AdminDashboard() {
                           />
                           <button
                             onClick={() => addUpdate(selectedProject.id)}
-                            className="mt-3 bg-gradient-to-r from-purple-500 to-magenta-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-magenta-600 transition-all duration-300"
+                            className="mt-3 group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                           >
-                            Add Update
+                            <span className="relative z-10">Add Update</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                           </button>
                         </div>
 
@@ -1053,9 +1060,10 @@ export default function AdminDashboard() {
                           />
                           <button
                             onClick={() => addNote(selectedProject.id)}
-                            className="mt-3 bg-gradient-to-r from-purple-500 to-magenta-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-magenta-600 transition-all duration-300"
+                            className="mt-3 group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                           >
-                            Add Note
+                            <span className="relative z-10">Add Note</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                           </button>
                         </div>
 
@@ -1166,15 +1174,17 @@ export default function AdminDashboard() {
                             <div className="flex gap-3 mt-4">
                               <button
                                 onClick={() => createInvoice(selectedProject.id)}
-                                className="bg-gradient-to-r from-purple-500 to-magenta-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-magenta-600 transition-all duration-300"
+                                className="group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                               >
-                                Create Invoice
+                                <span className="relative z-10">Create Invoice</span>
+                                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               </button>
                               <button
                                 onClick={() => setActiveTab('invoices')}
-                                className="border-2 border-gray-600 text-white px-4 py-2 rounded-lg hover:border-gray-500 transition-all duration-300"
+                                className="group px-4 py-2 rounded-full border-2 border-gray-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
                               >
-                                Cancel
+                                <span className="relative z-10">Cancel</span>
+                                <div className="absolute inset-0 bg-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               </button>
                             </div>
                           </div>
@@ -1335,15 +1345,17 @@ export default function AdminDashboard() {
             <div className="flex gap-3 mt-6">
               <button
                 onClick={createProject}
-                className="flex-1 bg-gradient-to-r from-purple-500 to-magenta-500 text-white py-3 rounded-lg hover:from-purple-600 hover:to-magenta-600 transition-all duration-300"
+                className="flex-1 group px-4 py-3 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
               >
-                Create Project
+                <span className="relative z-10">Create Project</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </button>
               <button
                 onClick={() => setShowCreateProject(false)}
-                className="flex-1 border-2 border-gray-600 text-white py-3 rounded-lg hover:border-gray-500 transition-all duration-300"
+                className="flex-1 group px-4 py-3 rounded-full border-2 border-gray-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
               >
-                Cancel
+                <span className="relative z-10">Cancel</span>
+                <div className="absolute inset-0 bg-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </button>
             </div>
           </div>
