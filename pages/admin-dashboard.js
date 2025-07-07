@@ -36,6 +36,7 @@ export default function AdminDashboard() {
   });
   const [editingStage, setEditingStage] = useState(null);
   const [updatingStage, setUpdatingStage] = useState(null);
+  const [updatingInvoice, setUpdatingInvoice] = useState(null);
 
   // Load projects on component mount
   useEffect(() => {
@@ -208,11 +209,20 @@ export default function AdminDashboard() {
 
       const createdInvoice = await invoiceService.createInvoice(invoiceData);
       
-      setProjects(projects.map(project => 
+      // Update projects state
+      const updatedProjects = projects.map(project => 
         project.id === projectId 
           ? { ...project, invoices: [createdInvoice, ...(project.invoices || [])] }
           : project
-      ));
+      );
+      
+      setProjects(updatedProjects);
+      
+      // Update selected project state immediately
+      if (selectedProject && selectedProject.id === projectId) {
+        const updatedSelectedProject = updatedProjects.find(p => p.id === projectId);
+        setSelectedProject(updatedSelectedProject);
+      }
       
       setNewInvoice({
         invoice_number: '',
@@ -220,6 +230,10 @@ export default function AdminDashboard() {
         description: '',
         due_date: ''
       });
+      
+      setActiveTab('invoices');
+      setSuccess('Invoice created successfully!');
+      setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
       setError(err.message);
       console.error('Error creating invoice:', err);
@@ -228,10 +242,12 @@ export default function AdminDashboard() {
 
   const updateInvoiceStatus = async (projectId, invoiceId, status) => {
     try {
+      setUpdatingInvoice(invoiceId);
       const paidDate = status === 'paid' ? new Date().toISOString() : null;
       await invoiceService.updateInvoiceStatus(invoiceId, status, paidDate);
       
-      setProjects(projects.map(project => 
+      // Update projects state
+      const updatedProjects = projects.map(project => 
         project.id === projectId 
           ? {
               ...project,
@@ -242,10 +258,23 @@ export default function AdminDashboard() {
               )
             }
           : project
-      ));
+      );
+      
+      setProjects(updatedProjects);
+      
+      // Update selected project state immediately
+      if (selectedProject && selectedProject.id === projectId) {
+        const updatedSelectedProject = updatedProjects.find(p => p.id === projectId);
+        setSelectedProject(updatedSelectedProject);
+      }
+      
+      setSuccess(`Invoice status updated to ${status}!`);
+      setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
       setError(err.message);
       console.error('Error updating invoice:', err);
+    } finally {
+      setUpdatingInvoice(null);
     }
   };
 
@@ -357,6 +386,38 @@ export default function AdminDashboard() {
     } catch (err) {
       setError(err.message);
       console.error('Error deleting stage:', err);
+    }
+  };
+
+  const deleteInvoice = async (projectId, invoiceId) => {
+    if (!confirm('Are you sure you want to delete this invoice?')) return;
+    
+    try {
+      await invoiceService.deleteInvoice(invoiceId);
+      
+      // Update projects state
+      const updatedProjects = projects.map(project => 
+        project.id === projectId 
+          ? {
+              ...project,
+              invoices: project.invoices.filter(invoice => invoice.id !== invoiceId)
+            }
+          : project
+      );
+      
+      setProjects(updatedProjects);
+      
+      // Update selected project state immediately
+      if (selectedProject && selectedProject.id === projectId) {
+        const updatedSelectedProject = updatedProjects.find(p => p.id === projectId);
+        setSelectedProject(updatedSelectedProject);
+      }
+      
+      setSuccess('Invoice deleted successfully!');
+      setTimeout(() => setSuccess(null), 3000);
+    } catch (err) {
+      setError(err.message);
+      console.error('Error deleting invoice:', err);
     }
   };
 
@@ -1025,6 +1086,38 @@ export default function AdminDashboard() {
                             <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                           </button>
                         </div>
+
+                        {/* Invoice Summary */}
+                        {selectedProject.invoices && selectedProject.invoices.length > 0 && (
+                          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                            <div className="bg-gray-800/50 rounded-lg p-4">
+                              <p className="text-gray-400 text-sm">Total Invoices</p>
+                              <p className="text-2xl font-bold text-white">{selectedProject.invoices.length}</p>
+                            </div>
+                            <div className="bg-gray-800/50 rounded-lg p-4">
+                              <p className="text-gray-400 text-sm">Total Amount</p>
+                              <p className="text-2xl font-bold text-white">
+                                ${selectedProject.invoices.reduce((sum, inv) => sum + (inv.amount || 0), 0).toLocaleString()}
+                              </p>
+                            </div>
+                            <div className="bg-gray-800/50 rounded-lg p-4">
+                              <p className="text-gray-400 text-sm">Paid Amount</p>
+                              <p className="text-2xl font-bold text-green-400">
+                                ${selectedProject.invoices
+                                  .filter(inv => inv.status === 'paid')
+                                  .reduce((sum, inv) => sum + (inv.amount || 0), 0).toLocaleString()}
+                              </p>
+                            </div>
+                            <div className="bg-gray-800/50 rounded-lg p-4">
+                              <p className="text-gray-400 text-sm">Pending Amount</p>
+                              <p className="text-2xl font-bold text-yellow-400">
+                                ${selectedProject.invoices
+                                  .filter(inv => inv.status === 'pending')
+                                  .reduce((sum, inv) => sum + (inv.amount || 0), 0).toLocaleString()}
+                              </p>
+                            </div>
+                          </div>
+                        )}
                         
                         {/* Create Invoice Form */}
                         {activeTab === 'create-invoice' && (
@@ -1088,43 +1181,64 @@ export default function AdminDashboard() {
                         )}
                         
                         <div className="space-y-3">
-                          {selectedProject.invoices?.map((invoice) => (
-                            <div key={invoice.id} className="bg-gray-800/50 rounded-lg p-4">
-                              <div className="flex items-center justify-between">
-                                <div>
-                                  <h4 className="font-medium text-white">{invoice.invoice_number}</h4>
-                                  <p className="text-gray-400 text-sm">Due: {new Date(invoice.due_date).toLocaleDateString()}</p>
-                                  {invoice.description && (
-                                    <p className="text-gray-400 text-sm mt-1">{invoice.description}</p>
-                                  )}
-                                </div>
-                                <div className="text-right">
-                                  <p className="text-white font-semibold">${invoice.amount?.toLocaleString() || 0}</p>
-                                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                    invoice.status === 'paid' ? 'bg-green-500/20 text-green-300' :
-                                    invoice.status === 'pending' ? 'bg-yellow-500/20 text-yellow-300' :
-                                    'bg-gray-500/20 text-gray-300'
-                                  }`}>
-                                    {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
-                                  </span>
-                                  <div className="mt-2">
-                                    <select
-                                      value={invoice.status}
-                                      onChange={(e) => updateInvoiceStatus(selectedProject.id, invoice.id, e.target.value)}
-                                      className="bg-gray-700 text-white text-xs rounded px-2 py-1 border border-gray-600"
-                                    >
-                                      <option value="draft">Draft</option>
-                                      <option value="pending">Pending</option>
-                                      <option value="paid">Paid</option>
-                                    </select>
+                          {selectedProject.invoices?.length === 0 ? (
+                            <div className="text-center py-8">
+                              <p className="text-gray-400">No invoices created yet. Create your first invoice to get started!</p>
+                            </div>
+                          ) : (
+                            selectedProject.invoices?.map((invoice) => (
+                              <div key={invoice.id} className="bg-gray-800/50 rounded-lg p-4">
+                                <div className="flex items-center justify-between">
+                                  <div className="flex-1">
+                                    <div className="flex items-center space-x-3 mb-2">
+                                      <h4 className="font-medium text-white">{invoice.invoice_number}</h4>
+                                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                        invoice.status === 'paid' ? 'bg-green-500/20 text-green-300' :
+                                        invoice.status === 'pending' ? 'bg-yellow-500/20 text-yellow-300' :
+                                        'bg-gray-500/20 text-gray-300'
+                                      }`}>
+                                        {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
+                                      </span>
+                                    </div>
+                                    <p className="text-gray-400 text-sm">Due: {new Date(invoice.due_date).toLocaleDateString()}</p>
+                                    {invoice.description && (
+                                      <p className="text-gray-400 text-sm mt-1">{invoice.description}</p>
+                                    )}
+                                    {invoice.paid_date && (
+                                      <p className="text-green-400 text-sm mt-1">✅ Paid: {new Date(invoice.paid_date).toLocaleDateString()}</p>
+                                    )}
+                                  </div>
+                                  <div className="text-right ml-4">
+                                    <p className="text-white font-semibold text-lg">${invoice.amount?.toLocaleString() || 0}</p>
+                                    <div className="flex items-center space-x-2 mt-2">
+                                      <select
+                                        value={invoice.status}
+                                        onChange={(e) => updateInvoiceStatus(selectedProject.id, invoice.id, e.target.value)}
+                                        disabled={updatingInvoice === invoice.id}
+                                        className={`bg-gray-700 text-white text-xs rounded px-2 py-1 border border-gray-600 ${
+                                          updatingInvoice === invoice.id ? 'opacity-50 cursor-not-allowed' : ''
+                                        }`}
+                                      >
+                                        <option value="draft">Draft</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="paid">Paid</option>
+                                      </select>
+                                      {updatingInvoice === invoice.id && (
+                                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-purple-500"></div>
+                                      )}
+                                      <button
+                                        onClick={() => deleteInvoice(selectedProject.id, invoice.id)}
+                                        className="text-red-400 hover:text-red-300 transition-colors text-xs"
+                                        title="Delete Invoice"
+                                      >
+                                        🗑️
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                              {invoice.paid_date && (
-                                <p className="text-gray-400 text-sm mt-2">Paid: {new Date(invoice.paid_date).toLocaleDateString()}</p>
-                              )}
-                            </div>
-                          ))}
+                            ))
+                          )}
                         </div>
                       </div>
                     )}
