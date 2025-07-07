@@ -37,6 +37,22 @@ export default function AdminDashboard() {
   const [editingStage, setEditingStage] = useState(null);
   const [updatingStage, setUpdatingStage] = useState(null);
   const [updatingInvoice, setUpdatingInvoice] = useState(null);
+  const [creatingInvoice, setCreatingInvoice] = useState(false);
+  const [invoiceSortBy, setInvoiceSortBy] = useState('date'); // date, amount, status
+
+  // Generate automatic invoice number
+  const generateInvoiceNumber = () => {
+    const existingInvoices = selectedProject?.invoices || [];
+    const lastInvoice = existingInvoices.sort((a, b) => 
+      parseInt(b.invoice_number.replace(/\D/g, '')) - parseInt(a.invoice_number.replace(/\D/g, ''))
+    )[0];
+    
+    if (lastInvoice) {
+      const lastNumber = parseInt(lastInvoice.invoice_number.replace(/\D/g, '')) || 0;
+      return `INV-${String(lastNumber + 1).padStart(3, '0')}`;
+    }
+    return 'INV-001';
+  };
 
   // Load projects on component mount
   useEffect(() => {
@@ -198,11 +214,27 @@ export default function AdminDashboard() {
 
   const createInvoice = async (projectId) => {
     try {
+      setCreatingInvoice(true);
+      
+      // Validation
+      if (!newInvoice.invoice_number.trim()) {
+        setError('Invoice number is required');
+        return;
+      }
+      if (!newInvoice.amount || parseFloat(newInvoice.amount) <= 0) {
+        setError('Invoice amount must be greater than 0');
+        return;
+      }
+      if (!newInvoice.due_date) {
+        setError('Due date is required');
+        return;
+      }
+
       const invoiceData = {
         project_id: projectId,
-        invoice_number: newInvoice.invoice_number,
-        amount: parseFloat(newInvoice.amount) || 0,
-        description: newInvoice.description,
+        invoice_number: newInvoice.invoice_number.trim(),
+        amount: parseFloat(newInvoice.amount),
+        description: newInvoice.description.trim(),
         due_date: newInvoice.due_date,
         status: 'draft'
       };
@@ -237,6 +269,8 @@ export default function AdminDashboard() {
     } catch (err) {
       setError(err.message);
       console.error('Error creating invoice:', err);
+    } finally {
+      setCreatingInvoice(false);
     }
   };
 
@@ -1098,7 +1132,7 @@ export default function AdminDashboard() {
 
                         {/* Invoice Summary */}
                         {selectedProject.invoices && selectedProject.invoices.length > 0 && (
-                          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
                             <div className="bg-gray-800/50 rounded-lg p-4">
                               <p className="text-gray-400 text-sm">Total Invoices</p>
                               <p className="text-2xl font-bold text-white">{selectedProject.invoices.length}</p>
@@ -1125,22 +1159,41 @@ export default function AdminDashboard() {
                                   .reduce((sum, inv) => sum + (inv.amount || 0), 0).toLocaleString()}
                               </p>
                             </div>
+                            <div className="bg-gray-800/50 rounded-lg p-4">
+                              <p className="text-gray-400 text-sm">Overdue</p>
+                              <p className="text-2xl font-bold text-red-400">
+                                {selectedProject.invoices
+                                  .filter(inv => new Date(inv.due_date) < new Date() && inv.status !== 'paid').length}
+                              </p>
+                            </div>
                           </div>
                         )}
                         
+
+
                         {/* Create Invoice Form */}
                         {activeTab === 'create-invoice' && (
                           <div className="bg-gray-800/50 rounded-lg p-4">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                               <div>
                                 <label className="block text-gray-300 text-sm mb-2">Invoice Number</label>
-                                <input
-                                  type="text"
-                                  value={newInvoice.invoice_number}
-                                  onChange={(e) => setNewInvoice({...newInvoice, invoice_number: e.target.value})}
-                                  className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
-                                  placeholder="INV-001"
-                                />
+                                <div className="flex gap-2">
+                                  <input
+                                    type="text"
+                                    value={newInvoice.invoice_number}
+                                    onChange={(e) => setNewInvoice({...newInvoice, invoice_number: e.target.value})}
+                                    className="flex-1 bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                    placeholder="INV-001"
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() => setNewInvoice({...newInvoice, invoice_number: generateInvoiceNumber()})}
+                                    className="px-3 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500 transition-colors text-sm"
+                                    title="Auto-generate invoice number"
+                                  >
+                                    🔄
+                                  </button>
+                                </div>
                               </div>
                               <div>
                                 <label className="block text-gray-300 text-sm mb-2">Amount</label>
@@ -1165,20 +1218,42 @@ export default function AdminDashboard() {
                             </div>
                             <div className="mt-4">
                               <label className="block text-gray-300 text-sm mb-2">Due Date</label>
-                              <input
-                                type="date"
-                                value={newInvoice.due_date}
-                                onChange={(e) => setNewInvoice({...newInvoice, due_date: e.target.value})}
-                                className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
-                              />
+                              <div className="flex gap-2">
+                                <input
+                                  type="date"
+                                  value={newInvoice.due_date}
+                                  onChange={(e) => setNewInvoice({...newInvoice, due_date: e.target.value})}
+                                  className="flex-1 bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const thirtyDaysFromNow = new Date();
+                                    thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
+                                    setNewInvoice({...newInvoice, due_date: thirtyDaysFromNow.toISOString().split('T')[0]});
+                                  }}
+                                  className="px-3 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500 transition-colors text-sm"
+                                  title="Set due date to 30 days from now"
+                                >
+                                  30d
+                                </button>
+                              </div>
                             </div>
                             <div className="flex gap-3 mt-4">
                               <button
                                 onClick={() => createInvoice(selectedProject.id)}
-                                className="group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
+                                disabled={creatingInvoice}
+                                className={`group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden ${
+                                  creatingInvoice ? 'opacity-50 cursor-not-allowed' : ''
+                                }`}
                               >
-                                <span className="relative z-10">Create Invoice</span>
-                                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <span className="relative z-10 flex items-center">
+                                  {creatingInvoice && (
+                                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                                  )}
+                                  {creatingInvoice ? 'Creating...' : 'Create Invoice'}
+                                </span>
+                                <div className="absolute inset-0 bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               </button>
                               <button
                                 onClick={() => setActiveTab('invoices')}
@@ -1191,13 +1266,44 @@ export default function AdminDashboard() {
                           </div>
                         )}
                         
+                        {/* Invoice List Header */}
+                        {selectedProject.invoices && selectedProject.invoices.length > 0 && (
+                          <div className="flex items-center justify-between mb-4">
+                            <h3 className="text-lg font-semibold text-white">Invoices</h3>
+                            <div className="flex items-center space-x-2">
+                              <span className="text-gray-400 text-sm">Sort by:</span>
+                              <select
+                                value={invoiceSortBy}
+                                onChange={(e) => setInvoiceSortBy(e.target.value)}
+                                className="bg-gray-700 text-white text-sm rounded px-2 py-1 border border-gray-600"
+                              >
+                                <option value="date">Date</option>
+                                <option value="amount">Amount</option>
+                                <option value="status">Status</option>
+                              </select>
+                            </div>
+                          </div>
+                        )}
+
                         <div className="space-y-3">
                           {selectedProject.invoices?.length === 0 ? (
                             <div className="text-center py-8">
                               <p className="text-gray-400">No invoices created yet. Create your first invoice to get started!</p>
                             </div>
                           ) : (
-                            selectedProject.invoices?.map((invoice) => (
+                            selectedProject.invoices
+                              ?.sort((a, b) => {
+                                switch (invoiceSortBy) {
+                                  case 'amount':
+                                    return (b.amount || 0) - (a.amount || 0);
+                                  case 'status':
+                                    return a.status.localeCompare(b.status);
+                                  case 'date':
+                                  default:
+                                    return new Date(b.due_date) - new Date(a.due_date);
+                                }
+                              })
+                              ?.map((invoice) => (
                               <div key={invoice.id} className="bg-gray-800/50 rounded-lg p-4">
                                 <div className="flex items-center justify-between">
                                   <div className="flex-1">
@@ -1211,7 +1317,10 @@ export default function AdminDashboard() {
                                         {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
                                       </span>
                                     </div>
-                                    <p className="text-gray-400 text-sm">Due: {new Date(invoice.due_date).toLocaleDateString()}</p>
+                                    <p className={`text-sm ${new Date(invoice.due_date) < new Date() && invoice.status !== 'paid' ? 'text-red-400' : 'text-gray-400'}`}>
+                                      Due: {new Date(invoice.due_date).toLocaleDateString()}
+                                      {new Date(invoice.due_date) < new Date() && invoice.status !== 'paid' && ' (Overdue)'}
+                                    </p>
                                     {invoice.description && (
                                       <p className="text-gray-400 text-sm mt-1">{invoice.description}</p>
                                     )}
