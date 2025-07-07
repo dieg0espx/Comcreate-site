@@ -459,9 +459,10 @@ export default function AdminDashboard() {
             <p className="text-gray-300 text-sm">{error}</p>
             <button 
               onClick={loadProjects}
-              className="mt-4 bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors"
+              className="mt-4 group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
             >
-              Try Again
+              <span className="relative z-10">Try Again</span>
+              <div className="absolute inset-0 bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
           </div>
         </div>
@@ -609,8 +610,8 @@ export default function AdminDashboard() {
                           onClick={() => setActiveTab(tab)}
                           className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
                             activeTab === tab
-                              ? 'bg-gradient-to-r from-purple-500 to-magenta-500 text-white'
-                              : 'text-gray-400 hover:text-white'
+                              ? 'bg-purple-500 text-white'
+                              : 'text-gray-400 hover:text-white hover:bg-gray-700'
                           }`}
                         >
                           {tab.charAt(0).toUpperCase() + tab.slice(1)}
