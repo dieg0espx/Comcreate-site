@@ -27,6 +27,14 @@ export default function AdminDashboard() {
     description: '',
     due_date: ''
   });
+  const [showCreateStage, setShowCreateStage] = useState(false);
+  const [newStage, setNewStage] = useState({
+    name: '',
+    description: '',
+    estimated_duration: '',
+    order_index: 0
+  });
+  const [editingStage, setEditingStage] = useState(null);
 
   // Load projects on component mount
   useEffect(() => {
@@ -222,6 +230,90 @@ export default function AdminDashboard() {
     } catch (err) {
       setError(err.message);
       console.error('Error updating invoice:', err);
+    }
+  };
+
+  const createStage = async (projectId) => {
+    try {
+      const stageData = {
+        project_id: projectId,
+        name: newStage.name,
+        description: newStage.description,
+        estimated_duration: parseInt(newStage.estimated_duration) || 0,
+        order_index: parseInt(newStage.order_index) || 0,
+        status: 'pending'
+      };
+
+      const createdStage = await stageService.createStage(stageData);
+      
+      setProjects(projects.map(project => 
+        project.id === projectId 
+          ? { 
+              ...project, 
+              project_stages: [...(project.project_stages || []), createdStage].sort((a, b) => a.order_index - b.order_index)
+            }
+          : project
+      ));
+      
+      setShowCreateStage(false);
+      setNewStage({
+        name: '',
+        description: '',
+        estimated_duration: '',
+        order_index: 0
+      });
+      setSuccess('Stage created successfully!');
+      setTimeout(() => setSuccess(null), 3000);
+    } catch (err) {
+      setError(err.message);
+      console.error('Error creating stage:', err);
+    }
+  };
+
+  const updateStage = async (projectId, stageId, updates) => {
+    try {
+      const updatedStage = await stageService.updateStage(stageId, updates);
+      
+      setProjects(projects.map(project => 
+        project.id === projectId 
+          ? {
+              ...project,
+              project_stages: project.project_stages.map(stage => 
+                stage.id === stageId ? updatedStage : stage
+              )
+            }
+          : project
+      ));
+      
+      setEditingStage(null);
+      setSuccess('Stage updated successfully!');
+      setTimeout(() => setSuccess(null), 3000);
+    } catch (err) {
+      setError(err.message);
+      console.error('Error updating stage:', err);
+    }
+  };
+
+  const deleteStage = async (projectId, stageId) => {
+    if (!confirm('Are you sure you want to delete this stage?')) return;
+    
+    try {
+      await stageService.deleteStage(stageId);
+      
+      setProjects(projects.map(project => 
+        project.id === projectId 
+          ? {
+              ...project,
+              project_stages: project.project_stages.filter(stage => stage.id !== stageId)
+            }
+          : project
+      ));
+      
+      setSuccess('Stage deleted successfully!');
+      setTimeout(() => setSuccess(null), 3000);
+    } catch (err) {
+      setError(err.message);
+      console.error('Error deleting stage:', err);
     }
   };
 
@@ -572,35 +664,225 @@ export default function AdminDashboard() {
 
                     {activeTab === 'stages' && (
                       <div className="space-y-4">
-                        <h3 className="text-lg font-semibold text-white mb-4">Project Stages</h3>
-                        {selectedProject.project_stages?.map((stage) => (
-                          <div key={stage.id} className="bg-gray-800/50 rounded-lg p-4">
-                            <div className="flex items-center justify-between mb-3">
-                              <h4 className="font-medium text-white">{stage.name}</h4>
-                              <div className="flex items-center space-x-2">
-                                <span className={`w-3 h-3 rounded-full ${getStatusColor(stage.status)}`}></span>
-                                <span className={`text-sm font-medium ${getStatusTextColor(stage.status)}`}>
-                                  {stage.status.replace('_', ' ')}
-                                </span>
-                                <select
-                                  value={stage.status}
-                                  onChange={(e) => updateStageStatus(selectedProject.id, stage.id, e.target.value)}
-                                  className="bg-gray-700 text-white text-sm rounded px-2 py-1 border border-gray-600"
-                                >
-                                  <option value="pending">Pending</option>
-                                  <option value="in_progress">In Progress</option>
-                                  <option value="completed">Completed</option>
-                                </select>
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-lg font-semibold text-white">Project Stages</h3>
+                          <button 
+                            onClick={() => setShowCreateStage(true)}
+                            className="group px-4 py-2 rounded-full border-2 border-purple-400 text-white text-sm font-medium bg-transparent hover:border-transparent transition-all duration-300 relative overflow-hidden"
+                          >
+                            <span className="relative z-10">+ Add Stage</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-magenta-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          </button>
+                        </div>
+
+                        {/* Create Stage Modal */}
+                        {showCreateStage && (
+                          <div className="bg-gray-800/50 rounded-lg p-4">
+                            <h4 className="text-lg font-semibold text-white mb-4">Add New Stage</h4>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div>
+                                <label className="block text-gray-300 text-sm mb-2">Stage Name</label>
+                                <input
+                                  type="text"
+                                  value={newStage.name}
+                                  onChange={(e) => setNewStage({...newStage, name: e.target.value})}
+                                  className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                  placeholder="e.g., Design Phase"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-gray-300 text-sm mb-2">Order Index</label>
+                                <input
+                                  type="number"
+                                  value={newStage.order_index}
+                                  onChange={(e) => setNewStage({...newStage, order_index: e.target.value})}
+                                  className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                  placeholder="1"
+                                />
+                              </div>
+                              <div className="md:col-span-2">
+                                <label className="block text-gray-300 text-sm mb-2">Description</label>
+                                <textarea
+                                  value={newStage.description}
+                                  onChange={(e) => setNewStage({...newStage, description: e.target.value})}
+                                  className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none resize-none"
+                                  rows="3"
+                                  placeholder="Describe what this stage involves..."
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-gray-300 text-sm mb-2">Estimated Duration (days)</label>
+                                <input
+                                  type="number"
+                                  value={newStage.estimated_duration}
+                                  onChange={(e) => setNewStage({...newStage, estimated_duration: e.target.value})}
+                                  className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                  placeholder="7"
+                                />
                               </div>
                             </div>
-                            {stage.completed_at && (
-                              <p className="text-gray-400 text-sm">Completed: {new Date(stage.completed_at).toLocaleDateString()}</p>
-                            )}
-                            {stage.started_at && stage.status === 'in_progress' && (
-                              <p className="text-gray-400 text-sm">Started: {new Date(stage.started_at).toLocaleDateString()}</p>
-                            )}
+                            <div className="flex gap-3 mt-4">
+                              <button
+                                onClick={() => createStage(selectedProject.id)}
+                                className="bg-gradient-to-r from-purple-500 to-magenta-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-magenta-600 transition-all duration-300"
+                              >
+                                Create Stage
+                              </button>
+                              <button
+                                onClick={() => setShowCreateStage(false)}
+                                className="border-2 border-gray-600 text-white px-4 py-2 rounded-lg hover:border-gray-500 transition-all duration-300"
+                              >
+                                Cancel
+                              </button>
+                            </div>
                           </div>
-                        ))}
+                        )}
+
+                        {/* Stages List */}
+                        <div className="space-y-4">
+                          {selectedProject.project_stages?.length === 0 ? (
+                            <div className="text-center py-8">
+                              <p className="text-gray-400">No stages created yet. Add your first stage to get started!</p>
+                            </div>
+                          ) : (
+                            selectedProject.project_stages?.map((stage) => (
+                              <div key={stage.id} className="bg-gray-800/50 rounded-lg p-4">
+                                {editingStage === stage.id ? (
+                                  <div className="space-y-4">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                      <div>
+                                        <label className="block text-gray-300 text-sm mb-2">Stage Name</label>
+                                        <input
+                                          type="text"
+                                          defaultValue={stage.name}
+                                          className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                          id={`edit-stage-name-${stage.id}`}
+                                        />
+                                      </div>
+                                      <div>
+                                        <label className="block text-gray-300 text-sm mb-2">Order Index</label>
+                                        <input
+                                          type="number"
+                                          defaultValue={stage.order_index}
+                                          className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                          id={`edit-stage-order-${stage.id}`}
+                                        />
+                                      </div>
+                                      <div className="md:col-span-2">
+                                        <label className="block text-gray-300 text-sm mb-2">Description</label>
+                                        <textarea
+                                          defaultValue={stage.description}
+                                          className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none resize-none"
+                                          rows="3"
+                                          id={`edit-stage-description-${stage.id}`}
+                                        />
+                                      </div>
+                                      <div>
+                                        <label className="block text-gray-300 text-sm mb-2">Estimated Duration (days)</label>
+                                        <input
+                                          type="number"
+                                          defaultValue={stage.estimated_duration}
+                                          className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                          id={`edit-stage-duration-${stage.id}`}
+                                        />
+                                      </div>
+                                      <div>
+                                        <label className="block text-gray-300 text-sm mb-2">Status</label>
+                                        <select
+                                          defaultValue={stage.status}
+                                          className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                          id={`edit-stage-status-${stage.id}`}
+                                        >
+                                          <option value="pending">Pending</option>
+                                          <option value="in_progress">In Progress</option>
+                                          <option value="completed">Completed</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div className="flex gap-3">
+                                      <button
+                                        onClick={() => {
+                                          const updates = {
+                                            name: document.getElementById(`edit-stage-name-${stage.id}`).value,
+                                            description: document.getElementById(`edit-stage-description-${stage.id}`).value,
+                                            order_index: parseInt(document.getElementById(`edit-stage-order-${stage.id}`).value) || 0,
+                                            estimated_duration: parseInt(document.getElementById(`edit-stage-duration-${stage.id}`).value) || 0,
+                                            status: document.getElementById(`edit-stage-status-${stage.id}`).value
+                                          };
+                                          updateStage(selectedProject.id, stage.id, updates);
+                                        }}
+                                        className="bg-gradient-to-r from-purple-500 to-magenta-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-magenta-600 transition-all duration-300"
+                                      >
+                                        Save Changes
+                                      </button>
+                                      <button
+                                        onClick={() => setEditingStage(null)}
+                                        className="border-2 border-gray-600 text-white px-4 py-2 rounded-lg hover:border-gray-500 transition-all duration-300"
+                                      >
+                                        Cancel
+                                      </button>
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <div>
+                                    <div className="flex items-center justify-between mb-3">
+                                      <div className="flex items-center space-x-3">
+                                        <h4 className="font-medium text-white">{stage.name}</h4>
+                                        <span className="text-gray-400 text-sm">#{stage.order_index}</span>
+                                      </div>
+                                      <div className="flex items-center space-x-2">
+                                        <span className={`w-3 h-3 rounded-full ${getStatusColor(stage.status)}`}></span>
+                                        <span className={`text-sm font-medium ${getStatusTextColor(stage.status)}`}>
+                                          {stage.status.replace('_', ' ')}
+                                        </span>
+                                        <select
+                                          value={stage.status}
+                                          onChange={(e) => updateStageStatus(selectedProject.id, stage.id, e.target.value)}
+                                          className="bg-gray-700 text-white text-sm rounded px-2 py-1 border border-gray-600"
+                                        >
+                                          <option value="pending">Pending</option>
+                                          <option value="in_progress">In Progress</option>
+                                          <option value="completed">Completed</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    
+                                    {stage.description && (
+                                      <p className="text-gray-300 text-sm mb-2">{stage.description}</p>
+                                    )}
+                                    
+                                    <div className="flex items-center justify-between text-sm text-gray-400 mb-2">
+                                      {stage.estimated_duration > 0 && (
+                                        <span>Est. Duration: {stage.estimated_duration} days</span>
+                                      )}
+                                      <div className="flex items-center space-x-2">
+                                        <button
+                                          onClick={() => setEditingStage(stage.id)}
+                                          className="text-purple-400 hover:text-purple-300 transition-colors"
+                                        >
+                                          Edit
+                                        </button>
+                                        <button
+                                          onClick={() => deleteStage(selectedProject.id, stage.id)}
+                                          className="text-red-400 hover:text-red-300 transition-colors"
+                                        >
+                                          Delete
+                                        </button>
+                                      </div>
+                                    </div>
+                                    
+                                    {stage.completed_at && (
+                                      <p className="text-green-400 text-sm">✅ Completed: {new Date(stage.completed_at).toLocaleDateString()}</p>
+                                    )}
+                                    {stage.started_at && stage.status === 'in_progress' && (
+                                      <p className="text-blue-400 text-sm">🔄 Started: {new Date(stage.started_at).toLocaleDateString()}</p>
+                                    )}
+                                  </div>
+                                )}
+                              </div>
+                            ))
+                          )}
+                        </div>
                       </div>
                     )}
 
