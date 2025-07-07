@@ -203,16 +203,11 @@ export default function Header() {
         <div className="relative z-10 h-full overflow-y-auto py-20 px-6">
           {/* Logo and Brand */}
           <div className={`flex items-center justify-center mb-8 transition-all duration-700 delay-200 ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <Image
-              src="/logo.png"
+            <img
+              src="/wide-logo.png"
               alt="Comcreate Logo"
-              width={32}
-              height={32}
-              className="mr-3"
+              className="w-[50%] my-0"
             />
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Comcreate
-            </span>
           </div>
 
           {/* Main Navigation */}

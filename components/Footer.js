@@ -16,18 +16,13 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           
           {/* Company Info */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="lg:col-span-1">
             <div className="flex items-center">
-              <Image 
-                src="/logo.png" 
+              <img 
+                src="/wide-logo.png" 
                 alt="Comcreate Logo" 
-                width={40} 
-                height={40} 
-                className="mr-3"
+                className="mr-3 w-[80%] my-5"
               />
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Comcreate
-              </span>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
               Transform your digital presence with cutting-edge web design, SEO, advertising, and branding solutions that drive real results.
