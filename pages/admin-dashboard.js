@@ -23,6 +23,7 @@ export default function AdminDashboard() {
   const [editingProject, setEditingProject] = useState(false);
   const [newInvoice, setNewInvoice] = useState({
     invoice_number: '',
+    title: '',
     amount: '',
     description: '',
     due_date: ''
@@ -221,6 +222,10 @@ export default function AdminDashboard() {
         setError('Invoice number is required');
         return;
       }
+      if (!newInvoice.title.trim()) {
+        setError('Invoice title is required');
+        return;
+      }
       if (!newInvoice.amount || parseFloat(newInvoice.amount) <= 0) {
         setError('Invoice amount must be greater than 0');
         return;
@@ -233,6 +238,7 @@ export default function AdminDashboard() {
       const invoiceData = {
         project_id: projectId,
         invoice_number: newInvoice.invoice_number.trim(),
+        title: newInvoice.title.trim(),
         amount: parseFloat(newInvoice.amount),
         description: newInvoice.description.trim(),
         due_date: newInvoice.due_date,
@@ -258,6 +264,7 @@ export default function AdminDashboard() {
       
       setNewInvoice({
         invoice_number: '',
+        title: '',
         amount: '',
         description: '',
         due_date: ''
@@ -1207,6 +1214,16 @@ export default function AdminDashboard() {
                               </div>
                             </div>
                             <div className="mt-4">
+                              <label className="block text-gray-300 text-sm mb-2">Invoice Title</label>
+                              <input
+                                type="text"
+                                value={newInvoice.title}
+                                onChange={(e) => setNewInvoice({...newInvoice, title: e.target.value})}
+                                className="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 focus:outline-none"
+                                placeholder="e.g., Website Design Phase 1"
+                              />
+                            </div>
+                            <div className="mt-4">
                               <label className="block text-gray-300 text-sm mb-2">Description</label>
                               <textarea
                                 value={newInvoice.description}
@@ -1317,6 +1334,9 @@ export default function AdminDashboard() {
                                         {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
                                       </span>
                                     </div>
+                                    {invoice.title && (
+                                      <p className="text-white text-sm font-medium mb-1">{invoice.title}</p>
+                                    )}
                                     <p className={`text-sm ${new Date(invoice.due_date) < new Date() && invoice.status !== 'paid' ? 'text-red-400' : 'text-gray-400'}`}>
                                       Due: {new Date(invoice.due_date).toLocaleDateString()}
                                       {new Date(invoice.due_date) < new Date() && invoice.status !== 'paid' && ' (Overdue)'}

@@ -70,6 +70,7 @@ CREATE TABLE invoices (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     project_id UUID REFERENCES projects(id) ON DELETE CASCADE,
     invoice_number VARCHAR(50) UNIQUE NOT NULL,
+    title VARCHAR(255) NOT NULL,
     amount DECIMAL(10,2) NOT NULL,
     description TEXT,
     status invoice_status DEFAULT 'draft',
