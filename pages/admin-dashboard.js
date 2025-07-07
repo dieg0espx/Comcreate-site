@@ -1,156 +1,111 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
-
-// Test data for projects
-const testProjects = [
-  {
-    id: 1,
-    clientName: "TechStart Inc.",
-    projectName: "E-commerce Website Redesign",
-    status: "In Progress",
-    progress: 65,
-    startDate: "2024-01-15",
-    endDate: "2024-03-15",
-    budget: 15000,
-    stages: [
-      { id: 1, name: "Discovery & Planning", status: "completed", completedAt: "2024-01-20" },
-      { id: 2, name: "Design & Wireframes", status: "completed", completedAt: "2024-01-30" },
-      { id: 3, name: "Development", status: "in-progress", startedAt: "2024-02-01" },
-      { id: 4, name: "Testing & QA", status: "pending" },
-      { id: 5, name: "Launch", status: "pending" }
-    ],
-    updates: [
-      { id: 1, date: "2024-02-10", message: "Frontend development completed. Moving to backend integration.", author: "Admin" },
-      { id: 2, date: "2024-02-08", message: "Design approval received from client. Starting development phase.", author: "Admin" }
-    ],
-    notes: [
-      { id: 1, date: "2024-02-10", content: "Client requested additional payment gateway integration", author: "Admin" },
-      { id: 2, date: "2024-02-05", content: "Need to schedule client meeting for final review", author: "Admin" }
-    ],
-    invoices: [
-      { id: 1, number: "INV-001", amount: 5000, status: "paid", dueDate: "2024-01-25", paidDate: "2024-01-24" },
-      { id: 2, number: "INV-002", amount: 5000, status: "pending", dueDate: "2024-02-25" },
-      { id: 3, number: "INV-003", amount: 5000, status: "draft", dueDate: "2024-03-25" }
-    ]
-  },
-  {
-    id: 2,
-    clientName: "Green Solutions",
-    projectName: "Brand Identity Package",
-    status: "Completed",
-    progress: 100,
-    startDate: "2023-12-01",
-    endDate: "2024-01-15",
-    budget: 8000,
-    stages: [
-      { id: 1, name: "Brand Research", status: "completed", completedAt: "2023-12-10" },
-      { id: 2, name: "Logo Design", status: "completed", completedAt: "2023-12-20" },
-      { id: 3, name: "Brand Guidelines", status: "completed", completedAt: "2024-01-05" },
-      { id: 4, name: "Final Delivery", status: "completed", completedAt: "2024-01-15" }
-    ],
-    updates: [
-      { id: 1, date: "2024-01-15", message: "Project completed successfully. All deliverables sent to client.", author: "Admin" }
-    ],
-    notes: [
-      { id: 1, date: "2024-01-15", content: "Client very satisfied with final results", author: "Admin" }
-    ],
-    invoices: [
-      { id: 1, number: "INV-001", amount: 4000, status: "paid", dueDate: "2023-12-15", paidDate: "2023-12-14" },
-      { id: 2, number: "INV-002", amount: 4000, status: "paid", dueDate: "2024-01-15", paidDate: "2024-01-15" }
-    ]
-  },
-  {
-    id: 3,
-    clientName: "Fitness Pro",
-    projectName: "SEO Optimization Campaign",
-    status: "Planning",
-    progress: 15,
-    startDate: "2024-02-01",
-    endDate: "2024-05-01",
-    budget: 12000,
-    stages: [
-      { id: 1, name: "SEO Audit", status: "completed", completedAt: "2024-02-05" },
-      { id: 2, name: "Keyword Research", status: "in-progress", startedAt: "2024-02-06" },
-      { id: 3, name: "Content Strategy", status: "pending" },
-      { id: 4, name: "Implementation", status: "pending" },
-      { id: 5, name: "Monitoring", status: "pending" }
-    ],
-    updates: [
-      { id: 1, date: "2024-02-05", message: "SEO audit completed. Found 15 critical issues to address.", author: "Admin" }
-    ],
-    notes: [
-      { id: 1, date: "2024-02-05", content: "Client wants to focus on local SEO for gym locations", author: "Admin" }
-    ],
-    invoices: [
-      { id: 1, number: "INV-001", amount: 3000, status: "paid", dueDate: "2024-02-01", paidDate: "2024-02-01" },
-      { id: 2, number: "INV-002", amount: 3000, status: "pending", dueDate: "2024-03-01" },
-      { id: 3, number: "INV-003", amount: 3000, status: "draft", dueDate: "2024-04-01" },
-      { id: 4, number: "INV-004", amount: 3000, status: "draft", dueDate: "2024-05-01" }
-    ]
-  }
-];
+import { projectService, stageService, updateService, noteService, invoiceService } from '../lib/database';
 
 export default function AdminDashboard() {
-  const [projects, setProjects] = useState(testProjects);
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
   const [newUpdate, setNewUpdate] = useState('');
   const [newNote, setNewNote] = useState('');
 
-  const addUpdate = (projectId) => {
+  // Load projects on component mount
+  useEffect(() => {
+    loadProjects();
+  }, []);
+
+  const loadProjects = async () => {
+    try {
+      setLoading(true);
+      const data = await projectService.getProjects();
+      setProjects(data);
+    } catch (err) {
+      setError(err.message);
+      console.error('Error loading projects:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const addUpdate = async (projectId) => {
     if (!newUpdate.trim()) return;
     
-    const update = {
-      id: Date.now(),
-      date: new Date().toISOString().split('T')[0],
-      message: newUpdate,
-      author: "Admin"
-    };
+    try {
+      const updateData = {
+        project_id: projectId,
+        message: newUpdate,
+        author: "Admin"
+      };
 
-    setProjects(projects.map(project => 
-      project.id === projectId 
-        ? { ...project, updates: [update, ...project.updates] }
-        : project
-    ));
-    setNewUpdate('');
+      const newUpdateRecord = await updateService.createUpdate(updateData);
+      
+      setProjects(projects.map(project => 
+        project.id === projectId 
+          ? { ...project, project_updates: [newUpdateRecord, ...project.project_updates] }
+          : project
+      ));
+      setNewUpdate('');
+    } catch (err) {
+      setError(err.message);
+      console.error('Error adding update:', err);
+    }
   };
 
-  const addNote = (projectId) => {
+  const addNote = async (projectId) => {
     if (!newNote.trim()) return;
     
-    const note = {
-      id: Date.now(),
-      date: new Date().toISOString().split('T')[0],
-      content: newNote,
-      author: "Admin"
-    };
+    try {
+      const noteData = {
+        project_id: projectId,
+        content: newNote,
+        author: "Admin"
+      };
 
-    setProjects(projects.map(project => 
-      project.id === projectId 
-        ? { ...project, notes: [note, ...project.notes] }
-        : project
-    ));
-    setNewNote('');
+      const newNoteRecord = await noteService.createNote(noteData);
+      
+      setProjects(projects.map(project => 
+        project.id === projectId 
+          ? { ...project, project_notes: [newNoteRecord, ...project.project_notes] }
+          : project
+      ));
+      setNewNote('');
+    } catch (err) {
+      setError(err.message);
+      console.error('Error adding note:', err);
+    }
   };
 
-  const updateStageStatus = (projectId, stageId, newStatus) => {
-    setProjects(projects.map(project => 
-      project.id === projectId 
-        ? {
-            ...project,
-            stages: project.stages.map(stage => 
-              stage.id === stageId 
-                ? { 
-                    ...stage, 
-                    status: newStatus,
-                    ...(newStatus === 'completed' && { completedAt: new Date().toISOString().split('T')[0] }),
-                    ...(newStatus === 'in-progress' && { startedAt: new Date().toISOString().split('T')[0] })
-                  }
-                : stage
-            )
-          }
-        : project
-    ));
+  const updateStageStatus = async (projectId, stageId, newStatus) => {
+    try {
+      const now = new Date().toISOString();
+      const startedAt = newStatus === 'in_progress' ? now : null;
+      const completedAt = newStatus === 'completed' ? now : null;
+
+      await stageService.updateStageStatus(stageId, newStatus, startedAt, completedAt);
+      
+      setProjects(projects.map(project => 
+        project.id === projectId 
+          ? {
+              ...project,
+              project_stages: project.project_stages.map(stage => 
+                stage.id === stageId 
+                  ? { 
+                      ...stage, 
+                      status: newStatus,
+                      started_at: startedAt,
+                      completed_at: completedAt
+                    }
+                  : stage
+              )
+            }
+          : project
+      ));
+    } catch (err) {
+      setError(err.message);
+      console.error('Error updating stage:', err);
+    }
   };
 
   const getStatusColor = (status) => {
@@ -171,6 +126,36 @@ export default function AdminDashboard() {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-black to-magenta-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-500 mx-auto"></div>
+          <p className="text-white mt-4 text-lg">Loading projects...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-black to-magenta-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-6 max-w-md">
+            <p className="text-red-300 text-lg mb-4">Error loading dashboard</p>
+            <p className="text-gray-300 text-sm">{error}</p>
+            <button 
+              onClick={loadProjects}
+              className="mt-4 bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors"
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <Head>
@@ -189,14 +174,14 @@ export default function AdminDashboard() {
                 </h1>
                 <p className="text-gray-300 mt-1">Manage projects, updates, and client communications</p>
               </div>
-              <div className="flex items-center space-x-4">
-                <div className="bg-purple-500/20 px-4 py-2 rounded-lg">
-                  <span className="text-purple-300 text-sm">Total Projects: {projects.length}</span>
+                              <div className="flex items-center space-x-4">
+                  <div className="bg-purple-500/20 px-4 py-2 rounded-lg">
+                    <span className="text-purple-300 text-sm">Total Projects: {projects.length}</span>
+                  </div>
+                  <div className="bg-magenta-500/20 px-4 py-2 rounded-lg">
+                    <span className="text-magenta-300 text-sm">Active: {projects.filter(p => p.status === 'in_progress').length}</span>
+                  </div>
                 </div>
-                <div className="bg-magenta-500/20 px-4 py-2 rounded-lg">
-                  <span className="text-magenta-300 text-sm">Active: {projects.filter(p => p.status === 'In Progress').length}</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -219,26 +204,26 @@ export default function AdminDashboard() {
                       }`}
                     >
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-medium text-white">{project.clientName}</h3>
+                        <h3 className="font-medium text-white">{project.client_name}</h3>
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          project.status === 'Completed' ? 'bg-green-500/20 text-green-300' :
-                          project.status === 'In Progress' ? 'bg-blue-500/20 text-blue-300' :
+                          project.status === 'completed' ? 'bg-green-500/20 text-green-300' :
+                          project.status === 'in_progress' ? 'bg-blue-500/20 text-blue-300' :
                           'bg-yellow-500/20 text-yellow-300'
                         }`}>
-                          {project.status}
+                          {project.status.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                         </span>
                       </div>
-                      <p className="text-gray-400 text-sm mb-2">{project.projectName}</p>
-                      <div className="flex items-center justify-between text-xs text-gray-500">
-                        <span>${project.budget.toLocaleString()}</span>
-                        <span>{project.progress}%</span>
-                      </div>
-                      <div className="w-full bg-gray-700 rounded-full h-1 mt-2">
-                        <div 
-                          className="bg-gradient-to-r from-purple-500 to-magenta-500 h-1 rounded-full transition-all duration-300"
-                          style={{ width: `${project.progress}%` }}
-                        ></div>
-                      </div>
+                      <p className="text-gray-400 text-sm mb-2">{project.project_name}</p>
+                                              <div className="flex items-center justify-between text-xs text-gray-500">
+                          <span>${project.budget?.toLocaleString() || 0}</span>
+                          <span>{project.progress || 0}%</span>
+                        </div>
+                                              <div className="w-full bg-gray-700 rounded-full h-1 mt-2">
+                          <div 
+                            className="bg-gradient-to-r from-purple-500 to-magenta-500 h-1 rounded-full transition-all duration-300"
+                            style={{ width: `${project.progress || 0}%` }}
+                          ></div>
+                        </div>
                     </div>
                   ))}
                 </div>
@@ -253,12 +238,12 @@ export default function AdminDashboard() {
                   <div className="mb-6">
                     <div className="flex items-center justify-between mb-4">
                       <div>
-                        <h2 className="text-2xl font-bold text-white">{selectedProject.projectName}</h2>
-                        <p className="text-purple-300">{selectedProject.clientName}</p>
+                        <h2 className="text-2xl font-bold text-white">{selectedProject.project_name}</h2>
+                        <p className="text-purple-300">{selectedProject.client_name}</p>
                       </div>
                       <div className="text-right">
                         <p className="text-gray-400 text-sm">Budget</p>
-                        <p className="text-white font-semibold">${selectedProject.budget.toLocaleString()}</p>
+                        <p className="text-white font-semibold">${selectedProject.budget?.toLocaleString() || 0}</p>
                       </div>
                     </div>
                     
@@ -291,21 +276,21 @@ export default function AdminDashboard() {
                           </div>
                           <div className="bg-gray-800/50 rounded-lg p-4">
                             <p className="text-gray-400 text-sm">Start Date</p>
-                            <p className="text-white">{selectedProject.startDate}</p>
+                            <p className="text-white">{selectedProject.start_date ? new Date(selectedProject.start_date).toLocaleDateString() : 'Not set'}</p>
                           </div>
                           <div className="bg-gray-800/50 rounded-lg p-4">
                             <p className="text-gray-400 text-sm">End Date</p>
-                            <p className="text-white">{selectedProject.endDate}</p>
+                            <p className="text-white">{selectedProject.end_date ? new Date(selectedProject.end_date).toLocaleDateString() : 'Not set'}</p>
                           </div>
                         </div>
                         
                         <div className="bg-gray-800/50 rounded-lg p-4">
                           <h3 className="text-lg font-semibold text-white mb-3">Recent Updates</h3>
                           <div className="space-y-3">
-                            {selectedProject.updates.slice(0, 3).map((update) => (
+                            {selectedProject.project_updates?.slice(0, 3).map((update) => (
                               <div key={update.id} className="border-l-2 border-purple-500 pl-4">
                                 <p className="text-white text-sm">{update.message}</p>
-                                <p className="text-gray-400 text-xs mt-1">{update.date} by {update.author}</p>
+                                <p className="text-gray-400 text-xs mt-1">{new Date(update.created_at).toLocaleDateString()} by {update.author}</p>
                               </div>
                             ))}
                           </div>
@@ -316,14 +301,14 @@ export default function AdminDashboard() {
                     {activeTab === 'stages' && (
                       <div className="space-y-4">
                         <h3 className="text-lg font-semibold text-white mb-4">Project Stages</h3>
-                        {selectedProject.stages.map((stage) => (
+                        {selectedProject.project_stages?.map((stage) => (
                           <div key={stage.id} className="bg-gray-800/50 rounded-lg p-4">
                             <div className="flex items-center justify-between mb-3">
                               <h4 className="font-medium text-white">{stage.name}</h4>
                               <div className="flex items-center space-x-2">
                                 <span className={`w-3 h-3 rounded-full ${getStatusColor(stage.status)}`}></span>
                                 <span className={`text-sm font-medium ${getStatusTextColor(stage.status)}`}>
-                                  {stage.status.replace('-', ' ')}
+                                  {stage.status.replace('_', ' ')}
                                 </span>
                                 <select
                                   value={stage.status}
@@ -331,16 +316,16 @@ export default function AdminDashboard() {
                                   className="bg-gray-700 text-white text-sm rounded px-2 py-1 border border-gray-600"
                                 >
                                   <option value="pending">Pending</option>
-                                  <option value="in-progress">In Progress</option>
+                                  <option value="in_progress">In Progress</option>
                                   <option value="completed">Completed</option>
                                 </select>
                               </div>
                             </div>
-                            {stage.completedAt && (
-                              <p className="text-gray-400 text-sm">Completed: {stage.completedAt}</p>
+                            {stage.completed_at && (
+                              <p className="text-gray-400 text-sm">Completed: {new Date(stage.completed_at).toLocaleDateString()}</p>
                             )}
-                            {stage.startedAt && stage.status === 'in-progress' && (
-                              <p className="text-gray-400 text-sm">Started: {stage.startedAt}</p>
+                            {stage.started_at && stage.status === 'in_progress' && (
+                              <p className="text-gray-400 text-sm">Started: {new Date(stage.started_at).toLocaleDateString()}</p>
                             )}
                           </div>
                         ))}
@@ -372,12 +357,12 @@ export default function AdminDashboard() {
 
                         {/* Updates List */}
                         <div className="space-y-4">
-                          {selectedProject.updates.map((update) => (
+                          {selectedProject.project_updates?.map((update) => (
                             <div key={update.id} className="bg-gray-800/50 rounded-lg p-4">
                               <p className="text-white">{update.message}</p>
                               <div className="flex items-center justify-between mt-2">
                                 <p className="text-gray-400 text-sm">by {update.author}</p>
-                                <p className="text-gray-400 text-sm">{update.date}</p>
+                                <p className="text-gray-400 text-sm">{new Date(update.created_at).toLocaleDateString()}</p>
                               </div>
                             </div>
                           ))}
@@ -410,12 +395,12 @@ export default function AdminDashboard() {
 
                         {/* Notes List */}
                         <div className="space-y-4">
-                          {selectedProject.notes.map((note) => (
+                          {selectedProject.project_notes?.map((note) => (
                             <div key={note.id} className="bg-gray-800/50 rounded-lg p-4">
                               <p className="text-white">{note.content}</p>
                               <div className="flex items-center justify-between mt-2">
                                 <p className="text-gray-400 text-sm">by {note.author}</p>
-                                <p className="text-gray-400 text-sm">{note.date}</p>
+                                <p className="text-gray-400 text-sm">{new Date(note.created_at).toLocaleDateString()}</p>
                               </div>
                             </div>
                           ))}
@@ -433,15 +418,15 @@ export default function AdminDashboard() {
                         </div>
                         
                         <div className="space-y-3">
-                          {selectedProject.invoices.map((invoice) => (
+                          {selectedProject.invoices?.map((invoice) => (
                             <div key={invoice.id} className="bg-gray-800/50 rounded-lg p-4">
                               <div className="flex items-center justify-between">
                                 <div>
-                                  <h4 className="font-medium text-white">{invoice.number}</h4>
-                                  <p className="text-gray-400 text-sm">Due: {invoice.dueDate}</p>
+                                  <h4 className="font-medium text-white">{invoice.invoice_number}</h4>
+                                  <p className="text-gray-400 text-sm">Due: {new Date(invoice.due_date).toLocaleDateString()}</p>
                                 </div>
                                 <div className="text-right">
-                                  <p className="text-white font-semibold">${invoice.amount.toLocaleString()}</p>
+                                  <p className="text-white font-semibold">${invoice.amount?.toLocaleString() || 0}</p>
                                   <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                                     invoice.status === 'paid' ? 'bg-green-500/20 text-green-300' :
                                     invoice.status === 'pending' ? 'bg-yellow-500/20 text-yellow-300' :
@@ -451,8 +436,8 @@ export default function AdminDashboard() {
                                   </span>
                                 </div>
                               </div>
-                              {invoice.paidDate && (
-                                <p className="text-gray-400 text-sm mt-2">Paid: {invoice.paidDate}</p>
+                              {invoice.paid_date && (
+                                <p className="text-gray-400 text-sm mt-2">Paid: {new Date(invoice.paid_date).toLocaleDateString()}</p>
                               )}
                             </div>
                           ))}
