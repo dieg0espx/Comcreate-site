@@ -172,6 +172,7 @@ function Projects() {
       title: "Reef Health",
       description: "Complete website build that matched their ideal style in the medical market. Their old look didn't reflect the level of professionalism or trust they wanted to convey. We delivered a modern, clean site with consistent, medical-focused branding to help them stand out and connect with clients.",
       liveUrl: "https://www.reefhealth.co/",
+      imageUrl: "/sitesCapture/reef.png",
       gradient: "bg-gradient-to-br from-teal-500/80 to-green-600/60",
       services: ["Website"],
       bullets: [
@@ -235,6 +236,7 @@ function Projects() {
       title: "RS Surf",
       description: "This project needed a complete Shopify website revamp to match and support an already strong brand. The old site didn't reflect their brand or quality. We delivered a modern, user-friendly store that strengthens their digital presence and drives sales.",
       liveUrl: "https://rssurf.com",
+      imageUrl: "/sitesCapture/rssurf.png",
       gradient: "bg-gradient-to-br from-blue-500/80 to-cyan-600/60",
       services: ["Website"],
       bullets: [
@@ -251,6 +253,7 @@ function Projects() {
       title: "House of Sacred Flame",
       description: "House of Sacred Flame needed their Shopify website completely redone to better showcase their products and improve the shopping experience. We delivered a modern, easy-to-use online store that highlights their brand and makes buying simple.",
       liveUrl: "https://houseofsacredflame.com/",
+      imageUrl: "/sitesCapture/houseofscared.png",
       gradient: "bg-gradient-to-br from-red-500/80 to-pink-600/60",
       services: ["Website"],
       bullets: [
@@ -264,8 +267,8 @@ function Projects() {
     {
       id: 15,
       category: "WASTE MANAGEMENT",
-      title: "Anthony Dumps",
-      description: "Anthony Dumps needed a new website, branding, and SEO to make their dumpster service easy to understand and book. They wanted a smooth, solid user experience that converts visitors into customers. We delivered a clean, easy-to-navigate site with a strong interface designed to drive bookings, along with SEO that brings in valuable organic traffic.",
+      title: "San Diego Dumpster Pros",
+      description: "San Diego Dumpster Pros needed a new website, branding, and SEO to make their dumpster service easy to understand and book. They wanted a smooth, solid user experience that converts visitors into customers. We delivered a clean, easy-to-navigate site with a strong interface designed to drive bookings, along with SEO that brings in valuable organic traffic.",
       liveUrl: "https://dumpster-glass.vercel.app/",
       gradient: "bg-gradient-to-br from-green-500/80 to-blue-600/60",
       services: ["Website", "Branding", "SEO"],
@@ -388,18 +391,28 @@ function Projects() {
                         {projects[0].category}
                       </div>
                       <div className="absolute inset-0 overflow-hidden">
-                        <iframe 
-                          src={projects[0].liveUrl}
-                          className="opacity-80 hover:opacity-100 transition-opacity"
-                          title={projects[0].title}
-                          loading="lazy"
-                          style={{ 
-                            width: '400%', 
-                            height: '400%', 
-                            transform: 'scale(0.25)', 
-                            transformOrigin: 'top left' 
-                          }}
-                        />
+                        {projects[0].imageUrl ? (
+                          <Image 
+                            src={projects[0].imageUrl}
+                            alt={projects[0].title}
+                            fill
+                            className="object-cover opacity-80 hover:opacity-100 transition-opacity"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <iframe 
+                            src={projects[0].liveUrl}
+                            className="opacity-80 hover:opacity-100 transition-opacity"
+                            title={projects[0].title}
+                            loading="lazy"
+                            style={{ 
+                              width: '400%', 
+                              height: '400%', 
+                              transform: 'scale(0.25)', 
+                              transformOrigin: 'top left' 
+                            }}
+                          />
+                        )}
                       </div>
                     </div>
                     
@@ -465,18 +478,28 @@ function Projects() {
                         {projects[1].category}
                       </div>
                       <div className="absolute inset-0 overflow-hidden">
-                        <iframe 
-                          src={projects[1].liveUrl}
-                          className="opacity-80 hover:opacity-100 transition-opacity"
-                          title={projects[1].title}
-                          loading="lazy"
-                          style={{ 
-                            width: '400%', 
-                            height: '400%', 
-                            transform: 'scale(0.25)', 
-                            transformOrigin: 'top left' 
-                          }}
-                        />
+                        {projects[1].imageUrl ? (
+                          <Image 
+                            src={projects[1].imageUrl}
+                            alt={projects[1].title}
+                            fill
+                            className="object-cover opacity-80 hover:opacity-100 transition-opacity"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <iframe 
+                            src={projects[1].liveUrl}
+                            className="opacity-80 hover:opacity-100 transition-opacity"
+                            title={projects[1].title}
+                            loading="lazy"
+                            style={{ 
+                              width: '400%', 
+                              height: '400%', 
+                              transform: 'scale(0.25)', 
+                              transformOrigin: 'top left' 
+                            }}
+                          />
+                        )}
                       </div>
                     </div>
                     
@@ -547,18 +570,28 @@ function Projects() {
                                   {project.category}
                                 </div>
                                 <div className="absolute inset-0 overflow-hidden">
-                                  <iframe 
-                                    src={project.liveUrl}
-                                    className="opacity-80 hover:opacity-100 transition-opacity"
-                                    title={project.title}
-                                    loading="lazy"
-                                    style={{ 
-                                      width: '400%', 
-                                      height: '400%', 
-                                      transform: 'scale(0.25)', 
-                                      transformOrigin: 'top left' 
-                                    }}
-                                  />
+                                  {project.imageUrl ? (
+                                    <Image 
+                                      src={project.imageUrl}
+                                      alt={project.title}
+                                      fill
+                                      className="object-cover opacity-80 hover:opacity-100 transition-opacity"
+                                      loading="lazy"
+                                    />
+                                  ) : (
+                                    <iframe 
+                                      src={project.liveUrl}
+                                      className="opacity-80 hover:opacity-100 transition-opacity"
+                                      title={project.title}
+                                      loading="lazy"
+                                      style={{ 
+                                        width: '400%', 
+                                        height: '400%', 
+                                        transform: 'scale(0.25)', 
+                                        transformOrigin: 'top left' 
+                                      }}
+                                    />
+                                  )}
                                 </div>
                               </div>
                       
@@ -630,18 +663,28 @@ function Projects() {
                                   {project.category}
                                 </div>
                                 <div className="absolute inset-0 overflow-hidden">
-                                  <iframe 
-                                    src={project.liveUrl}
-                                    className="opacity-80 hover:opacity-100 transition-opacity"
-                                    title={project.title}
-                                    loading="lazy"
-                                    style={{ 
-                                      width: '400%', 
-                                      height: '400%', 
-                                      transform: 'scale(0.25)', 
-                                      transformOrigin: 'top left' 
-                                    }}
-                                  />
+                                  {project.imageUrl ? (
+                                    <Image 
+                                      src={project.imageUrl}
+                                      alt={project.title}
+                                      fill
+                                      className="object-cover opacity-80 hover:opacity-100 transition-opacity"
+                                      loading="lazy"
+                                    />
+                                  ) : (
+                                    <iframe 
+                                      src={project.liveUrl}
+                                      className="opacity-80 hover:opacity-100 transition-opacity"
+                                      title={project.title}
+                                      loading="lazy"
+                                      style={{ 
+                                        width: '400%', 
+                                        height: '400%', 
+                                        transform: 'scale(0.25)', 
+                                        transformOrigin: 'top left' 
+                                      }}
+                                    />
+                                  )}
                                 </div>
                               </div>
                       
@@ -713,18 +756,28 @@ function Projects() {
                                   {project.category}
                                 </div>
                                 <div className="absolute inset-0 overflow-hidden">
-                                  <iframe 
-                                    src={project.liveUrl}
-                                    className="opacity-80 hover:opacity-100 transition-opacity"
-                                    title={project.title}
-                                    loading="lazy"
-                                    style={{ 
-                                      width: '400%', 
-                                      height: '400%', 
-                                      transform: 'scale(0.25)', 
-                                      transformOrigin: 'top left' 
-                                    }}
-                                  />
+                                  {project.imageUrl ? (
+                                    <Image 
+                                      src={project.imageUrl}
+                                      alt={project.title}
+                                      fill
+                                      className="object-cover opacity-80 hover:opacity-100 transition-opacity"
+                                      loading="lazy"
+                                    />
+                                  ) : (
+                                    <iframe 
+                                      src={project.liveUrl}
+                                      className="opacity-80 hover:opacity-100 transition-opacity"
+                                      title={project.title}
+                                      loading="lazy"
+                                      style={{ 
+                                        width: '400%', 
+                                        height: '400%', 
+                                        transform: 'scale(0.25)', 
+                                        transformOrigin: 'top left' 
+                                      }}
+                                    />
+                                  )}
                                 </div>
                               </div>
                       
@@ -796,18 +849,28 @@ function Projects() {
                                   {project.category}
                                 </div>
                                 <div className="absolute inset-0 overflow-hidden">
-                                  <iframe 
-                                    src={project.liveUrl}
-                                    className="opacity-80 hover:opacity-100 transition-opacity"
-                                    title={project.title}
-                                    loading="lazy"
-                                    style={{ 
-                                      width: '400%', 
-                                      height: '400%', 
-                                      transform: 'scale(0.25)', 
-                                      transformOrigin: 'top left' 
-                                    }}
-                                  />
+                                  {project.imageUrl ? (
+                                    <Image 
+                                      src={project.imageUrl}
+                                      alt={project.title}
+                                      fill
+                                      className="object-cover opacity-80 hover:opacity-100 transition-opacity"
+                                      loading="lazy"
+                                    />
+                                  ) : (
+                                    <iframe 
+                                      src={project.liveUrl}
+                                      className="opacity-80 hover:opacity-100 transition-opacity"
+                                      title={project.title}
+                                      loading="lazy"
+                                      style={{ 
+                                        width: '400%', 
+                                        height: '400%', 
+                                        transform: 'scale(0.25)', 
+                                        transformOrigin: 'top left' 
+                                      }}
+                                    />
+                                  )}
                                 </div>
                               </div>
                       
