@@ -171,7 +171,7 @@ function Projects() {
       category: "MEDICAL",
       title: "Reef Health",
       description: "Complete website build that matched their ideal style in the medical market. Their old look didn't reflect the level of professionalism or trust they wanted to convey. We delivered a modern, clean site with consistent, medical-focused branding to help them stand out and connect with clients.",
-      liveUrl: "https://reef-health.vercel.app/",
+      liveUrl: "https://honestaffordablehealthcare.com/",
     
       gradient: "bg-gradient-to-br from-teal-500/80 to-green-600/60",
       services: ["Website"],
