@@ -139,7 +139,7 @@ function Projects() {
       category: "MEDICAL", 
       title: "V3 Biomedical",
       description: "V3 Biomedical needed a full website redesign and rebranding to match their ideal style in the medical market. Their old site didn't reflect their professionalism or connect well with clients. We created a modern, clean site with a new logo and branding tailored to the medical field, helping them build trust and stand out.",
-      liveUrl: "https://www.v3biomedical.com/landing",
+      liveUrl: "https://v3-biomedical-jade.vercel.app/",
       gradient: "bg-gradient-to-br from-cyan-500/80 to-blue-600/60",
       services: ["Website", "Branding"],
       bullets: [
