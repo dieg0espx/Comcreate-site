@@ -11,16 +11,16 @@ export default async function handler(req, res) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'tech@comcreate.org', // replace with your Gmail address
-      pass: 'ohofdbldlzwfjfiz', // replace with your Gmail app password
+      user: 'analytics@comcreate.org', // replace with your Gmail address
+      pass: 'vdwrkgwkcqnkdjxa', // replace with your Gmail app password
     },
   });
 
   try {
     // Send email
     await transporter.sendMail({
-      from: 'tech@comcreate.org', // replace with your Gmail address
-      to: ['sales@comcreate.org', 'tecnodael@gmail.com'],
+      from: 'analytics@comcreate.org', // replace with your Gmail address
+      to: ['sales@comcreate.org', 'diego@comcreate.org', 'josh@comcreate.org'],
       subject: `New Contact Form Submission from ${name}`,
       text: `\nName: ${name}\nEmail: ${email}\nMessage: ${message}\n      `,
       html: `\n<h2>New Contact Form Submission</h2>\n<p><strong>Name:</strong> ${name}</p>\n<p><strong>Email:</strong> ${email}</p>\n<p><strong>Message:</strong></p>\n<p>${message}</p>\n      `,
