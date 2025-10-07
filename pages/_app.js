@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Comcreate - Professional Web Design & Development Services" />
         <meta property="og:description" content="Transform your business with Comcreate&apos;s professional web design, development, and digital marketing services. We create stunning websites that drive growth and results." />
-        <meta property="og:image" content="https://www.comcreate.org/miniature.png" />
+        <meta property="og:image" content="https://www.comcreate.org/miniature.png?v=1" />
         <meta property="og:image:secure_url" content="https://www.comcreate.org/miniature.png" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="2882" />
