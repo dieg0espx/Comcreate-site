@@ -29,13 +29,13 @@ export default function App({ Component, pageProps }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Comcreate - Professional Web Design & Development Services" />
         <meta property="og:description" content="Transform your business with Comcreate&apos;s professional web design, development, and digital marketing services. We create stunning websites that drive growth and results." />
-        <meta property="og:image" content="https://www.comcreate.ca/miniature.png" />
-        <meta property="og:image:secure_url" content="https://www.comcreate.ca/miniature.png" />
+        <meta property="og:image" content="https://www.comcreate.org/miniature.png" />
+        <meta property="og:image:secure_url" content="https://www.comcreate.org/miniature.png" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="2882" />
         <meta property="og:image:height" content="1960" />
         <meta property="og:image:alt" content="Comcreate - Professional Website Development & Design" />
-        <meta property="og:url" content="https://www.comcreate.ca" />
+        <meta property="og:url" content="https://www.comcreate.org" />
         <meta property="og:site_name" content="Comcreate" />
         <meta property="og:locale" content="en_US" />
         
@@ -43,7 +43,7 @@ export default function App({ Component, pageProps }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Comcreate - Professional Web Design & Development Services" />
         <meta name="twitter:description" content="Transform your business with Comcreate&apos;s professional web design, development, and digital marketing services. We create stunning websites that drive growth and results." />
-        <meta name="twitter:image" content="https://www.comcreate.ca/miniature.png" />
+        <meta name="twitter:image" content="https://www.comcreate.org/miniature.png" />
         <meta name="twitter:image:alt" content="Comcreate - Professional Website Development & Design" />
       </Head>
       <Header />
