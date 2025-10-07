@@ -8,6 +8,7 @@ export default function App({ Component, pageProps }) {
   return (
     <div className="bg-black">
       <Head>
+        <title>Comcreate - Professional Web Design & Development Services</title>
         <meta name="theme-color" content="#000000" />
         <meta name="msapplication-navbutton-color" content="#000000" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -17,7 +18,7 @@ export default function App({ Component, pageProps }) {
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <meta name="apple-mobile-web-app-title" content="Comcreate" />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="description" content="Comcreate is a company that creates websites for businesses." />
+        <meta name="description" content="Transform your business with Comcreate&apos;s professional web design, development, and digital marketing services. We create stunning websites that drive growth and results." />
         <meta name="keywords" content="Comcreate, website, development, design, marketing, SEO, digital marketing, social media, branding, web design, web development, web agency, web design agency, web development agency, web design company, web development company, web design services, web development services, web design agency, web development agency, web design company, web development company, web design services, web development services" />
         <meta name="author" content="Comcreate" />
         <meta name="robots" content="index, follow" />
@@ -26,8 +27,8 @@ export default function App({ Component, pageProps }) {
         
         {/* Open Graph / Facebook / WhatsApp */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Comcreate - Professional Website Development & Design" />
-        <meta property="og:description" content="Comcreate is a company that creates websites for businesses." />
+        <meta property="og:title" content="Comcreate - Professional Web Design & Development Services" />
+        <meta property="og:description" content="Transform your business with Comcreate&apos;s professional web design, development, and digital marketing services. We create stunning websites that drive growth and results." />
         <meta property="og:image" content="https://www.comcreate.ca/miniature.png" />
         <meta property="og:image:secure_url" content="https://www.comcreate.ca/miniature.png" />
         <meta property="og:image:type" content="image/png" />
@@ -40,8 +41,8 @@ export default function App({ Component, pageProps }) {
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Comcreate - Professional Website Development & Design" />
-        <meta name="twitter:description" content="Comcreate is a company that creates websites for businesses." />
+        <meta name="twitter:title" content="Comcreate - Professional Web Design & Development Services" />
+        <meta name="twitter:description" content="Transform your business with Comcreate&apos;s professional web design, development, and digital marketing services. We create stunning websites that drive growth and results." />
         <meta name="twitter:image" content="https://www.comcreate.ca/miniature.png" />
         <meta name="twitter:image:alt" content="Comcreate - Professional Website Development & Design" />
       </Head>
