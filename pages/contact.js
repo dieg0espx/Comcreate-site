@@ -327,7 +327,7 @@ function Contact() {
                     animate={{ opacity: 1, y: 0 }}
                   >
                     <p className="font-semibold">Message sent successfully!</p>
-                    <p className="text-sm mt-1">We'll get back to you within 24 hours.</p>
+                    <p className="text-sm mt-1">We&apos;ll get back to you within 24 hours.</p>
                   </motion.div>
                 )}
 
