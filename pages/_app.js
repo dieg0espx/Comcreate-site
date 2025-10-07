@@ -23,6 +23,27 @@ export default function App({ Component, pageProps }) {
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
         <meta name="google" content="notranslate" />
+        
+        {/* Open Graph / Facebook / WhatsApp */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Comcreate - Professional Website Development & Design" />
+        <meta property="og:description" content="Comcreate is a company that creates websites for businesses." />
+        <meta property="og:image" content="https://www.comcreate.ca/miniature.png" />
+        <meta property="og:image:secure_url" content="https://www.comcreate.ca/miniature.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Comcreate - Professional Website Development & Design" />
+        <meta property="og:url" content="https://www.comcreate.ca" />
+        <meta property="og:site_name" content="Comcreate" />
+        <meta property="og:locale" content="en_US" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Comcreate - Professional Website Development & Design" />
+        <meta name="twitter:description" content="Comcreate is a company that creates websites for businesses." />
+        <meta name="twitter:image" content="https://www.comcreate.ca/miniature.png" />
+        <meta name="twitter:image:alt" content="Comcreate - Professional Website Development & Design" />
       </Head>
       <Header />
         <div className="pt-[80px] md:pt-[150px] pb-[100px] max-w-[1440px] mx-auto px-3 md:px-6 lg:px-10">
