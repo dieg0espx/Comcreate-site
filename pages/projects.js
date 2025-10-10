@@ -204,7 +204,7 @@ function Projects() {
       category: "MEDICAL",
       title: "Cosent",
       description: "Cosent needed a complete website and rebranding tailored to their ideal style in the medical market. Previously had no site, so this was a fresh build. We delivered a clean, modern website with consistent branding designed to build trust and clearly present their services.",
-      liveUrl: "https://cosent-site.vercel.app/",
+      liveUrl: "https://cosentcare.com/",
       gradient: "bg-gradient-to-br from-purple-500/80 to-pink-600/60",
       services: ["Website", "Branding"],
       bullets: [
@@ -278,6 +278,84 @@ function Projects() {
         "Strong, consistent branding",
         "Smooth, user-friendly interface",
         "SEO-optimized for local traffic"
+      ]
+    },
+    {
+      id: 16,
+      category: "MARKETING AGENCY",
+      title: "Social HQ",
+      description: "Social HQ helps brands create high-performing ad campaigns and viral content. Their website highlights speed, creativity, and proven ROI with a clear 3-step onboarding process and strong client testimonials.",
+      liveUrl: "https://social-hq-mu.vercel.app/",
+      gradient: "bg-gradient-to-br from-pink-500/80 to-orange-600/60",
+      services: ["Website", "Branding"],
+      bullets: [
+        "Results-driven design (+150% engagement)",
+        "3-step process with client testimonials"
+      ]
+    },
+    {
+      id: 17,
+      category: "REAL ESTATE",
+      title: "Ruben Real Estate",
+      description: "Ruben Banuelos' website is designed to guide veterans, families, and investors with trust and clarity. It blends empathy from his healthcare background with real estate expertise to help clients reach their goals.",
+      liveUrl: "https://www.sandiegorubenrealestate.com/home",
+      gradient: "bg-gradient-to-br from-blue-500/80 to-teal-600/60",
+      services: ["Website", "Branding"],
+      bullets: [
+        "Focused on veterans, investors, and families",
+        "Local credibility with testimonials"
+      ]
+    },
+    {
+      id: 18,
+      category: "EDUCATION / FAMILY",
+      title: "Cocinarte",
+      description: "Cocinarte offers hands-on cooking classes for kids and families to explore Latin flavors and build real kitchen confidence. The website blends fun visuals with clear program details and class options for every age and skill level.",
+      liveUrl: "https://www.cocinartepdx.com/",
+      gradient: "bg-gradient-to-br from-orange-500/80 to-pink-600/60",
+      services: ["Website"],
+      bullets: [
+        "Family-friendly design with class types",
+        "Easy booking for classes and events"
+      ]
+    },
+    {
+      id: 19,
+      category: "EDUCATION / K–5 SCHOOL",
+      title: "Spanish Horizons Academy",
+      description: "K–5 Spanish immersion school in Hillsboro, OR. The site showcases an 80/20 Spanish-English model and Expeditionary Learning with clear, family-friendly info that drives tours and applications.",
+      liveUrl: "https://spanishhorizonsacademy.com/",
+      gradient: "bg-gradient-to-br from-yellow-500/80 to-orange-600/60",
+      services: ["Website"],
+      bullets: [
+        "80/20 immersion model with examples",
+        "Streamlined admissions with clear tuition"
+      ]
+    },
+    {
+      id: 20,
+      category: "FINANCE / REAL ESTATE LENDING",
+      title: "Key Real Estate Capital",
+      description: "Key Real Estate Capital provides flexible, creative lending solutions for investors nationwide. The site emphasizes speed, trust, and human-centered service — helping clients secure funding to scale their real estate portfolios.",
+      liveUrl: "https://www.keyrealestatecapital.com/",
+      gradient: "bg-gradient-to-br from-indigo-500/80 to-blue-600/60",
+      services: ["Website", "Branding"],
+      bullets: [
+        "Built-in loan calculator",
+        "Human-focused trust-building messaging"
+      ]
+    },
+    {
+      id: 21,
+      category: "FITNESS / ONLINE TRAINING",
+      title: "All Levels Athletics",
+      description: "All Levels Athletics delivers premium online fitness coaching combining personalized training, recovery science, and Daniel Ledbetter's signature \"Tension Reset\" method. Designed for all levels, the site highlights proven results, clear tier options, and a 98% client success rate.",
+      liveUrl: "https://alllevelsathletics.com/",
+      gradient: "bg-gradient-to-br from-red-500/80 to-orange-600/60",
+      services: ["Website"],
+      bullets: [
+        "Tier pricing with free consultation",
+        "Results-focused recovery methods"
       ]
     }
   ];
