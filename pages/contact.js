@@ -160,7 +160,7 @@ function Contact() {
               <h3 className="text-xl font-bold text-white mb-3">Call Us</h3>
               <p className="text-gray-400 mb-4">Speak directly with our experts</p>
               <div className="text-blue-400 font-semibold text-lg">619-955-0105</div>
-              <p className="text-gray-500 text-sm mt-2">Available Mon-Fri, 9AM-6PM PST</p>
+              <p className="text-gray-500 text-sm mt-2">Available Mon to Fri, 9AM–6PM PST</p>
             </motion.a>
 
             {/* Email */}
@@ -384,7 +384,7 @@ function Contact() {
                     </div>
                     <div>
                       <h4 className="text-white font-semibold mb-1">Business Hours</h4>
-                      <p className="text-gray-400 text-sm">Monday - Friday: 9:00 AM - 6:00 PM PST</p>
+                      <p className="text-gray-400 text-sm">Monday to Friday: 9:00 AM – 6:00 PM PST</p>
                       <p className="text-gray-400 text-sm">Weekend: By appointment only</p>
                     </div>
                   </div>

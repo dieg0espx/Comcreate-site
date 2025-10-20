@@ -350,7 +350,8 @@ function Projects() {
       category: "FITNESS / ONLINE TRAINING",
       title: "All Levels Athletics",
       description: "All Levels Athletics delivers premium online fitness coaching combining personalized training, recovery science, and Daniel Ledbetter's signature \"Tension Reset\" method. Designed for all levels, the site highlights proven results, clear tier options, and a 98% client success rate.",
-      liveUrl: "https://alllevelsathletics.com/",
+      liveUrl: "https://alllevelsathletics.com",
+      imageUrl: "/sitesCapture/openGraphAllLevels.png",
       gradient: "bg-gradient-to-br from-red-500/80 to-orange-600/60",
       services: ["Website"],
       bullets: [
@@ -409,8 +410,8 @@ function Projects() {
                 <div className="text-gray-300">Industries Served</div>
               </div>
               <div className="bg-gradient-to-br from-purple-500/10 to-purple-600/10 p-6 rounded-2xl border border-purple-500/20">
-                <div className="text-4xl font-bold text-purple-400 mb-2">$300K+</div>
-                <div className="text-gray-300">Revenue Generated</div>
+                <div className="text-4xl font-bold text-purple-400 mb-2">21+</div>
+                <div className="text-gray-300">Projects Completed</div>
               </div>
               <div className="bg-gradient-to-br from-pink-500/10 to-pink-600/10 p-6 rounded-2xl border border-pink-500/20">
                 <div className="text-4xl font-bold text-pink-400 mb-2">100%</div>
@@ -483,6 +484,8 @@ function Projects() {
                             className="opacity-80 hover:opacity-100 transition-opacity"
                             title={projects[0].title}
                             loading="lazy"
+                            sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                            referrerPolicy="no-referrer"
                             style={{ 
                               width: '400%', 
                               height: '400%', 
@@ -570,6 +573,8 @@ function Projects() {
                             className="opacity-80 hover:opacity-100 transition-opacity"
                             title={projects[1].title}
                             loading="lazy"
+                            sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                            referrerPolicy="no-referrer"
                             style={{ 
                               width: '400%', 
                               height: '400%', 
@@ -594,7 +599,7 @@ function Projects() {
                         {/* Services */}
                         <div className="mb-4">
                           <h5 className="text-white font-semibold mb-2 text-sm">Services:</h5>
-                          <div className="flex flex-wrap gap-1">
+                          <div className="flex flex-wrap gap-2">
                             {projects[1].services.map((service, index) => (
                               <span key={index} className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full text-xs">
                                 {service}
@@ -662,6 +667,8 @@ function Projects() {
                                       className="opacity-80 hover:opacity-100 transition-opacity"
                                       title={project.title}
                                       loading="lazy"
+                                      sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                                      referrerPolicy="no-referrer"
                                       style={{ 
                                         width: '400%', 
                                         height: '400%', 
@@ -686,7 +693,7 @@ function Projects() {
                           {/* Services */}
                           <div className="mb-4">
                             <h5 className="text-white font-semibold mb-2 text-sm">Services:</h5>
-                            <div className="flex flex-wrap gap-1">
+                            <div className="flex flex-wrap gap-2">
                               {project.services.map((service, index) => (
                                 <span key={index} className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full text-xs">
                                   {service}
@@ -755,6 +762,8 @@ function Projects() {
                                       className="opacity-80 hover:opacity-100 transition-opacity"
                                       title={project.title}
                                       loading="lazy"
+                                      sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                                      referrerPolicy="no-referrer"
                                       style={{ 
                                         width: '400%', 
                                         height: '400%', 
@@ -779,7 +788,7 @@ function Projects() {
                           {/* Services */}
                           <div className="mb-4">
                             <h5 className="text-white font-semibold mb-2 text-sm">Services:</h5>
-                            <div className="flex flex-wrap gap-1">
+                            <div className="flex flex-wrap gap-2">
                               {project.services.map((service, index) => (
                                 <span key={index} className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full text-xs">
                                   {service}
@@ -848,6 +857,8 @@ function Projects() {
                                       className="opacity-80 hover:opacity-100 transition-opacity"
                                       title={project.title}
                                       loading="lazy"
+                                      sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                                      referrerPolicy="no-referrer"
                                       style={{ 
                                         width: '400%', 
                                         height: '400%', 
@@ -872,7 +883,7 @@ function Projects() {
                           {/* Services */}
                           <div className="mb-3">
                             <h5 className="text-white font-semibold mb-1 text-xs">Services:</h5>
-                            <div className="flex flex-wrap gap-1">
+                            <div className="flex flex-wrap gap-2">
                               {project.services.map((service, index) => (
                                 <span key={index} className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full text-xs">
                                   {service}
@@ -941,6 +952,8 @@ function Projects() {
                                       className="opacity-80 hover:opacity-100 transition-opacity"
                                       title={project.title}
                                       loading="lazy"
+                                      sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                                      referrerPolicy="no-referrer"
                                       style={{ 
                                         width: '400%', 
                                         height: '400%', 
@@ -965,7 +978,7 @@ function Projects() {
                           {/* Services */}
                           <div className="mb-3">
                             <h5 className="text-white font-semibold mb-1 text-xs">Services:</h5>
-                            <div className="flex flex-wrap gap-1">
+                            <div className="flex flex-wrap gap-2">
                               {project.services.map((service, index) => (
                                 <span key={index} className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full text-xs">
                                   {service}

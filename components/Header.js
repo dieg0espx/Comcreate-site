@@ -27,7 +27,7 @@ export default function Header() {
       <div className="hidden lg:flex bg-[linear-gradient(90deg,rgba(0,60,199,1)_0%,rgba(112,15,89,1)_100%)] text-white font-md justify-between items-center py-1 text-sm">
         <div className="max-w-[1440px] mx-auto w-full px-10 flex justify-between items-center">
           <div className="truncate">
-            Get a FREE site audit scheduling a call with our team.
+            Get a free site audit by scheduling a call with our team.
           </div>
           <div className="flex items-center gap-4">
             {/* <div className="flex items-center gap-2">
