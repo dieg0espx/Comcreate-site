@@ -89,7 +89,7 @@ function ContactSection() {
               <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="4"/><path d="M2 6l10 7 10-7"/></svg>
             </motion.div>
             <div className="text-fuchsia-300 text-xl font-bold mb-1">Email us</div>
-            <div className="text-gray-200 text-base mb-1">sales@comcreate.com</div>
+            <div className="text-gray-200 text-base mb-1">sales@comcreate.org</div>
           </motion.div>
           {/* Chat Card */}
           <motion.a 

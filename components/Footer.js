@@ -177,8 +177,10 @@ function Footer() {
               © {new Date().getFullYear()} Comcreate. All rights reserved.
             </div>
             <div className="flex items-center gap-6 text-sm">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+              <Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link>
+              <span className="text-gray-400">|</span>
+              <Link href="/terms-of-service" className="text-gray-400 hover:text-white transition-colors">Terms of Service</Link>
+              <span className="text-gray-400">|</span>
               <a href="#" className="text-gray-400 hover:text-white transition-colors">Sitemap</a>
             </div>
           </div>

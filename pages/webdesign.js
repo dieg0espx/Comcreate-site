@@ -170,7 +170,7 @@ function WebDesign() {
           </span>
         </h1>
         <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-8">
-                     From custom code to popular platforms like Shopify and Webflow, we create websites that don&apos;t just look amazing — they drive results, engage users, and grow your business.
+          From custom code to popular platforms like Shopify and Webflow, we create websites that don&apos;t just look amazing — they drive results, engage users, and grow your business.
         </p>
         <motion.button 
           className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
@@ -462,7 +462,7 @@ function WebDesign() {
             Why Choose Comcreate?
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-                         We don&apos;t just build websites — we create digital experiences that drive real business results.
+            We don&apos;t just build websites — we create digital experiences that drive real business results.
           </p>
         </div>
 
@@ -545,7 +545,7 @@ function WebDesign() {
             { name: "Finance", icon: "💰", description: "Banking & investment firms" },
             { name: "Education", icon: "🎓", description: "Schools & online learning" },
             { name: "Technology", icon: "💻", description: "SaaS & software companies" },
-            { name: "Restaurant", icon: "🍽️", description: "Food & hospitality" },
+            { name: "Restaurants", icon: "🍽️", description: "Food & hospitality" },
             { name: "Professional", icon: "💼", description: "Legal & consulting firms" },
             { name: "Non-Profit", icon: "❤️", description: "Charities & foundations" },
             { name: "Entertainment", icon: "🎭", description: "Media & creative agencies" }
@@ -597,7 +597,7 @@ function WebDesign() {
                 },
                 {
                   question: "What if I need changes after launch?",
-                                      answer: "We include a revision period post-launch, and offer flexible maintenance plans for ongoing updates. We&apos;re here to support your website&apos;s evolution as your business grows."
+                  answer: "We include a revision period post-launch, and offer flexible maintenance plans for ongoing updates. We&apos;re here to support your website&apos;s evolution as your business grows."
                 }
               ].map((faq, index) => (
                 <motion.div 

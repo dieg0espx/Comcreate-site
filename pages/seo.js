@@ -427,11 +427,11 @@ function SEO() {
               { name: "SEMrush", icon: "📈", color: "orange" },
               { name: "Ahrefs", icon: "🔗", color: "orange" },
               { name: "Screaming Frog", icon: "🐸", color: "green" },
-              { name: "GTMetrix", icon: "⚡", color: "green" },
+              { name: "GTmetrix.", icon: "⚡", color: "green" },
               { name: "Moz Pro", icon: "📊", color: "blue" },
               { name: "Schema Markup", icon: "🏗️", color: "purple" },
               { name: "PageSpeed Insights", icon: "🚀", color: "green" },
-              { name: "Google My Business", icon: "📍", color: "red" },
+              { name: "Google Business Profile", icon: "📍", color: "red" },
               { name: "Hotjar", icon: "🎯", color: "orange" },
               { name: "Yoast SEO", icon: "🎯", color: "green" }
             ].map((tool, index) => (

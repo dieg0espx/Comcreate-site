@@ -549,7 +549,7 @@ function Ads() {
               { name: "Legal Services", icon: "⚖️", description: "Law firms & attorneys" },
               { name: "Home Services", icon: "🔧", description: "Contractors & repairs" },
               { name: "Automotive", icon: "🚗", description: "Dealers & services" },
-              { name: "Restaurant", icon: "🍽️", description: "Food & delivery" }
+              { name: "Restaurants", icon: "🍽️", description: "Food & delivery" }
             ].map((industry, index) => (
               <motion.div 
                 key={index}

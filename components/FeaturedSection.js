@@ -97,7 +97,7 @@ function FeaturedSection() {
             </div>
             <div>
               <h3 className="text-white text-xl font-bold">Scalable Ad Campaigns</h3>
-              <p className="text-gray-400 mt-2 text-base">Whether you&apos;re starting small or scaling big our ad systems flex to your goals.</p>
+              <p className="text-gray-400 mt-2 text-base">Whether you&apos;re starting small or scaling big, our ad systems flex to your goals.</p>
             </div>
           </motion.div>
           {/* Real Human Support */}
