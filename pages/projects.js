@@ -8,32 +8,32 @@ function Projects() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
+        staggerChildren: 0.03,
+        delayChildren: 0
       }
     }
   }
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 10 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        ease: "easeOut"
+        duration: 0.25,
+        ease: [0.25, 0.1, 0.25, 1]
       }
     }
   }
 
   const headerVariants = {
-    hidden: { opacity: 0, y: -20 },
+    hidden: { opacity: 0, y: -10 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 1,
-        ease: "easeOut"
+        duration: 0.4,
+        ease: [0.25, 0.1, 0.25, 1]
       }
     }
   }
@@ -91,8 +91,8 @@ function Projects() {
       category: "HOME SERVICES",
       title: "4 Corners",
       description: "4 Corners needed a complete website redesign and rebranding to better fit their style and stand out in the home services market. Their old site lacked a clear theme and didn't connect well with customers. We delivered a modern, professional look tailored to their ideal style, helping them build trust and attract the right clients. SEO work ensures they show up in local searches and generate quality leads.",
-      liveUrl: "https://4corners-site.vercel.app/home",
-      gradient: "bg-gradient-to-br from-orange-500/80 to-red-600/60", 
+      liveUrl: "https://www.4cornersconcretecoatings.com/home",
+      gradient: "bg-gradient-to-br from-orange-500/80 to-red-600/60",
       services: ["Website", "SEO"],
       bullets: [
         "Clean, mobile-friendly design",
@@ -136,10 +136,10 @@ function Projects() {
     },
     {
       id: 7,
-      category: "MEDICAL", 
+      category: "MEDICAL",
       title: "V3 Biomedical",
       description: "V3 Biomedical needed a full website redesign and rebranding to match their ideal style in the medical market. Their old site didn't reflect their professionalism or connect well with clients. We created a modern, clean site with a new logo and branding tailored to the medical field, helping them build trust and stand out.",
-      liveUrl: "https://v3-biomedical-jade.vercel.app/",
+      liveUrl: "https://v3biomedical.com/",
       gradient: "bg-gradient-to-br from-cyan-500/80 to-blue-600/60",
       services: ["Website", "Branding"],
       bullets: [
@@ -358,11 +358,26 @@ function Projects() {
         "Tier pricing with free consultation",
         "Results-focused recovery methods"
       ]
+    },
+    {
+      id: 22,
+      category: "REAL ESTATE / PROPERTY MANAGEMENT",
+      title: "Cadiz & Lluis",
+      description: "Cadiz & Lluis needed a luxury property management website that reflects their premium brand and showcases high-end rental properties. We delivered a sophisticated, modern site with property listings, detailed views, and seamless contact integration designed to attract discerning clients.",
+      liveUrl: "https://concierge-zillow.vercel.app/",
+      gradient: "bg-gradient-to-br from-amber-500/80 to-yellow-600/60",
+      services: ["Website"],
+      bullets: [
+        "Premium property showcase design",
+        "Detailed property listing pages",
+        "Luxury-focused branding and visuals",
+        "Mobile-optimized browsing experience"
+      ]
     }
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white" style={{scrollBehavior: 'smooth'}}>
       {/* Hero Section with Parallax Effect */}
       <div className="relative py-32 px-4 lg:px-8 overflow-hidden">
         {/* Animated Background Grid */}
@@ -461,7 +476,7 @@ function Projects() {
                   variants={cardVariants}
                   className="lg:col-span-2 group"
                 >
-                  <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-3xl overflow-hidden h-full flex flex-col min-h-[600px] relative hover:transform hover:scale-[1.02] transition-transform duration-300 border border-gray-800/30 shadow-2xl">
+                  <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-3xl overflow-hidden h-full flex flex-col min-h-[600px] relative transition-all duration-200 border border-gray-800/30 shadow-2xl hover:shadow-3xl hover:border-gray-700/50" style={{willChange: 'box-shadow, border-color'}}>
                     {/* Live Site Preview */}
                     <div className="relative h-64 overflow-hidden">
                       <div className={`absolute inset-0 ${projects[0].gradient} opacity-90`}></div>
@@ -536,7 +551,7 @@ function Projects() {
                       <div>
                         <button 
                           onClick={() => window.open(projects[0].liveUrl, '_blank')}
-                          className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 flex items-center gap-3 group w-full justify-center shadow-lg hover:shadow-xl transform hover:scale-105"
+                          className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-200 flex items-center gap-3 group w-full justify-center shadow-lg hover:shadow-xl"
                         >
                           View Live Site 
                           <span className="group-hover:translate-x-1 transition-transform text-xl">🚀</span>
@@ -550,7 +565,7 @@ function Projects() {
                   variants={cardVariants}
                   className="group"
                 >
-                  <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-2xl overflow-hidden h-full flex flex-col min-h-[600px] relative hover:transform hover:scale-[1.02] transition-transform duration-300 border border-gray-800/30 shadow-xl">
+                  <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-2xl overflow-hidden h-full flex flex-col min-h-[600px] relative transition-all duration-200 border border-gray-800/30 shadow-xl hover:shadow-2xl hover:border-gray-700/50" style={{willChange: 'box-shadow, border-color'}}>
                     {/* Live Site Preview */}
                     <div className="relative h-48 overflow-hidden">
                       <div className={`absolute inset-0 ${projects[1].gradient} opacity-90`}></div>
@@ -625,7 +640,7 @@ function Projects() {
                       <div>
                         <button 
                           onClick={() => window.open(projects[1].liveUrl, '_blank')}
-                          className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 flex items-center gap-2 group w-full justify-center shadow-lg hover:shadow-xl transform hover:scale-105"
+                          className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-full transition-all duration-200 flex items-center gap-2 group w-full justify-center shadow-lg hover:shadow-xl"
                         >
                           View Live Site 
                           <span className="group-hover:translate-x-1 transition-transform">🚀</span>
@@ -644,7 +659,7 @@ function Projects() {
                             variants={cardVariants}
                             className="group"
                           >
-                            <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-2xl overflow-hidden h-full flex flex-col min-h-[500px] relative hover:transform hover:scale-[1.02] transition-transform duration-300 border border-gray-800/30 shadow-xl">
+                            <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-2xl overflow-hidden h-full flex flex-col min-h-[500px] relative transition-all duration-200 border border-gray-800/30 shadow-xl hover:shadow-2xl hover:border-gray-700/50" style={{willChange: 'box-shadow, border-color'}}>
                               {/* Live Site Preview */}
                               <div className="relative h-48 overflow-hidden">
                                 <div className={`absolute inset-0 ${project.gradient} opacity-90`}></div>
@@ -719,7 +734,7 @@ function Projects() {
                         <div>
                           <button 
                             onClick={() => window.open(project.liveUrl, '_blank')}
-                            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 flex items-center gap-2 group w-full justify-center shadow-lg hover:shadow-xl transform hover:scale-105"
+                            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-full transition-all duration-200 flex items-center gap-2 group w-full justify-center shadow-lg hover:shadow-xl"
                           >
                             View Live Site 
                             <span className="group-hover:translate-x-1 transition-transform">🚀</span>
@@ -739,7 +754,7 @@ function Projects() {
                             variants={cardVariants}
                             className="group"
                           >
-                            <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-2xl overflow-hidden h-full flex flex-col min-h-[500px] relative hover:transform hover:scale-[1.02] transition-transform duration-300 border border-gray-800/30 shadow-xl">
+                            <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-2xl overflow-hidden h-full flex flex-col min-h-[500px] relative transition-all duration-200 border border-gray-800/30 shadow-xl hover:shadow-2xl hover:border-gray-700/50" style={{willChange: 'box-shadow, border-color'}}>
                               {/* Live Site Preview */}
                               <div className="relative h-48 overflow-hidden">
                                 <div className={`absolute inset-0 ${project.gradient} opacity-90`}></div>
@@ -814,7 +829,7 @@ function Projects() {
                         <div>
                           <button 
                             onClick={() => window.open(project.liveUrl, '_blank')}
-                            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 flex items-center gap-2 group w-full justify-center shadow-lg hover:shadow-xl transform hover:scale-105"
+                            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-full transition-all duration-200 flex items-center gap-2 group w-full justify-center shadow-lg hover:shadow-xl"
                           >
                             View Live Site 
                             <span className="group-hover:translate-x-1 transition-transform">🚀</span>
@@ -834,7 +849,7 @@ function Projects() {
                             variants={cardVariants}
                             className="group"
                           >
-                            <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-xl overflow-hidden h-full flex flex-col min-h-[450px] relative hover:transform hover:scale-[1.02] transition-transform duration-300 border border-gray-800/30 shadow-lg">
+                            <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-xl overflow-hidden h-full flex flex-col min-h-[450px] relative transition-all duration-200 border border-gray-800/30 shadow-lg hover:shadow-xl hover:border-gray-700/50" style={{willChange: 'box-shadow, border-color'}}>
                               {/* Live Site Preview */}
                               <div className="relative h-40 overflow-hidden">
                                 <div className={`absolute inset-0 ${project.gradient} opacity-90`}></div>
@@ -909,7 +924,7 @@ function Projects() {
                         <div>
                           <button 
                             onClick={() => window.open(project.liveUrl, '_blank')}
-                            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-4 py-2 rounded-full transition-all duration-300 flex items-center gap-2 group w-full justify-center text-sm shadow-lg hover:shadow-xl transform hover:scale-105"
+                            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-4 py-2 rounded-full transition-all duration-200 flex items-center gap-2 group w-full justify-center text-sm shadow-lg hover:shadow-xl"
                           >
                             View Live Site 
                             <span className="group-hover:translate-x-1 transition-transform">🚀</span>
@@ -921,15 +936,196 @@ function Projects() {
                 ))}
               </div>
 
-                                    {/* Row 5: 4 Small Cards */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {projects.slice(11).map((project, index) => (
+                                    {/* Row 5: Large Featured Card + Medium Card */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <motion.div
+                  variants={cardVariants}
+                  className="lg:col-span-2 group"
+                >
+                  <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-3xl overflow-hidden h-full flex flex-col min-h-[600px] relative transition-all duration-200 border border-gray-800/30 shadow-2xl hover:shadow-3xl hover:border-gray-700/50" style={{willChange: 'box-shadow, border-color'}}>
+                    {/* Live Site Preview */}
+                    <div className="relative h-64 overflow-hidden">
+                      <div className={`absolute inset-0 ${projects[11].gradient} opacity-90`}></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                      <div className="absolute top-6 left-6 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold text-white">
+                        {projects[11].category}
+                      </div>
+                      <div className="absolute inset-0 overflow-hidden">
+                        {projects[11].imageUrl ? (
+                          <Image
+                            src={projects[11].imageUrl}
+                            alt={projects[11].title}
+                            fill
+                            className="object-cover opacity-80 hover:opacity-100 transition-opacity"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <iframe
+                            src={projects[11].liveUrl}
+                            className="opacity-80 hover:opacity-100 transition-opacity"
+                            title={projects[11].title}
+                            loading="lazy"
+                            sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                            referrerPolicy="no-referrer"
+                            style={{
+                              width: '400%',
+                              height: '400%',
+                              transform: 'scale(0.25)',
+                              transformOrigin: 'top left'
+                            }}
+                          />
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Project Content */}
+                    <div className="p-8 flex flex-col justify-between flex-1">
+                      <div>
+                        <h3 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
+                          {projects[11].title}
+                        </h3>
+                        <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+                          {projects[11].description}
+                        </p>
+
+                        {/* Services */}
+                        <div className="mb-6">
+                          <h5 className="text-white font-semibold mb-3 text-lg">Services:</h5>
+                          <div className="flex flex-wrap gap-2">
+                            {projects[11].services.map((service, index) => (
+                              <span key={index} className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 px-4 py-2 rounded-full text-sm border border-blue-500/30">
+                                {service}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Key Features */}
+                        <div className="mb-8">
+                          <h5 className="text-white font-semibold mb-4 text-lg">Key Features:</h5>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            {projects[11].bullets.map((bullet, index) => (
+                              <div key={index} className="flex items-start gap-3">
+                                <span className="text-blue-400 mt-1 text-lg">→</span>
+                                <span className="text-gray-300 text-base">{bullet}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <button
+                          onClick={() => window.open(projects[11].liveUrl, '_blank')}
+                          className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-200 flex items-center gap-3 group w-full justify-center shadow-lg hover:shadow-xl"
+                        >
+                          View Live Site
+                          <span className="group-hover:translate-x-1 transition-transform text-xl">🚀</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  variants={cardVariants}
+                  className="group"
+                >
+                  <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-2xl overflow-hidden h-full flex flex-col min-h-[600px] relative transition-all duration-200 border border-gray-800/30 shadow-xl hover:shadow-2xl hover:border-gray-700/50" style={{willChange: 'box-shadow, border-color'}}>
+                    {/* Live Site Preview */}
+                    <div className="relative h-48 overflow-hidden">
+                      <div className={`absolute inset-0 ${projects[12].gradient} opacity-90`}></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                      <div className="absolute top-4 left-4 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-white">
+                        {projects[12].category}
+                      </div>
+                      <div className="absolute inset-0 overflow-hidden">
+                        {projects[12].imageUrl ? (
+                          <Image
+                            src={projects[12].imageUrl}
+                            alt={projects[12].title}
+                            fill
+                            className="object-cover opacity-80 hover:opacity-100 transition-opacity"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <iframe
+                            src={projects[12].liveUrl}
+                            className="opacity-80 hover:opacity-100 transition-opacity"
+                            title={projects[12].title}
+                            loading="lazy"
+                            sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                            referrerPolicy="no-referrer"
+                            style={{
+                              width: '400%',
+                              height: '400%',
+                              transform: 'scale(0.25)',
+                              transformOrigin: 'top left'
+                            }}
+                          />
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Project Content */}
+                    <div className="p-6 flex flex-col justify-between flex-1">
+                      <div>
+                        <h3 className="text-xl lg:text-2xl font-bold text-white mb-3 leading-tight">
+                          {projects[12].title}
+                        </h3>
+                        <p className="text-gray-400 text-sm lg:text-base mb-4 leading-relaxed">
+                          {projects[12].description}
+                        </p>
+
+                        {/* Services */}
+                        <div className="mb-4">
+                          <h5 className="text-white font-semibold mb-2 text-sm">Services:</h5>
+                          <div className="flex flex-wrap gap-2">
+                            {projects[12].services.map((service, index) => (
+                              <span key={index} className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full text-xs">
+                                {service}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Key Features */}
+                        <div className="mb-6">
+                          <h5 className="text-white font-semibold mb-3 text-sm">Key Features:</h5>
+                          <div className="space-y-1">
+                            {projects[12].bullets.slice(0, 4).map((bullet, index) => (
+                              <div key={index} className="flex items-start gap-2">
+                                <span className="text-blue-400 mt-1 text-xs">•</span>
+                                <span className="text-gray-300 text-xs">{bullet}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <button
+                          onClick={() => window.open(projects[12].liveUrl, '_blank')}
+                          className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-full transition-all duration-200 flex items-center gap-2 group w-full justify-center shadow-lg hover:shadow-xl"
+                        >
+                          View Live Site
+                          <span className="group-hover:translate-x-1 transition-transform">🚀</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+
+                                    {/* Row 6: 3 Medium Cards */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {projects.slice(13, 16).map((project, index) => (
                           <motion.div 
                             key={project.id}
                             variants={cardVariants}
                             className="group"
                           >
-                            <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-xl overflow-hidden h-full flex flex-col min-h-[400px] relative hover:transform hover:scale-[1.02] transition-transform duration-300 border border-gray-800/30 shadow-lg">
+                            <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-xl overflow-hidden h-full flex flex-col min-h-[400px] relative transition-all duration-200 border border-gray-800/30 shadow-lg hover:shadow-xl hover:border-gray-700/50" style={{willChange: 'box-shadow, border-color'}}>
                               {/* Live Site Preview */}
                               <div className="relative h-32 overflow-hidden">
                                 <div className={`absolute inset-0 ${project.gradient} opacity-90`}></div>
@@ -1004,9 +1200,294 @@ function Projects() {
                         <div>
                           <button 
                             onClick={() => window.open(project.liveUrl, '_blank')}
-                            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-4 py-2 rounded-full transition-all duration-300 flex items-center gap-2 group w-full justify-center text-xs shadow-lg hover:shadow-xl transform hover:scale-105"
+                            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-4 py-2 rounded-full transition-all duration-200 flex items-center gap-2 group w-full justify-center text-xs shadow-lg hover:shadow-xl"
                           >
                             View Live Site 
+                            <span className="group-hover:translate-x-1 transition-transform">🚀</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Row 7: 2 Large Cards */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {projects.slice(16, 18).map((project, index) => (
+                  <motion.div
+                    key={project.id}
+                    variants={cardVariants}
+                    className="group"
+                  >
+                    <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-2xl overflow-hidden h-full flex flex-col min-h-[500px] relative transition-all duration-200 border border-gray-800/30 shadow-xl hover:shadow-2xl hover:border-gray-700/50" style={{willChange: 'box-shadow, border-color'}}>
+                      {/* Live Site Preview */}
+                      <div className="relative h-48 overflow-hidden">
+                        <div className={`absolute inset-0 ${project.gradient} opacity-90`}></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div className="absolute top-4 left-4 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-white">
+                          {project.category}
+                        </div>
+                        <div className="absolute inset-0 overflow-hidden">
+                          {project.imageUrl ? (
+                            <Image
+                              src={project.imageUrl}
+                              alt={project.title}
+                              fill
+                              className="object-cover opacity-80 hover:opacity-100 transition-opacity"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <iframe
+                              src={project.liveUrl}
+                              className="opacity-80 hover:opacity-100 transition-opacity"
+                              title={project.title}
+                              loading="lazy"
+                              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                              referrerPolicy="no-referrer"
+                              style={{
+                                width: '400%',
+                                height: '400%',
+                                transform: 'scale(0.25)',
+                                transformOrigin: 'top left'
+                              }}
+                            />
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Project Content */}
+                      <div className="p-6 flex flex-col justify-between flex-1">
+                        <div>
+                          <h3 className="text-xl lg:text-2xl font-bold text-white mb-3 leading-tight">
+                            {project.title}
+                          </h3>
+                          <p className="text-gray-400 text-sm lg:text-base mb-4 leading-relaxed">
+                            {project.description}
+                          </p>
+
+                          {/* Services */}
+                          <div className="mb-4">
+                            <h5 className="text-white font-semibold mb-2 text-sm">Services:</h5>
+                            <div className="flex flex-wrap gap-2">
+                              {project.services.map((service, index) => (
+                                <span key={index} className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full text-xs">
+                                  {service}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Key Features */}
+                          <div className="mb-6">
+                            <h5 className="text-white font-semibold mb-3 text-sm">Key Features:</h5>
+                            <div className="space-y-1">
+                              {project.bullets.slice(0, 4).map((bullet, index) => (
+                                <div key={index} className="flex items-start gap-2">
+                                  <span className="text-blue-400 mt-1 text-xs">•</span>
+                                  <span className="text-gray-300 text-xs">{bullet}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div>
+                          <button
+                            onClick={() => window.open(project.liveUrl, '_blank')}
+                            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-full transition-all duration-200 flex items-center gap-2 group w-full justify-center shadow-lg hover:shadow-xl"
+                          >
+                            View Live Site
+                            <span className="group-hover:translate-x-1 transition-transform">🚀</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Row 8: 4 Medium Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {projects.slice(18, 22).map((project, index) => (
+                  <motion.div
+                    key={project.id}
+                    variants={cardVariants}
+                    className="group"
+                  >
+                    <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-xl overflow-hidden h-full flex flex-col min-h-[450px] relative transition-all duration-200 border border-gray-800/30 shadow-lg hover:shadow-xl hover:border-gray-700/50" style={{willChange: 'box-shadow, border-color'}}>
+                      {/* Live Site Preview */}
+                      <div className="relative h-40 overflow-hidden">
+                        <div className={`absolute inset-0 ${project.gradient} opacity-90`}></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div className="absolute top-3 left-3 bg-white/20 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-semibold text-white">
+                          {project.category}
+                        </div>
+                        <div className="absolute inset-0 overflow-hidden">
+                          {project.imageUrl ? (
+                            <Image
+                              src={project.imageUrl}
+                              alt={project.title}
+                              fill
+                              className="object-cover opacity-80 hover:opacity-100 transition-opacity"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <iframe
+                              src={project.liveUrl}
+                              className="opacity-80 hover:opacity-100 transition-opacity"
+                              title={project.title}
+                              loading="lazy"
+                              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                              referrerPolicy="no-referrer"
+                              style={{
+                                width: '400%',
+                                height: '400%',
+                                transform: 'scale(0.25)',
+                                transformOrigin: 'top left'
+                              }}
+                            />
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Project Content */}
+                      <div className="p-4 flex flex-col justify-between flex-1">
+                        <div>
+                          <h3 className="text-base lg:text-lg font-bold text-white mb-2 leading-tight">
+                            {project.title}
+                          </h3>
+                          <p className="text-gray-400 text-xs mb-3 leading-relaxed line-clamp-3">
+                            {project.description}
+                          </p>
+
+                          {/* Services */}
+                          <div className="mb-3">
+                            <h5 className="text-white font-semibold mb-1 text-xs">Services:</h5>
+                            <div className="flex flex-wrap gap-2">
+                              {project.services.map((service, index) => (
+                                <span key={index} className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full text-xs">
+                                  {service}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Key Features */}
+                          <div className="mb-4">
+                            <h5 className="text-white font-semibold mb-2 text-xs">Key Features:</h5>
+                            <div className="space-y-1">
+                              {project.bullets.slice(0, 3).map((bullet, index) => (
+                                <div key={index} className="flex items-start gap-2">
+                                  <span className="text-blue-400 mt-1 text-xs">•</span>
+                                  <span className="text-gray-300 text-xs line-clamp-1">{bullet}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div>
+                          <button
+                            onClick={() => window.open(project.liveUrl, '_blank')}
+                            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-4 py-2 rounded-full transition-all duration-200 flex items-center gap-2 group w-full justify-center text-sm shadow-lg hover:shadow-xl"
+                          >
+                            View Live Site
+                            <span className="group-hover:translate-x-1 transition-transform">🚀</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Row 9: Remaining Small Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {projects.slice(22).map((project, index) => (
+                  <motion.div
+                    key={project.id}
+                    variants={cardVariants}
+                    className="group"
+                  >
+                    <div className="bg-gradient-to-br from-[#181626] to-[#1a1a2e] rounded-xl overflow-hidden h-full flex flex-col min-h-[400px] relative transition-all duration-200 border border-gray-800/30 shadow-lg hover:shadow-xl hover:border-gray-700/50" style={{willChange: 'box-shadow, border-color'}}>
+                      {/* Live Site Preview */}
+                      <div className="relative h-32 overflow-hidden">
+                        <div className={`absolute inset-0 ${project.gradient} opacity-90`}></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div className="absolute top-3 left-3 bg-white/20 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-semibold text-white">
+                          {project.category}
+                        </div>
+                        <div className="absolute inset-0 overflow-hidden">
+                          {project.imageUrl ? (
+                            <Image
+                              src={project.imageUrl}
+                              alt={project.title}
+                              fill
+                              className="object-cover opacity-80 hover:opacity-100 transition-opacity"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <iframe
+                              src={project.liveUrl}
+                              className="opacity-80 hover:opacity-100 transition-opacity"
+                              title={project.title}
+                              loading="lazy"
+                              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                              referrerPolicy="no-referrer"
+                              style={{
+                                width: '400%',
+                                height: '400%',
+                                transform: 'scale(0.25)',
+                                transformOrigin: 'top left'
+                              }}
+                            />
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Project Content */}
+                      <div className="p-4 flex flex-col justify-between flex-1">
+                        <div>
+                          <h3 className="text-base lg:text-lg font-bold text-white mb-2 leading-tight">
+                            {project.title}
+                          </h3>
+                          <p className="text-gray-400 text-xs mb-3 leading-relaxed line-clamp-2">
+                            {project.description}
+                          </p>
+
+                          {/* Services */}
+                          <div className="mb-3">
+                            <h5 className="text-white font-semibold mb-1 text-xs">Services:</h5>
+                            <div className="flex flex-wrap gap-2">
+                              {project.services.map((service, index) => (
+                                <span key={index} className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full text-xs">
+                                  {service}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Key Features */}
+                          <div className="mb-4">
+                            <h5 className="text-white font-semibold mb-2 text-xs">Key Features:</h5>
+                            <div className="space-y-1">
+                              {project.bullets.slice(0, 2).map((bullet, index) => (
+                                <div key={index} className="flex items-start gap-2">
+                                  <span className="text-blue-400 mt-1 text-xs">•</span>
+                                  <span className="text-gray-300 text-xs line-clamp-1">{bullet}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div>
+                          <button
+                            onClick={() => window.open(project.liveUrl, '_blank')}
+                            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-4 py-2 rounded-full transition-all duration-200 flex items-center gap-2 group w-full justify-center text-xs shadow-lg hover:shadow-xl"
+                          >
+                            View Live Site
                             <span className="group-hover:translate-x-1 transition-transform">🚀</span>
                           </button>
                         </div>
