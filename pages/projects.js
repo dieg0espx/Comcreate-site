@@ -358,21 +358,6 @@ function Projects() {
         "Tier pricing with free consultation",
         "Results-focused recovery methods"
       ]
-    },
-    {
-      id: 22,
-      category: "REAL ESTATE / PROPERTY MANAGEMENT",
-      title: "Cadiz & Lluis",
-      description: "Cadiz & Lluis needed a luxury property management website that reflects their premium brand and showcases high-end rental properties. We delivered a sophisticated, modern site with property listings, detailed views, and seamless contact integration designed to attract discerning clients.",
-      liveUrl: "https://concierge-zillow.vercel.app/",
-      gradient: "bg-gradient-to-br from-amber-500/80 to-yellow-600/60",
-      services: ["Website"],
-      bullets: [
-        "Premium property showcase design",
-        "Detailed property listing pages",
-        "Luxury-focused branding and visuals",
-        "Mobile-optimized browsing experience"
-      ]
     }
   ];
 
