@@ -220,7 +220,7 @@ function PrivacyPolicy() {
 
             {/* Section 10 */}
             <motion.section className="mb-8" variants={itemVariants}>
-              <h2 className="text-2xl font-bold text-white mb-4">10. Children's Privacy</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">10. Children&apos;s Privacy</h2>
               <p className="text-gray-300 leading-relaxed">
                 Our services are not intended for individuals under the age of 18. We do not knowingly collect personal information from children. If we learn that we have collected personal data from a child under 18, we will take steps to delete such information.
               </p>
@@ -230,7 +230,7 @@ function PrivacyPolicy() {
             <motion.section className="mb-8" variants={itemVariants}>
               <h2 className="text-2xl font-bold text-white mb-4">11. Changes to This Privacy Policy</h2>
               <p className="text-gray-300 leading-relaxed">
-                Comcreate reserves the right to update or modify this Privacy Policy at any time. We will notify you of any significant changes by posting an updated version on our website with the "Effective Date" noted at the top. Your continued use of our services after the changes take effect will constitute your acknowledgment and acceptance of the updated policy.
+                Comcreate reserves the right to update or modify this Privacy Policy at any time. We will notify you of any significant changes by posting an updated version on our website with the &quot;Effective Date&quot; noted at the top. Your continued use of our services after the changes take effect will constitute your acknowledgment and acceptance of the updated policy.
               </p>
             </motion.section>
 

@@ -69,7 +69,7 @@ function TermsOfService() {
             <motion.section className="mb-8" variants={itemVariants}>
               <h2 className="text-2xl font-bold text-white mb-4">1. Introduction</h2>
               <p className="text-gray-300 leading-relaxed mb-4">
-                Welcome to Comcreate. These Terms of Service ("Terms") govern your use of our website and digital marketing services. By accessing or using our website and services, you agree to comply with these Terms. If you do not agree with these Terms, please do not use our services.
+                Welcome to Comcreate. These Terms of Service (&quot;Terms&quot;) govern your use of our website and digital marketing services. By accessing or using our website and services, you agree to comply with these Terms. If you do not agree with these Terms, please do not use our services.
               </p>
             </motion.section>
 
@@ -91,8 +91,8 @@ function TermsOfService() {
               <p className="text-gray-300 leading-relaxed mb-3">You agree not to engage in any of the following activities:</p>
               <ul className="text-gray-300 space-y-1 mb-4">
                 <li>• Using the website for any illegal or unauthorized purpose</li>
-                <li>• Attempting to access or use another user's account without permission</li>
-                <li>• Interfering with or disrupting the website's operation</li>
+                <li>• Attempting to access or use another user&apos;s account without permission</li>
+                <li>• Interfering with or disrupting the website&apos;s operation</li>
                 <li>• Uploading or transmitting any malicious software, viruses, or harmful code</li>
                 <li>• Impersonating any person or entity or misrepresenting your affiliation</li>
                 <li>• Violating any applicable local, state, national, or international law</li>
@@ -181,7 +181,7 @@ function TermsOfService() {
               
               <h3 className="text-xl font-semibold text-white mb-3">a. No Warranties</h3>
               <p className="text-gray-300 leading-relaxed mb-4">
-                Comcreate makes no warranties or representations about the accuracy, completeness, or reliability of the information on our website. The services are provided on an "as-is" and "as-available" basis, without any express or implied warranties.
+                Comcreate makes no warranties or representations about the accuracy, completeness, or reliability of the information on our website. The services are provided on an &quot;as-is&quot; and &quot;as-available&quot; basis, without any express or implied warranties.
               </p>
 
               <h3 className="text-xl font-semibold text-white mb-3">b. Limitation of Liability</h3>
