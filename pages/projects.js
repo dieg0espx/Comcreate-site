@@ -235,7 +235,7 @@ function Projects() {
       category: "SURF SHOP",
       title: "RS Surf",
       description: "This project needed a complete Shopify website revamp to match and support an already strong brand. The old site didn't reflect their brand or quality. We delivered a modern, user-friendly store that strengthens their digital presence and drives sales.",
-      liveUrl: "https://rssurf.com",
+      liveUrl: "https://resinservicesoc.com/",
       imageUrl: "/sitesCapture/rssurf.png",
       gradient: "bg-gradient-to-br from-blue-500/80 to-cyan-600/60",
       services: ["Website"],
