@@ -142,8 +142,8 @@ export default function Header() {
               }`}></span>
             </Link>
             
-            <Link 
-              href="/projects" 
+            <Link
+              href="/projects"
               className={`group relative py-2 px-4 whitespace-nowrap hover:text-white transition-all duration-300 rounded-lg hover:bg-white/10 ${
                 isActive('/projects') ? 'text-white bg-white/10' : ''
               }`}
@@ -153,8 +153,20 @@ export default function Header() {
                 isActive('/projects') ? 'w-3/4' : ''
               }`}></span>
             </Link>
-            
-            <Link 
+
+            <Link
+              href="/blog"
+              className={`group relative py-2 px-4 whitespace-nowrap hover:text-white transition-all duration-300 rounded-lg hover:bg-white/10 ${
+                isActive('/blog') || pathname?.startsWith('/blog/') ? 'text-white bg-white/10' : ''
+              }`}
+            >
+              <span className="relative z-10">Blog</span>
+              <span className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-3/4 ${
+                isActive('/blog') || pathname?.startsWith('/blog/') ? 'w-3/4' : ''
+              }`}></span>
+            </Link>
+
+            <Link
               href="/contact" 
               className={`group relative py-2 px-4 whitespace-nowrap hover:text-white transition-all duration-300 rounded-lg hover:bg-white/10 ${
                 isActive('/contact') ? 'text-white bg-white/10' : ''
@@ -234,6 +246,7 @@ export default function Header() {
               { href: '/ads', label: 'Digital Advertising', icon: '📱', gradient: 'from-red-500 to-orange-500', delay: 'delay-600', desc: 'Google, Facebook & social ads' },
               { href: '/branding', label: 'Brand Identity', icon: '✨', gradient: 'from-purple-500 to-pink-500', delay: 'delay-700', desc: 'Logos & brand design' },
               { href: '/projects', label: 'Our Projects', icon: '💼', gradient: 'from-indigo-500 to-purple-500', delay: 'delay-750', desc: 'View our portfolio' },
+              { href: '/blog', label: 'Blog', icon: '📝', gradient: 'from-teal-500 to-cyan-500', delay: 'delay-775', desc: 'Insights & resources' },
               { href: '/contact', label: 'Contact Us', icon: '📞', gradient: 'from-cyan-500 to-blue-500', delay: 'delay-800', desc: 'Get in touch today' },
             ].map((item, index) => (
               <Link 

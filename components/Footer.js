@@ -109,6 +109,12 @@ function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/blog" className="text-gray-300 hover:text-white transition-all duration-300 flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-teal-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                  Blog
+                </Link>
+              </li>
+              <li>
                 <a href="https://calendly.com/analytics-comcreate/30min" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-all duration-300 flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-green-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
                   Free Consultation
