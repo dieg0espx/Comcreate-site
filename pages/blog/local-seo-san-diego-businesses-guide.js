@@ -71,7 +71,7 @@ export default function BlogPost() {
     '@type': 'BlogPosting',
     headline: 'Local SEO for San Diego Businesses: The Complete Guide (2026)',
     description: 'Complete local SEO guide for San Diego businesses. Google Business Profile, local citations, on-page optimization, reviews & more. Actionable steps from Comcreate.',
-    image: 'https://res.cloudinary.com/dku1gnuat/image/upload/v1774888179/Comcreate_Blog_3_Local_SEO_San_Diego_hlpxhf.webp',
+    image: 'https://pub-4495e8d54dfa43e99172d7dd1b4885a7.r2.dev/Comcreate_Blog_3_Local_SEO_San_Diego_hlpxhf.webp',
     datePublished: '2026-03-28',
     dateModified: '2026-03-28',
     author: {
@@ -118,11 +118,11 @@ export default function BlogPost() {
         <meta property="og:description" content="Complete local SEO guide for San Diego businesses. Google Business Profile, local citations, on-page optimization, reviews & more. Actionable steps from Comcreate." />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://www.comcreate.org/blog/local-seo-san-diego-businesses-guide" />
-        <meta property="og:image" content="https://res.cloudinary.com/dku1gnuat/image/upload/v1774888179/Comcreate_Blog_3_Local_SEO_San_Diego_hlpxhf.webp" />
+        <meta property="og:image" content="https://pub-4495e8d54dfa43e99172d7dd1b4885a7.r2.dev/Comcreate_Blog_3_Local_SEO_San_Diego_hlpxhf.webp" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Local SEO for San Diego Businesses: The Complete Guide (2026)" />
         <meta name="twitter:description" content="Complete local SEO guide for San Diego businesses. Google Business Profile, local citations, on-page optimization, reviews & more." />
-        <meta name="twitter:image" content="https://res.cloudinary.com/dku1gnuat/image/upload/v1774888179/Comcreate_Blog_3_Local_SEO_San_Diego_hlpxhf.webp" />
+        <meta name="twitter:image" content="https://pub-4495e8d54dfa43e99172d7dd1b4885a7.r2.dev/Comcreate_Blog_3_Local_SEO_San_Diego_hlpxhf.webp" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       </Head>
@@ -166,7 +166,7 @@ export default function BlogPost() {
         {/* Featured Image */}
         <motion.div className="relative w-full aspect-[16/9] rounded-xl sm:rounded-2xl overflow-hidden mb-8 sm:mb-12 border border-white/10" variants={itemVariants}>
           <Image
-            src="https://res.cloudinary.com/dku1gnuat/image/upload/v1774888179/Comcreate_Blog_3_Local_SEO_San_Diego_hlpxhf.webp"
+            src="https://pub-4495e8d54dfa43e99172d7dd1b4885a7.r2.dev/Comcreate_Blog_3_Local_SEO_San_Diego_hlpxhf.webp"
             alt="Local SEO for San Diego Businesses Complete Guide"
             fill
             className="object-cover"
