@@ -75,7 +75,7 @@ export default function BlogPost() {
     '@type': 'BlogPosting',
     headline: 'How Much Does a Website Cost in San Diego? (2026 Guide)',
     description: 'San Diego website costs range from $2,000-$50,000+. Get transparent pricing by type, plus what affects cost. Free quote from Comcreate.',
-    image: 'https://res.cloudinary.com/dku1gnuat/image/upload/v1774888144/Comcreate_Blog_1_Website_Cost_San_Diego_gmhjg1.webp',
+    image: 'https://pub-4495e8d54dfa43e99172d7dd1b4885a7.r2.dev/Comcreate_Blog_1_Website_Cost_San_Diego_gmhjg1.webp',
     datePublished: '2026-03-28',
     dateModified: '2026-03-28',
     author: {
@@ -122,11 +122,11 @@ export default function BlogPost() {
         <meta property="og:description" content="San Diego website costs range from $2,000-$50,000+. Get transparent pricing by type, plus what affects cost. Free quote from Comcreate." />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://www.comcreate.org/blog/how-much-does-website-cost-san-diego" />
-        <meta property="og:image" content="https://res.cloudinary.com/dku1gnuat/image/upload/v1774888144/Comcreate_Blog_1_Website_Cost_San_Diego_gmhjg1.webp" />
+        <meta property="og:image" content="https://pub-4495e8d54dfa43e99172d7dd1b4885a7.r2.dev/Comcreate_Blog_1_Website_Cost_San_Diego_gmhjg1.webp" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How Much Does a Website Cost in San Diego? (2026)" />
         <meta name="twitter:description" content="San Diego website costs range from $2,000-$50,000+. Get transparent pricing by type, plus what affects cost." />
-        <meta name="twitter:image" content="https://res.cloudinary.com/dku1gnuat/image/upload/v1774888144/Comcreate_Blog_1_Website_Cost_San_Diego_gmhjg1.webp" />
+        <meta name="twitter:image" content="https://pub-4495e8d54dfa43e99172d7dd1b4885a7.r2.dev/Comcreate_Blog_1_Website_Cost_San_Diego_gmhjg1.webp" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       </Head>
@@ -170,7 +170,7 @@ export default function BlogPost() {
         {/* Featured Image */}
         <motion.div className="relative w-full aspect-[16/9] rounded-xl sm:rounded-2xl overflow-hidden mb-8 sm:mb-12 border border-white/10" variants={itemVariants}>
           <Image
-            src="https://res.cloudinary.com/dku1gnuat/image/upload/v1774888144/Comcreate_Blog_1_Website_Cost_San_Diego_gmhjg1.webp"
+            src="https://pub-4495e8d54dfa43e99172d7dd1b4885a7.r2.dev/Comcreate_Blog_1_Website_Cost_San_Diego_gmhjg1.webp"
             alt="How Much Does a Website Cost in San Diego"
             fill
             className="object-cover"
